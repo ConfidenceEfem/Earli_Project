@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {store} from "./components/Redux/EarliStore"
-import {Provider} from "react-redux"
+import { store } from './components/Redux/EarliStore';
+import { Provider } from 'react-redux';
+import AuthProvider from './components/AuthState/AuthProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-  <Provider store={store}>
-  <App />
-  </Provider>
+    <AuthProvider>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </AuthProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

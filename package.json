@@ -31,6 +31,7 @@
     "react-scroll": "^1.8.4",
     "react-scroll-parallax": "^2.4.0",
     "react-spring": "^9.4.1",
+    "react-toastify": "^9.0.5",
     "react-transition-group": "^4.4.2",
     "recharts": "^2.1.6",
     "redux-thunk": "^2.4.0",
@@ -38,6 +39,7 @@
     "sass": "^1.43.4",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
+    "sweetalert2": "^11.4.18",
     "web-vitals": "^1.1.2",
     "yup": "^0.32.11"
   },

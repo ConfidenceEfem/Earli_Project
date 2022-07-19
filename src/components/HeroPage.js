@@ -1,13 +1,11 @@
-import React,{useEffect} from "react"
+import React from "react"
 import styled from 'styled-components'
 import img from "./images/hero.png"
 import {Link} from "react-router-dom"
 
 
 const HeroPage = ()=>{
-    const ref = React.useRef()
    
-    const [hold, setHold] = React.useState([])
     const [counter, setCounter] = React.useState(0)
 
     const holdText = [
@@ -164,7 +162,8 @@ object-fit: center;
 }
 @media screen and (max-width: 880px){
     /* display: none; */
-    margin: 30px 0;
+    margin-top: 50px;
+    margin-bottom: 30px;
     width: 100%;
     height: 400px;
 }

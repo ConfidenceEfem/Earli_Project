@@ -1,11 +1,6 @@
 import React from 'react';
 import styled from "styled-components"
-import * as yup from "yup"
-import {useForm} from "react-hook-form"
-import {yupResolver} from "@hookform/resolvers/yup"
-import {AiOutlineEye,AiOutlineEyeInvisible} from "react-icons/ai"
 import frontimage from "./images/register.png"
-
 import VerifyLoginCard from './VerifyLoginCard';
 import Header from './Header';
 
