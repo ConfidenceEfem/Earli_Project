@@ -202,14 +202,9 @@ const Input = styled.input`
 const Label = styled.div`
   font-size: 10px;
   margin-bottom: 7px;
+  text-align: center;
 `;
-const InputLabel = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px 0;
-`;
+
 const InputHead = styled.div`
   display: flex;
   font-size: 17px;
@@ -268,6 +263,9 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 340px;
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
   /* height: 500px; */
 `;
 
@@ -299,16 +297,26 @@ const AddChildWrapper = styled.div`
   align-items: center;
   flex-direction: column;
   margin-top: 30px;
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
 `;
 
 const AddChildCard = styled.div`
-  width: 600px;
+  width: 580px;
   height: 500px;
   display: flex;
   background-color: #ffffff;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 620px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 450px) {
+    box-shadow: none;
+    /* width: 90%; */
+  }
 `;
 
 const Wrapper = styled.div`

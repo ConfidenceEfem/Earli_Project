@@ -78,12 +78,16 @@ const DashAccountPage = () => {
     <Container>
       <Wrapper>
         <FirstPart>
-          <WelcomeName>
-            Welcome {currentUser?.data?.firstname} {currentUser?.data?.lastname}
-            !
-          </WelcomeName>
-          <InvestTextAndButton>
+          <NameAndSubHolder>
+            {' '}
+            <WelcomeName>
+              Welcome {currentUser?.data?.firstname}{' '}
+              {currentUser?.data?.lastname}! 
+            </WelcomeName>{' '}
             <InvestText>Your Investments and Savings are booming</InvestText>
+          </NameAndSubHolder>
+
+          <InvestTextAndButton>
             <AddAccountButton to={`/addchild/${parentid}`}>
               Add New Account
             </AddAccountButton>
@@ -226,7 +230,7 @@ const DashAccountPage = () => {
           ) : (
             <TransactionHolder>
               <TransactionWrapper>
-                <ChildrenHeading>Children's Accounts</ChildrenHeading>
+                <ChildrenHeading>Transaction History</ChildrenHeading>
                 <MiddleBody>
                   <NoIcon />
                   <NoHeadText>No History Made Yet</NoHeadText>
@@ -246,12 +250,35 @@ const DashAccountPage = () => {
 
 export default DashAccountPage;
 
+const NameAndSubHolder = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  @media screen and (max-width: 800px) {
+    width: 600px;
+  }
+  @media screen and (max-width: 750px) {
+    width: 500px;
+  }
+  @media screen and (max-width: 700px) {
+    width: 350px;
+  }
+  @media screen and (max-width: 550px) {
+    width: 82%;
+    /* background:red; */
+  }
+`;
 const SubTextHold = styled.div`
   width: 330px;
   text-align: center;
   font-size: 14px;
   margin-bottom: 40px;
-  line-height: 20px;
+  flex-wrap: wrap;
+  line-height: 24px;
+  @media screen and (max-width: 375px) {
+    width: 90%;
+    text-align: center;
+  }
 `;
 const NoHeadText = styled.div`
   font-weight: 600;
@@ -549,29 +576,39 @@ const ChildrenWrapper = styled.div`
 `;
 
 const TransactionHolder = styled.div`
-  width: 43%;
-  height: 500px;
+  /* width: 43%; */
+  width: 500px;
+  height: 510px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 const ChildrensAccountHolder = styled.div`
-  width: 54%;
+  /* width: 54%; */
+  width: 630px;
   height: 530px;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
   justify-content: center;
   border-radius: 10px;
+  margin-bottom: 20px;
+  @media screen and (max-width: 700px) {
+    width: 100%;
+  }
 `;
 
 const ChildrensAndTransactionHolder = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 const Amount = styled.div`
   font-size: 30px;
@@ -624,7 +661,12 @@ const ChartCard = styled.div`
   justify-content: center;
   background-color: ${({ bg }) => bg};
   align-items: center;
+  margin-bottom: 15px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  @media screen and (max-width: 550px) {
+    /* width: 82%; */
+    margin-bottom: 15px;
+  }
 `;
 const ChartCardHolder = styled.div`
   display: flex;
@@ -633,6 +675,9 @@ const ChartCardHolder = styled.div`
   flex-wrap: wrap;
   margin: 45px 0;
   width: 100%;
+  @media screen and (max-width: 550px) {
+    /* justify-content: center; */
+  }
 `;
 const AddAccountButton = styled(Link)`
   text-decoration: none;
@@ -655,18 +700,27 @@ const InvestText = styled.div`
 `;
 const InvestTextAndButton = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  align-items: flex-end;
+  height: 100%;
+  @media screen and (max-width: 550px) {
+    display: none;
+  }
 `;
 const WelcomeName = styled.div`
   font-weight: 600;
   font-size: 25px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  line-height: 35px;
 `;
 const FirstPart = styled.div`
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
+  @media screen and (max-width: 630px) {
+    /* background: red; */
+  }
 `;
 const Wrapper = styled.div`
   width: 93%;
@@ -674,6 +728,7 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
+  /* flex-wrap: wrap; */
 `;
 const Container = styled.div`
   width: 100%;

@@ -2,17 +2,32 @@ import React from 'react';
 import styled from 'styled-components';
 import DashBoardHeader from '../DashBoardHeader';
 import DashNav from '../DashNavs';
+import NewCardModa from './NewCardModa';
 import Step3Comp from './Step3Comp';
 
 const AddEarliStep3 = () => {
+  const [showPayment, setShowPayment] = React.useState(false);
+
   return (
     <Container>
+      {showPayment ? (
+        <NewCardModa
+          showPayment={showPayment}
+          setShowPayment={setShowPayment}
+        />
+      ) : null}
+
       <Wrapper>
         <DashNav />
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <Step3Comp />
+
+            {/* Step3Comp is the main component that you can choose payment method*/}
+            <Step3Comp
+              showPayment={showPayment}
+              setShowPayment={setShowPayment}
+            />
           </Wrap>
         </Cont>
       </Wrapper>

@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import img from '../images/avatar.png';
+import logo from '../images/earli1.png';
 import NotIcon from './NotIcon';
+import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
@@ -15,6 +18,7 @@ const DashBoardHeader = () => {
   return (
     <Container>
       <Wrapper>
+        <Logo src={logo} />
         <ItemsHolder>
           <AddAcount to={`/addchild/${parentid}`}>Add New Account</AddAcount>
           <NotificationIcon />
@@ -24,12 +28,36 @@ const DashBoardHeader = () => {
           </Name>
           <ArrowIcon />
         </ItemsHolder>
+        <HamIcon>
+          <AiOutlineMenu />
+        </HamIcon>
       </Wrapper>
     </Container>
   );
 };
 
 export default DashBoardHeader;
+
+const HamIcon = styled.div`
+  display: none;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    color: #7b69dd;
+    font-size: 25px;
+    cursor: pointer;
+    font-weight: 800;
+  }
+`;
+
+const Logo = styled.img`
+  display: none;
+  @media screen and (max-width: 1000px) {
+    display: flex;
+    width: 100px;
+    height: 40px;
+    object-fit: contain;
+  }
+`;
 
 const AddAcount = styled(Link)`
   text-decoration: none;
@@ -44,6 +72,9 @@ const AddAcount = styled(Link)`
   transition: all 350ms;
   :hover {
     transform: scale(1.01);
+  }
+  @media screen and (max-width: 1000px) {
+    display: none;
   }
 `;
 const ArrowIcon = styled(IoIosArrowDown)`
@@ -72,12 +103,19 @@ const NotificationIcon = styled(MdNotifications)`
 const ItemsHolder = styled.div`
   display: flex;
   align-items: center;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 const Wrapper = styled.div`
   width: 90%;
   display: flex;
+  align-items: center;
   justify-content: flex-end;
-
+  @media screen and (max-width: 1000px) {
+    justify-content: space-between;
+    /* width: 100%; */
+  }
   /* background: white; */
 `;
 

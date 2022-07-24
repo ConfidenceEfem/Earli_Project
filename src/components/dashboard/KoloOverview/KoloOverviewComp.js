@@ -5,6 +5,7 @@ import { AiOutlineInfoCircle, AiOutlineLeft } from 'react-icons/ai';
 import { FaPiggyBank } from 'react-icons/fa';
 import { BsDashCircle } from 'react-icons/bs';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
+import img from '../../images/avatar.png';
 
 const KoloOverviewComp = () => {
   return (
@@ -46,7 +47,11 @@ const KoloOverviewComp = () => {
                       <ButtonText>Withdraw Savings</ButtonText>
                     </ButtonComp>
                     <ButtonComp
-                      style={{ width: "130px", backgroundColor: 'rgba(255,105,180,0.15)', color: "red" }}
+                      style={{
+                        width: '130px',
+                        backgroundColor: 'rgba(255,105,180,0.15)',
+                        color: 'red',
+                      }}
                     >
                       <IoIosCloseCircleOutline size="15px" />
                       <ButtonText>Cancel Plan</ButtonText>
@@ -54,20 +59,54 @@ const KoloOverviewComp = () => {
                   </SavingsButton>
                 </SavingsCardWrapper>
               </SavedCard>
+              <SavedCard1>
+                <SavingsCardWrapper>
+                  <SavingsHeader>
+                    <KoloText style={{ marginLeft: '0px' }}>Details</KoloText>
+                  </SavingsHeader>
+                  <DetailAccountCard>
+                    <DetailData>
+                      <GrayAcc>Account</GrayAcc>
+                      <ImageandName>
+                        <ChildImage src={img} />
+                        <ChildName>Adebimpe Adesanya</ChildName>
+                      </ImageandName>
+                    </DetailData>
+                    <DurationMonth>
+                      <GrayAcc>Duration</GrayAcc>
+                      <Month>6 Months</Month>
+                    </DurationMonth>
+                  </DetailAccountCard>
+                  <LabelAndDate>
+                    <DateLabel>Start date</DateLabel>
+                    <TheDate>09/12/2021</TheDate>
+                  </LabelAndDate>
+                  <LabelAndDate>
+                    <DateLabel>End date</DateLabel>
+                    <TheDate>09/16/2021</TheDate>
+                  </LabelAndDate>
+                  <LabelAndDate>
+                    <DateLabel>Next Payment</DateLabel>
+                    <TheDate>20/16/2021</TheDate>
+                  </LabelAndDate>
+                </SavingsCardWrapper>
+              </SavedCard1>
             </LeftCardComp>
             <RightCardComp>
-            <TransactionHolder>
-              <TransactionWrapper>
-                <TransactionHeading>
-                  <TransHeading>Transaction History</TransHeading>
-                </TransactionHeading>
-                <TransactionBody>
+              <TransactionHolder>
+                <TransactionWrapper>
+                  <TransactionHeading>
+                    <TransHeading>Transaction History</TransHeading>
+                  </TransactionHeading>
+                  <TransactionBody>
                     <TransactionCard>
                       <TransactionDetails>
                         {/* <TransactionImage src={avatar} /> */}
                         <TransactionNameDetail>
                           <TransactionName>Money Added</TransactionName>
-                          <TranDetail>**** **** **** 3456 was debited</TranDetail>
+                          <TranDetail>
+                            **** **** **** 3456 was debited
+                          </TranDetail>
                         </TransactionNameDetail>
                       </TransactionDetails>
                       <AmountDate>
@@ -75,9 +114,9 @@ const KoloOverviewComp = () => {
                         <TransDate>Jun 12</TransDate>
                       </AmountDate>
                     </TransactionCard>
-                </TransactionBody>
-              </TransactionWrapper>
-            </TransactionHolder>
+                  </TransactionBody>
+                </TransactionWrapper>
+              </TransactionHolder>
             </RightCardComp>
           </CardCompWrapper>
         </CardComp>
@@ -88,8 +127,70 @@ const KoloOverviewComp = () => {
 
 export default KoloOverviewComp;
 
-
-
+const TheDate = styled.div`
+  font-weight: 600;
+  font-size: 13px;
+`;
+const DateLabel = styled.div`
+  font-size: 12px;
+  color: lightgray;
+  margin-bottom: 7px;
+  align-items: center;
+  font-weight: 500;
+  display: flex;
+  flex: 1;
+`;
+const LabelAndDate = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid lightgray;
+`;
+const Month = styled.div`
+  font-weight: 600;
+  font-size: 13px;
+`;
+const ChildName = styled.div`
+  font-weight: 600;
+  font-size: 13px;
+`;
+const ChildImage = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: cover;
+  background-color: red;
+  margin-right: 10px;
+  border-radius: 50%;
+`;
+const ImageandName = styled.div`
+  display: flex;
+  align-items: center;
+`;
+const GrayAcc = styled.div`
+  font-size: 12px;
+  color: lightgray;
+  margin-bottom: 7px;
+  font-weight: 500;
+`;
+const DurationMonth = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+`;
+const DetailData = styled.div`
+  display: flex;
+  flex: 1;
+  align-items: flex-start;
+  flex-direction: column;
+`;
+const DetailAccountCard = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding-bottom: 15px;
+  margin-top: 10px;
+  border-bottom: 1px solid lightgray;
+`;
 const TransHeading = styled.div`
   display: flex;
   align-items: center;
@@ -188,8 +289,6 @@ const TransactionWrapper = styled.div`
   align-items: center;
 `;
 
-
-
 const TransactionHolder = styled.div`
   height: 100%;
   width: 100%;
@@ -273,24 +372,36 @@ const SavingsHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 30px;
+  padding-bottom: 15px;
   border-bottom: 1px solid lightgray;
 `;
 const SavingsCardWrapper = styled.div`
 width: 90%;
-height: 90%:
+height: 95%:
 display:flex;
 flex-direction:column;
 align-items: center;
 `;
-const SavedCard = styled.div`
+const SavedCard1 = styled.div`
   width: 100%;
   display: flex;
-  height:250px;
+  height: 290px;
   background: white;
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+`;
+const SavedCard = styled.div`
+  width: 100%;
+  display: flex;
+  height: 250px;
+  background: white;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  margin: 15px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
 const RightCardComp = styled.div`
@@ -332,7 +443,7 @@ const CardComp = styled.div`
   justify-content: center;
   border-radius: 10px;
   align-items: center;
-  height: 500px;
+  height: 740px;
 `;
 const BackComp = styled.div`
   width: 100%;

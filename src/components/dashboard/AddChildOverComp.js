@@ -106,7 +106,7 @@ const AddChildOverComp = () => {
               </ProgressContianer>
               <InputContainer>
                 <InputContWrapper>
-                  <InputHead>Profile Picture</InputHead>
+                  <InputHead>Profile Overview</InputHead>
                   <Label>
                     Confirm the details of the account you are about to create
                   </Label>
@@ -190,6 +190,9 @@ const DetailsCont = styled.div`
   width: 100%;
   flex-direction: column;
   margin-bottom: 50px;
+  @media screen and (max-width: 375px) {
+    margin-bottom: 20px;
+  }
 `;
 
 const Image = styled.img`
@@ -226,6 +229,7 @@ const Button = styled.div`
 const Label = styled.div`
   font-size: 10px;
   margin-bottom: 7px;
+  text-align: center;
 `;
 
 const InputHead = styled.div`
@@ -248,6 +252,9 @@ const InputContainer = styled.form`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   justify-content: center;
+  @media screen and (max-width: 375px) {
+    height: 430px;
+  }
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -278,6 +285,11 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 380px;
+  @media screen and (max-width: 500px) {
+    /* box-shadow:none; */
+    width: 100%;
+  }
+
   /* height: 500px; */
 `;
 
@@ -319,6 +331,12 @@ const AddChildCard = styled.div`
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 650px) {
+    width: 100%;
+  }
+  @media screen and (max-width: 500px) {
+    box-shadow: none;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -328,6 +346,9 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 50px;
   margin-bottom: 30px;
+  @media screen and (max-width: 500px) {
+    width: 95%;
+  }
 `;
 
 const Container = styled.div`

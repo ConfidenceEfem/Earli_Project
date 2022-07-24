@@ -191,4 +191,7 @@ const Container = styled.div`
   background-color: #fafcff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   align-items: flex-end;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;

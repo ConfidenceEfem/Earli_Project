@@ -12,7 +12,7 @@ import img from '../../images/avatar.png';
 import master from '../../images/mastercard.png';
 import visa from '../../images/visa.png';
 
-const Step3Comp = () => {
+const Step3Comp = ({ showPayment, setShowPayment }) => {
   const { parentid } = useParams();
 
   const navigate = useNavigate();
@@ -53,6 +53,7 @@ const Step3Comp = () => {
                     <MainInputHead> Payment Method </MainInputHead>
                     <SubInputText>Choose a Payment Method</SubInputText>
                   </InputHead>
+                  {/* This is where you would map all your card you have added and choose the one you want to use*/}
                   <PaymentCard bg="#f2f0fc">
                     <PaymentCardWrapper>
                       <PayNoAndName fl>
@@ -79,7 +80,14 @@ const Step3Comp = () => {
                   </PaymentCard>
                   <PlusIconAndText>
                     <PlusIcon />
-                    <AddPay>Add New Payment Method</AddPay>
+                    <AddPay
+                      // this is to trigger the add card page
+                      onClick={() => {
+                        setShowPayment(!showPayment);
+                      }}
+                    >
+                      Add New Payment Method
+                    </AddPay>
                   </PlusIconAndText>
                   <Button
                     onClick={() => {
@@ -104,6 +112,7 @@ const AddPay = styled.div`
   font-size: 13px;
   font-weight: 500;
   margin-left: 10px;
+  cursor: pointer;
 `;
 const PlusIcon = styled(FiPlus)`
   font-size: 18px;

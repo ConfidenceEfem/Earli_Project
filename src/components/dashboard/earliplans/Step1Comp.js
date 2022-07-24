@@ -185,6 +185,13 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  @media screen and (max-width: 580px) {
+    width: 480px;
+  }
+
+  @media screen and (max-width: 500px) {
+    width: 90%;
+  }
 `;
 const Button = styled.div`
   width: 140px;
@@ -200,7 +207,7 @@ const Button = styled.div`
   font-size: 14px;
   border-radius: 4px;
   transition: all 550ms;
-  margin-top: 25px;
+  margin: 25px 0;
   :hover {
     transform: scale(1.02);
   }
@@ -250,6 +257,7 @@ const InputLabel = styled.div`
 const MainInputHead = styled.div`
   font-size: 16px;
   font-weight: 600;
+  text-align: center;
   margin-bottom: 10px;
 `;
 const SubInputText = styled.div`
@@ -277,10 +285,12 @@ const InputContWrapper = styled.div`
 const InputContainer = styled.div`
   width: 100%;
   display: flex;
-  height: 330px;
+  /* height: 330px; */
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -320,6 +330,9 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 380px;
+  @media screen and (max-width: 440px) {
+    width: 100%;
+  }
   /* height: 500px; */
 `;
 
@@ -328,6 +341,9 @@ const CreateText = styled.div`
   flex: 2;
   font-size: 16px;
   font-weight: 600;
+  @media screen and (max-width: 355px){
+    font-size: 15px;
+  }
 `;
 const IconAndBack = styled(Link)`
   display: flex;
@@ -338,6 +354,11 @@ const IconAndBack = styled(Link)`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  @media screen and (max-width: 500px){
+  flex:0;
+  margin-right: 25px;
+
+  }
 `;
 const CreateHeader = styled.div`
   width: 100%;
@@ -355,12 +376,21 @@ const AddChildWrapper = styled.div`
 
 const AddChildCard = styled.div`
   width: 550px;
-  height: 520px;
+  /* height: 520px; */
+  height: auto;
   display: flex;
   background-color: #ffffff;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 580px) {
+    width: 480px;
+  
+  }
+  @media screen and (max-width: 500px) {
+    width: 90%;
+    /* box-shadow:none; */
+  }
 `;
 
 const Wrapper = styled.div`
@@ -371,6 +401,9 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 80px;
   margin-bottom: 30px;
+  @media screen and (max-width: 500px) {
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`

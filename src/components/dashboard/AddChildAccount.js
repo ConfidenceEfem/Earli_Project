@@ -220,6 +220,9 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 340px;
+  @media screen and (max-width: 375px) {
+    width: 100%;
+  }
   /* height: 500px; */
 `;
 
@@ -261,6 +264,15 @@ const AddChildCard = styled.div`
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 580px) {
+    width: 480px;
+  }
+  @media screen and (max-width: 500px) {
+    box-shadow: none;
+  }
+  /* @media screen and (max-width: 1000px) {
+    width: 100%;
+  } */
 `;
 
 const Wrapper = styled.div`
@@ -270,6 +282,13 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 80px;
   margin-bottom: 30px;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+    /* margin-top: 0px; */
+  }
+  @media screen and (max-width: 500px) {
+    margin-top: 30px;
+  }
 `;
 
 const Container = styled.div`
