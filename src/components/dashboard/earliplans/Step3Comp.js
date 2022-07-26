@@ -29,7 +29,7 @@ const Step3Comp = () => {
 
   const [cardsData, setCardsData] = useState([]);
 
-  const [selectCard, setSelectCard] = useState("");
+  const [selectCard, setSelectCard] = useState();
   const [config, setConfig] = useState({
     publicKey: "pk_test_e4cc9f3c174db31657087b8c9eb9102ba63cd1fc",
   });
@@ -212,12 +212,12 @@ const Step3Comp = () => {
                     <SubInputText>Choose a Payment Method</SubInputText>
                   </InputHead>
 
-                  {cardsData?.map((props, i) =>
-                    i <= 5 ? (
+                  {cardsData?.map((props, i) => (
                       <PaymentCard
                         bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
                         key={props._id}
                         onClick={() => {
+                          console.log(props);
                           setSelectCard(i);
                         }}
                       >
@@ -236,7 +236,7 @@ const Step3Comp = () => {
                           </PayNoAndName>
                         </PaymentCardWrapper>
                       </PaymentCard>
-                    ) : null
+                    )
                   )}
 
                   <PlusIconAndText>
