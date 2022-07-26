@@ -57,7 +57,8 @@ const Step2Comp = () => {
   const submit = handleSubmit(async (data) => {
     console.log(data);
     const { amount, duration, start } = data;
-    // localStorage.setItem('amount', JSON.stringify(data));
+
+    localStorage.setItem('plan_details', JSON.stringify(data));
 
     navigate(`/thirdearliplan/${parentid}/${childid}`);
   });

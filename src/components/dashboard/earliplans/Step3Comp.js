@@ -216,9 +216,9 @@ const Step3Comp = () => {
                     i <= 5 ? (
                       <PaymentCard
                         bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
-                        key={props?._id}
+                        key={props._id}
                         onClick={() => {
-                          console.log(props?.id,"card")
+                          console.log(props.id,"card")
                         }}
                       >
                         <PaymentCardWrapper>
