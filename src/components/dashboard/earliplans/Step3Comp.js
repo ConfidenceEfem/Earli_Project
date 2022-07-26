@@ -94,7 +94,7 @@ const Step3Comp = () => {
     formData.append("startDate", plan_details.start);
     formData.append("duration", plan_details.duration);
     formData.append("frequency", frequency);
-    formData.append("cardId", selectCard);
+    formData.append("cardId", cardsData[selectCard]);
     formData.append("plan", "Earli");
 
     const mainLink = "https://earli.herokuapp.com";
@@ -217,7 +217,6 @@ const Step3Comp = () => {
                         bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
                         key={props._id}
                         onClick={() => {
-                          console.log(props);
                           setSelectCard(i);
                         }}
                       >
