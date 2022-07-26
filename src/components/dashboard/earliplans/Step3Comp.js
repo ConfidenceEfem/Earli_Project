@@ -139,30 +139,37 @@ const Step3Comp = () => {
     const mainLink1 = "http://localhost:2004";
     const onSuccess = (reference) => {
       console.log(reference);
-      const linkCard = axios.get(
-        `${mainLink}?trxref=${reference.reference}&reference=${reference.reference}`
-      );
-      console.log(linkCard);
+      const linkCard = axios
+        .get(
+          `${mainLink}?trxref=${reference.reference}&reference=${reference.reference}`
+        )
+        .then((res) => {
+          fetchCardsData();
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${res.message}`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        })
+        .catch((err) => { Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `Card Already Used`,
+          showConfirmButton: false,
+          timer: 2500,
+        })});
     };
 
     const onClose = (reference) => {
-      if (reference) {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: `Card added successfully`,
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      } else {
-        Swal.fire({
-          position: "center",
-          icon: "error",
-          title: `Network Error`,
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      }
+      Swal.fire({
+        position: "center",
+        icon: "error",
+        title: `Couldn't complete card link`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
     };
     initializePayment(onSuccess, onClose);
   };
@@ -206,10 +213,13 @@ const Step3Comp = () => {
                   </InputHead>
 
                   {cardsData?.map((props, i) =>
-                    i <= 2 ? (
+                    i <= 5 ? (
                       <PaymentCard
                         bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
                         key={props?._id}
+                        onClick={() => {
+                          console.log(props?.id,"card")
+                        }}
                       >
                         <PaymentCardWrapper>
                           <PayNoAndName fl>
