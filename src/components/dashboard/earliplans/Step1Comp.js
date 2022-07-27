@@ -54,7 +54,7 @@ const Step1Comp = () => {
         timer: 2500,
       });
     } else {
-      localStorage.setItem('frequency', paymentMethod);
+      localStorage.setItem('frequency', paymentMethod.toLowerCase());
       navigate(`/secondearliplan/${parentid}/${childid}`);
     }
   };
