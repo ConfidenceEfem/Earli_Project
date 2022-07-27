@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
-import avatar from "../images/avatar.png";
-import * as yup from "yup";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import axios from "axios";
-import { AiOutlineLeft } from "react-icons/ai";
-import Swal from "sweetalert2";
-import moment from "moment";
-import ProgressBar from "./ProgressBar";
-import { AuthContext } from "../AuthState/AuthProvider";
-import { ErrorFunction } from "../Error";
+import React, { useContext, useEffect, useState } from 'react';
+import styled from 'styled-components';
+import avatar from '../images/avatar.png';
+import * as yup from 'yup';
+import { useParams, useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
+import { AiOutlineLeft } from 'react-icons/ai';
+import Swal from 'sweetalert2';
+import moment from 'moment';
+import ProgressBar from './ProgressBar';
+import { AuthContext } from '../AuthState/AuthProvider';
+import { ErrorFunction } from '../Error';
 
 const AddChildOverComp = () => {
   const { parentid } = useParams();
@@ -22,59 +22,58 @@ const AddChildOverComp = () => {
 
   const navigate = useNavigate();
 
-  const childImage = localStorage.getItem("childImage")
-    ? localStorage.getItem("childImage")
-    : "";
-  const childdetail = localStorage.getItem("childdetail")
-    ? JSON.parse(localStorage.getItem("childdetail"))
+  const childImage = localStorage.getItem('childImage')
+    ? localStorage.getItem('childImage')
+    : '';
+  const childdetail = localStorage.getItem('childdetail')
+    ? JSON.parse(localStorage.getItem('childdetail'))
     : [];
 
   const createAChild = async () => {
     const config = {
       headers: {
-        "content-type": "multipart/form-data",
+        'content-type': 'multipart/form-data',
       },
     };
 
     const formData = new FormData();
-    formData.append("firstname", childdetail.firstname);
-    formData.append("lastname", childdetail.lastname);
-    formData.append("dob", childdetail.dob);
-    formData.append("relationship", childdetail.relationship);
-    formData.append("image", state.link);
+    formData.append('firstname', childdetail.firstname);
+    formData.append('lastname', childdetail.lastname);
+    formData.append('dob', childdetail.dob);
+    formData.append('relationship', childdetail.relationship);
+    formData.append('image', state.link);
 
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
 
-    ctxDispatch({ type: "LoadingRequest" });
+    ctxDispatch({ type: 'LoadingRequest' });
 
     try {
-      const res = await axios({
-        method: "post",
-        url: `${mainLink}/child/${parentid}`,
-        data: formData,
-        config,
-      });
+      const res = await axios.post(
+        `${mainLink}/child/${parentid}`,
+        formData,
+        config
+      );
       console.log(res.data.data);
       if (res) {
-        ctxDispatch({ type: "LoadingSuccess" });
+        ctxDispatch({ type: 'LoadingSuccess' });
         Swal.fire({
-          position: "center",
-          icon: "success",
+          position: 'center',
+          icon: 'success',
           title: `${res.data.data.firstname} account created successfully`,
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
           navigate(`/dashaccount/${parentid}/${res.data.data._id}`);
-          localStorage.removeItem("childdetail");
-          localStorage.removeItem("childImage");
+          localStorage.removeItem('childdetail');
+          localStorage.removeItem('childImage');
         });
       }
     } catch (error) {
-      ctxDispatch({ type: "LoadingFailed" });
+      ctxDispatch({ type: 'LoadingFailed' });
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         title: `${ErrorFunction(error)}`,
         showConfirmButton: false,
         timer: 2500,
@@ -130,7 +129,7 @@ const AddChildOverComp = () => {
                     <DetailItem>
                       <ItemName>Date of Birth</ItemName>
                       <ItemValue>
-                        {moment(childdetail?.dob).format("DD MM yy")}
+                        {moment(childdetail?.dob).format('DD MM yy')}
                       </ItemValue>
                     </DetailItem>
                   </DetailsCont>
@@ -140,7 +139,7 @@ const AddChildOverComp = () => {
                       <Button
                         onClick={() => {
                           createAChild();
-                          console.log("hello");
+                          console.log('hello');
                         }}
                       >
                         Create Account

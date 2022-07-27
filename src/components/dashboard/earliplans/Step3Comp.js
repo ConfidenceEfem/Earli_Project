@@ -102,11 +102,12 @@ const Step3Comp = () => {
 
     ctxDispatch({ type: "LoadingRequest" });
     try {
-      const res = await axios.post(
-        `${mainLink}/createplan/${childid}`,
-        formData,
-        config
-      );
+      const res = await axios({
+        method: "post",
+        url: `${mainLink}/createplan/${childid}`,
+        data: formData,
+        config,
+      });
       console.log(res);
       if (res) {
         ctxDispatch({ type: "LoadingSuccess" });
@@ -153,13 +154,15 @@ const Step3Comp = () => {
             timer: 2500,
           });
         })
-        .catch((err) => { Swal.fire({
-          position: "center",
-          icon: "error",
-          title: `Card Already Used`,
-          showConfirmButton: false,
-          timer: 2500,
-        })});
+        .catch((err) => {
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `Card Already Used`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        });
     };
 
     const onClose = (reference) => {
@@ -213,30 +216,27 @@ const Step3Comp = () => {
                   </InputHead>
 
                   {cardsData?.map((props, i) => (
-                      <PaymentCard
-                        bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
-                        key={props._id}
-                        onClick={() => {
-                          setSelectCard(i);
-                        }}
-                      >
-                        <PaymentCardWrapper>
-                          <PayNoAndName fl>
-                            <PayNo>**** *** *** {props?.last4}</PayNo>
-                            <PayName>{props?.bank}</PayName>
-                          </PayNoAndName>
-                          <PayNoAndName>
-                            <PayImage
-                              src={
-                                props?.card_type === "master" ? master : visa
-                              }
-                            />
-                            <PayExpire>{props?.exp_month}</PayExpire>
-                          </PayNoAndName>
-                        </PaymentCardWrapper>
-                      </PaymentCard>
-                    )
-                  )}
+                    <PaymentCard
+                      bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
+                      key={props._id}
+                      onClick={() => {
+                        setSelectCard(i);
+                      }}
+                    >
+                      <PaymentCardWrapper>
+                        <PayNoAndName fl>
+                          <PayNo>**** *** *** {props?.last4}</PayNo>
+                          <PayName>{props?.bank}</PayName>
+                        </PayNoAndName>
+                        <PayNoAndName>
+                          <PayImage
+                            src={props?.card_type === "master" ? master : visa}
+                          />
+                          <PayExpire>{props?.exp_month}</PayExpire>
+                        </PayNoAndName>
+                      </PaymentCardWrapper>
+                    </PaymentCard>
+                  ))}
 
                   <PlusIconAndText>
                     <PlusIcon />
