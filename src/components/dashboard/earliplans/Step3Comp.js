@@ -111,7 +111,7 @@ const Step3Comp = () => {
         Swal.fire({
           position: "center",
           icon: "success",
-          title: res.message,
+          title: `plan created successfully`,
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {

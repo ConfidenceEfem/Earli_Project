@@ -1,17 +1,34 @@
-import React from 'react';
-import styled from 'styled-components';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { FiPlus } from 'react-icons/fi';
-import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
-import { GrFormNext } from 'react-icons/gr';
-import { FaPiggyBank } from 'react-icons/fa';
-import avatar from '../images/avatar.png';
-import { FaWallet } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import { EarliIcon } from '../AllIcons';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { FiPlus } from "react-icons/fi";
+import { BsFillBarChartFill, BsBarChartFill } from "react-icons/bs";
+import { GrFormNext } from "react-icons/gr";
+import { FaPiggyBank } from "react-icons/fa";
+import avatar from "../images/avatar.png";
+import { FaWallet } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { EarliIcon } from "../AllIcons";
+import axios from "axios";
 
 const SavingsPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
+
+  const [savingsData, setSavingsData] = useState([]);
+
+  const fetchData = async () => {
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
+    
+    const res = await axios.get(`${mainLink}/onechild/${childid}`);
+    console.log(res?.data?.data);
+    setSavingsData(res?.data?.data?.savings);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <LastCard>
       <CreateSavingsPlan>
@@ -77,96 +94,34 @@ const SavingsPage = ({ parentid, childid }) => {
       </CreateSavingsPlan>
       <CreateSavingsPlan>
         <SavingsPlanWrapper>
-          <SavingsHeading>Create New Savings Plan</SavingsHeading>
+          <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle>
-                    <CurrentIcon />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Kolo</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle>
-                    <CurrentIcon />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Freedom</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N139,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>3 Years</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle>
-                    <CurrentIcon />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Earli</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle>
-                    <CurrentIcon />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Kolo</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
+            {savingsData?.map((props, i) =>
+              i <= 3 ? (
+                <CurrentCard>
+                  <CurrentCardWrapper>
+                    <CurrentPlan>
+                      <CurrentIconCircle>
+                        <CurrentIcon />
+                      </CurrentIconCircle>
+                      <CurrentMainPlan>
+                        <PlanHead>Plan</PlanHead>
+                        <PlanAmount>{props.plan}</PlanAmount>
+                      </CurrentMainPlan>
+                    </CurrentPlan>
+                    <CurrentSaved>
+                      <PlanHead>Saved</PlanHead>
+                      <PlanAmount>N{props.balance}</PlanAmount>
+                    </CurrentSaved>
+                    <CurrentDuration>
+                      <PlanHead>Durations</PlanHead>
+                      <PlanAmount>{props.duration}</PlanAmount>
+                    </CurrentDuration>
+                    <NextIcon1 color="#7b69dd" />
+                  </CurrentCardWrapper>
+                </CurrentCard>
+              ) : null
+            )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
       </CreateSavingsPlan>
