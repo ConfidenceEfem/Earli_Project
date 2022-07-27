@@ -94,7 +94,7 @@ const Step3Comp = () => {
     formData.append("startDate", plan_details.start);
     formData.append("duration", plan_details.duration);
     formData.append("frequency", frequency);
-    formData.append("cardId", cardsData[selectCard]);
+    formData.append("cardId", cardsData[selectCard]._id);
     formData.append("plan", "Earli");
 
     const mainLink = "https://earli.herokuapp.com";
