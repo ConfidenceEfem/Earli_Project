@@ -10,7 +10,7 @@ import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
 
 const Step2Comp = () => {
-  const { parentid, childid } = useParams();
+  const { parentid, childid, plan } = useParams();
 
   const navigate = useNavigate();
 
@@ -60,7 +60,7 @@ const Step2Comp = () => {
 
     localStorage.setItem('plan_details', JSON.stringify(data));
 
-    navigate(`/thirdearliplan/${parentid}/${childid}`);
+    navigate(`/thirdearliplan/${parentid}/${childid}/${plan}`);
   });
   return (
     <Container>
@@ -78,7 +78,7 @@ const Step2Comp = () => {
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/firstearliplan/${parentid}/${childid}`}>
+              <IconAndBack to={`/firstearliplan/${parentid}/${childid}/${plan}`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>

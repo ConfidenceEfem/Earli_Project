@@ -37,7 +37,7 @@ const SavingsPage = ({ parentid, childid }) => {
           <SavingsCardHolder>
             <SavingsCard
               bg="#fff6de"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/Earli`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
@@ -55,7 +55,7 @@ const SavingsPage = ({ parentid, childid }) => {
             </SavingsCard>
             <SavingsCard
               bg="#d7eeff"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/Freedom`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
@@ -73,7 +73,7 @@ const SavingsPage = ({ parentid, childid }) => {
             </SavingsCard>
             <SavingsCard
               bg="#d7eeff"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/kolo`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>

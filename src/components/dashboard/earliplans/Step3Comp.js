@@ -17,7 +17,7 @@ import { ErrorFunction } from "./../../Error";
 import { usePaystackPayment } from "react-paystack";
 
 const Step3Comp = () => {
-  const { parentid, childid } = useParams();
+  const { parentid, childid, plan } = useParams();
 
   const { currentUser, value } = useContext(AuthContext);
 
@@ -82,6 +82,7 @@ const Step3Comp = () => {
   const frequency = localStorage.getItem("frequency")
     ? localStorage.getItem("frequency")
     : "";
+
   const createPlan = async () => {
     const data = JSON.stringify({
       amount: plan_details.amount,
@@ -89,7 +90,7 @@ const Step3Comp = () => {
       duration: plan_details.duration,
       frequency: frequency,
       cardId: cardsData[selectCard]._id,
-      plan: "Earli",
+      plan: plan,
     });
 
     const mainLink = "https://earli.herokuapp.com";
