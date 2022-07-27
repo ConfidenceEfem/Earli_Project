@@ -106,7 +106,7 @@ const Step2Comp = () => {
                   </InputLabel>
 
                   <InputLabel>
-                    <Label>Date of Birth</Label>
+                    <Label>Start Date</Label>
                     <Input type="date" {...register('start')} />
                     <Error>{errors?.start?.message}</Error>
                   </InputLabel>
