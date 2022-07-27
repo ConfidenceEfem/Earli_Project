@@ -19,7 +19,7 @@ const SavingsPage = ({ parentid, childid }) => {
   const fetchData = async () => {
     const mainLink = "https://earli.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
-    
+
     const res = await axios.get(`${mainLink}/onechild/${childid}`);
     console.log(res?.data?.data);
     setSavingsData(res?.data?.data?.savings);
@@ -96,31 +96,35 @@ const SavingsPage = ({ parentid, childid }) => {
         <SavingsPlanWrapper>
           <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
-            {savingsData?.map((props, i) =>
-              i <= 3 ? (
-                <CurrentCard>
-                  <CurrentCardWrapper>
-                    <CurrentPlan>
-                      <CurrentIconCircle>
-                        <CurrentIcon />
-                      </CurrentIconCircle>
-                      <CurrentMainPlan>
-                        <PlanHead>Plan</PlanHead>
-                        <PlanAmount>{props.plan}</PlanAmount>
-                      </CurrentMainPlan>
-                    </CurrentPlan>
-                    <CurrentSaved>
-                      <PlanHead>Saved</PlanHead>
-                      <PlanAmount>N{props.balance}</PlanAmount>
-                    </CurrentSaved>
-                    <CurrentDuration>
-                      <PlanHead>Durations</PlanHead>
-                      <PlanAmount>{props.duration}</PlanAmount>
-                    </CurrentDuration>
-                    <NextIcon1 color="#7b69dd" />
-                  </CurrentCardWrapper>
-                </CurrentCard>
-              ) : null
+            {savingsData.length > 1 ? (
+              savingsData?.map((props, i) =>
+                i <= 3 ? (
+                  <CurrentCard>
+                    <CurrentCardWrapper>
+                      <CurrentPlan>
+                        <CurrentIconCircle>
+                          <CurrentIcon />
+                        </CurrentIconCircle>
+                        <CurrentMainPlan>
+                          <PlanHead>Plan</PlanHead>
+                          <PlanAmount>{props.plan}</PlanAmount>
+                        </CurrentMainPlan>
+                      </CurrentPlan>
+                      <CurrentSaved>
+                        <PlanHead>Saved</PlanHead>
+                        <PlanAmount>N{props.balance}</PlanAmount>
+                      </CurrentSaved>
+                      <CurrentDuration>
+                        <PlanHead>Durations</PlanHead>
+                        <PlanAmount>{props.duration}</PlanAmount>
+                      </CurrentDuration>
+                      <NextIcon1 color="#7b69dd" />
+                    </CurrentCardWrapper>
+                  </CurrentCard>
+                ) : null
+              )
+            ) : (
+              <NoPlan>You do have any savings plan</NoPlan>
             )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
@@ -139,6 +143,11 @@ const PlanAmount = styled.div`
 const PlanHead = styled.div`
   font-size: 11px;
   color: lightgray;
+`;
+const NoPlan = styled.div`
+  font-size: 13px;
+  color: lightgray;
+  text-align: center;
 `;
 
 const CurrentMainPlan = styled.div`
