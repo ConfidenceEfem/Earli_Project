@@ -7,7 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
-import img from '../../images/avatar.png';
+import earli from '../../images/eali.png';
 import Swal from 'sweetalert2';
 
 const Step1Comp = () => {
@@ -79,7 +79,10 @@ const Step1Comp = () => {
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
-              <CreateText>Create An Earli Saving Plan</CreateText>
+              <CreateAndIcon>
+                <CreateIcon src={earli} />
+                <CreateText>Create An Earli Saving Plan</CreateText>
+              </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
@@ -159,6 +162,23 @@ const Step1Comp = () => {
 
 export default Step1Comp;
 
+const CreateIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin-right: 10px;
+  @media screen and (max-width: 340px) {
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+const CreateAndIcon = styled.div`
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex: 2;
+`;
 const AccountName = styled.div`
   font-weight: 600;
   font-size: 18px;
@@ -327,6 +347,9 @@ const Error = styled.div`
 
 const Icon = styled(AiOutlineLeft)`
   margin-right: 5px;
+  @media screen and (max-width: 400px) {
+    margin-right: 3px;
+  }
 `;
 const MiddleComp = styled.div`
   width: 380px;
@@ -337,12 +360,10 @@ const MiddleComp = styled.div`
 `;
 
 const CreateText = styled.div`
-  display: flex;
-  flex: 2;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
-  @media screen and (max-width: 355px){
-    font-size: 15px;
+  @media screen and (max-width: 375px) {
+    font-size: 13px;
   }
 `;
 const IconAndBack = styled(Link)`
@@ -354,10 +375,13 @@ const IconAndBack = styled(Link)`
   color: black;
   text-decoration: none;
   cursor: pointer;
-  @media screen and (max-width: 500px){
-  flex:0;
-  margin-right: 25px;
-
+  @media screen and (max-width: 500px) {
+    flex: 0;
+    margin-right: 25px;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 11px;
+    margin-right: 15px;
   }
 `;
 const CreateHeader = styled.div`
@@ -385,7 +409,6 @@ const AddChildCard = styled.div`
   border-radius: 10px;
   @media screen and (max-width: 580px) {
     width: 480px;
-  
   }
   @media screen and (max-width: 500px) {
     width: 90%;

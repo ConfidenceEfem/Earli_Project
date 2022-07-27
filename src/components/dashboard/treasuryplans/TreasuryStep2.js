@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import earli from '../../images/treasury.png';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { FiPlus } from 'react-icons/fi';
 import ProgressBar from '../ProgressBar';
-import img from '../../images/avatar.png';
-import earli from '../../images/eali.png';
-import master from '../../images/mastercard.png';
-import visa from '../../images/visa.png';
 
-const Step3Comp = ({ showPayment, setShowPayment }) => {
+const TreasuryStep2 = () => {
   const { parentid, childid } = useParams();
 
   const navigate = useNavigate();
 
-  // const [paymentMethod, setPaymentMethod] = useState('Daily');
+  const [data, setData] = useState([]);
 
   const [childData, setChildData] = useState([]);
+
+  const fetchData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+
+    const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
+    setData(res?.data?.data?.children);
+    console.log(data);
+  };
 
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
@@ -31,10 +36,31 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
     console.log(childData);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    fetchData();
     ChildData();
   }, []);
 
+  const schema = yup.object().shape({
+    amount: yup.number().required('This field is reequired'),
+    duration: yup.string().required('This field is reequired'),
+    start: yup.date().required('This field is required'),
+  });
+
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const submit = handleSubmit(async (data) => {
+    console.log(data);
+    const { amount, duration, start } = data;
+    // localStorage.setItem('amount', JSON.stringify(data));
+
+    navigate(`/thirdearliplan/${parentid}/${childid}`);
+  });
   return (
     <Container>
       <Wrapper>
@@ -42,72 +68,51 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
           <ChildImage src={childData?.image} />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
-            <AccountName>Adebimpe Adesanya</AccountName>
+            <AccountName>
+              {childData?.firstname}
+              {childData?.lastname}
+            </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/thirdearliplan/${parentid}/${childid}`}>
+              <IconAndBack to={`/firstearliplan/${parentid}/${childid}`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
                 <CreateIcon src={earli} />
-                <CreateText>Create An Earli Saving Plan</CreateText>
+                <CreateText>Invest In Treasury Bills</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 3 of 3</ProgressText>
+                <ProgressText>Step 2 of 3</ProgressText>
                 <LineCont>
-                  <Line></Line>
                   <Line></Line>
                   <Line></Line>
                 </LineCont>
               </ProgressContianer>
-              <InputContainer>
+              <InputContainer onSubmit={submit}>
                 <InputContWrapper>
-                  <InputHead>
-                    <MainInputHead> Payment Method </MainInputHead>
-                    <SubInputText>Choose a Payment Method</SubInputText>
-                  </InputHead>
-                  {/* This is where you would map all your card you have added and choose the one you want to use*/}
-                  <PaymentCard bg="#f2f0fc">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage src={master} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
-                  <PaymentCard bg="#f9f9f9">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage1 src={visa} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
-                  <PlusIconAndText>
-                    <PlusIcon />
-                    <AddPay
-                      // this is to trigger the add card page
-                      onClick={() => {
-                        setShowPayment(!showPayment);
-                      }}
-                    >
-                      Add New Payment Method
-                    </AddPay>
-                  </PlusIconAndText>
+                  <InputHead>Amount</InputHead>
+                  <InputLabel>
+                    <Label>How much?</Label>
+                    <Input
+                      type="number"
+                      placeholder="Input Amount"
+                      {...register('amount')}
+                    />
+                    <Error>{errors?.amount?.message}</Error>
+                  </InputLabel>
+
+                  <InputLabel>
+                    <Label>Start Date</Label>
+                    <Input type="date" {...register('start')} />
+                    <Error>{errors?.start?.message}</Error>
+                  </InputLabel>
+
                   <Button>Next</Button>
                 </InputContWrapper>
               </InputContainer>
@@ -119,7 +124,7 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
   );
 };
 
-export default Step3Comp;
+export default TreasuryStep2;
 
 const CreateIcon = styled.img`
   width: 22px;
@@ -139,66 +144,6 @@ const CreateAndIcon = styled.div`
   flex: 2;
 `;
 
-const AddPay = styled.div`
-  font-size: 13px;
-  font-weight: 500;
-  margin-left: 10px;
-  cursor: pointer;
-`;
-const PlusIcon = styled(FiPlus)`
-  font-size: 18px;
-  font-weight: bold;
-`;
-const PlusIconAndText = styled.div`
-  display: flex;
-  align-items: center;
-  color: #7b69dd;
-  margin-bottom: 20px;
-`;
-const PayExpire = styled.div`
-  font-size: 9px;
-  color: gray;
-`;
-const PayImage1 = styled.img`
-  width: 50px;
-  height: 30px;
-  object-fit: cover;
-  margin-bottom: 13px;
-`;
-const PayImage = styled.img`
-  width: 30px;
-  height: 25px;
-  object-fit: contain;
-  margin-bottom: 13px;
-`;
-const PayName = styled.div`
-  margin-top: 13px;
-`;
-const PayNo = styled.div``;
-const PayNoAndName = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: ${({ fl }) => (fl ? 'flex-start' : 'flex-end')};
-  font-size: 11px;
-  font-weight: 500;
-`;
-const PaymentCardWrapper = styled.div`
-  width: 90%;
-  height: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const PaymentCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 70px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  background-color: ${({ bg }) => bg};
-`;
 const AccountName = styled.div`
   font-weight: 600;
   font-size: 18px;
@@ -225,11 +170,14 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  @media screen and (max-width: 600px) {
+  /* background: green; */
+  @media screen and (max-width: 620px) {
     width: 90%;
+    /* box-shadow:none; */
   }
 `;
-const Button = styled.div`
+
+const Button = styled.button`
   width: 140px;
   height: 45px;
   display: flex;
@@ -248,41 +196,68 @@ const Button = styled.div`
     transform: scale(1.02);
   }
 `;
-
-const MainInputHead = styled.div`
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 5px;
-`;
-const SubInputText = styled.div`
+const Select = styled.select`
   width: 100%;
-  text-align: center;
-  justify-content: center;
+  padding: 0 10px;
+  border: none;
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+  height: 40px;
+  font-size: 12px;
+  color: gray;
+  font-family: work sans;
+  option {
+    /* font-size: 13px;
+    color: gray;
+    font-family: work sans; */
+  }
+`;
+const Input = styled.input`
+  width: 95%;
+  padding: 0 10px;
+  border: none;
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+  height: 40px;
+  ::placeholder {
+    font-size: 11px;
+    color: gray;
+    font-family: work sans;
+  }
+`;
+const Label = styled.div`
+  width: 100%;
+  justify-content: flex-start;
   font-size: 11px;
-  font-weight: 400;
-  line-height: 20px;
+  margin-bottom: 7px;
+`;
+const InputLabel = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px 0;
 `;
 const InputHead = styled.div`
   display: flex;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   margin: 20px 0;
-  flex-direction: column;
-  align-items: center;
 `;
 const InputContWrapper = styled.div`
-  width: 90%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   width: 100%;
   display: flex;
-  height: 380px;
+  height: 350px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   justify-content: center;
+  background: white;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -322,10 +297,10 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 340px;
-  /* height: 500px; */
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 420px) {
     width: 100%;
   }
+  /* height: 500px; */
 `;
 
 const CreateText = styled.div`
@@ -370,32 +345,34 @@ const AddChildWrapper = styled.div`
 
 const AddChildCard = styled.div`
   width: 550px;
-  height: 580px;
+  height: 600px;
   display: flex;
   background-color: #ffffff;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 620px) {
     width: 90%;
   }
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 420px) {
     width: 100%;
     box-shadow: none;
     border-radius: 0px;
+    background: #fafcff;
   }
 `;
 
 const Wrapper = styled.div`
   width: 93%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 80px;
   margin-bottom: 30px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 620px) {
     width: 100%;
+    margin-top: 30px;
   }
 `;
 

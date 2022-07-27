@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -6,21 +6,27 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
-import { FiPlus } from 'react-icons/fi';
 import ProgressBar from '../ProgressBar';
-import img from '../../images/avatar.png';
-import earli from '../../images/eali.png';
-import master from '../../images/mastercard.png';
-import visa from '../../images/visa.png';
+import treasury from '../../images/treasury.png';
+import Swal from 'sweetalert2';
 
-const Step3Comp = ({ showPayment, setShowPayment }) => {
+const TreasuryStep1 = () => {
   const { parentid, childid } = useParams();
 
   const navigate = useNavigate();
 
-  // const [paymentMethod, setPaymentMethod] = useState('Daily');
+  const [data, setData] = useState([]);
 
   const [childData, setChildData] = useState([]);
+
+  const fetchData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+
+    const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
+    setData(res?.data?.data?.children);
+    // console.log(data);
+  };
 
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
@@ -31,9 +37,27 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
     console.log(childData);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
+    fetchData();
     ChildData();
   }, []);
+
+  const [paymentMethod, setPaymentMethod] = useState('30 Days');
+
+  const submitPayment = () => {
+    if (paymentMethod === '') {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `Please Choose A Duration`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    } else {
+      localStorage.setItem('frequency', paymentMethod);
+      navigate(`/treasury2`);
+    }
+  };
 
   return (
     <Container>
@@ -42,73 +66,90 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
           <ChildImage src={childData?.image} />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
-            <AccountName>Adebimpe Adesanya</AccountName>
+            <AccountName>
+              {childData?.firstname}
+              {childData?.lastname}
+            </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/thirdearliplan/${parentid}/${childid}`}>
+              <IconAndBack to={`/dashaccount/${parentid}/${childid}`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
-                <CreateIcon src={earli} />
-                <CreateText>Create An Earli Saving Plan</CreateText>
+                <CreateIcon src={treasury} />
+                <CreateText>Invest In Treasury Bills</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 3 of 3</ProgressText>
+                <ProgressText>Step 1 of 3</ProgressText>
                 <LineCont>
-                  <Line></Line>
-                  <Line></Line>
                   <Line></Line>
                 </LineCont>
               </ProgressContianer>
               <InputContainer>
                 <InputContWrapper>
                   <InputHead>
-                    <MainInputHead> Payment Method </MainInputHead>
-                    <SubInputText>Choose a Payment Method</SubInputText>
+                    <MainInputHead>
+                      {' '}
+                      How Long Will You Like to Invest
+                    </MainInputHead>
+                    <SubInputText>
+                      You can invest in treasury bills within a selected period
+                      of time.
+                    </SubInputText>
                   </InputHead>
-                  {/* This is where you would map all your card you have added and choose the one you want to use*/}
-                  <PaymentCard bg="#f2f0fc">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage src={master} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
-                  <PaymentCard bg="#f9f9f9">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage1 src={visa} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
-                  <PlusIconAndText>
-                    <PlusIcon />
-                    <AddPay
-                      // this is to trigger the add card page
-                      onClick={() => {
-                        setShowPayment(!showPayment);
+                  <InputLabel>
+                    <Input
+                      type="radio"
+                      id="30 Days"
+                      label="30 Days"
+                      value="30 Days"
+                      checked={paymentMethod === '30 Days'}
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.value);
                       }}
-                    >
-                      Add New Payment Method
-                    </AddPay>
-                  </PlusIconAndText>
-                  <Button>Next</Button>
+                    />
+                    <Label>30 Days</Label>
+                  </InputLabel>
+                  <InputLabel>
+                    <Input
+                      type="radio"
+                      id="60 Days"
+                      value="60 Days"
+                      label="60 Days"
+                      checked={paymentMethod === '60 Days'}
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.value);
+                      }}
+                    />
+                    <Label>60 Days</Label>
+                  </InputLabel>
+                  <InputLabel>
+                    <Input
+                      type="radio"
+                      id="90 Days"
+                      label="90 Days"
+                      value="90 Days"
+                      checked={paymentMethod === '90 Days'}
+                      onChange={(e) => {
+                        setPaymentMethod(e.target.value);
+                      }}
+                    />
+                    <Label>90 Days</Label>
+                  </InputLabel>
+
+                  <Button
+                    onClick={() => {
+                      submitPayment();
+                    }}
+                  >
+                    Next
+                  </Button>
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
@@ -119,14 +160,14 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
   );
 };
 
-export default Step3Comp;
+export default TreasuryStep1;
 
 const CreateIcon = styled.img`
   width: 22px;
   height: 22px;
   object-fit: contain;
   margin-right: 10px;
-  @media screen and (max-width: 370px) {
+  @media screen and (max-width: 340px) {
     margin-right: 6px;
     width: 20px;
     height: 20px;
@@ -137,67 +178,6 @@ const CreateAndIcon = styled.div`
   align-items: center;
   display: flex;
   flex: 2;
-`;
-
-const AddPay = styled.div`
-  font-size: 13px;
-  font-weight: 500;
-  margin-left: 10px;
-  cursor: pointer;
-`;
-const PlusIcon = styled(FiPlus)`
-  font-size: 18px;
-  font-weight: bold;
-`;
-const PlusIconAndText = styled.div`
-  display: flex;
-  align-items: center;
-  color: #7b69dd;
-  margin-bottom: 20px;
-`;
-const PayExpire = styled.div`
-  font-size: 9px;
-  color: gray;
-`;
-const PayImage1 = styled.img`
-  width: 50px;
-  height: 30px;
-  object-fit: cover;
-  margin-bottom: 13px;
-`;
-const PayImage = styled.img`
-  width: 30px;
-  height: 25px;
-  object-fit: contain;
-  margin-bottom: 13px;
-`;
-const PayName = styled.div`
-  margin-top: 13px;
-`;
-const PayNo = styled.div``;
-const PayNoAndName = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: ${({ fl }) => (fl ? 'flex-start' : 'flex-end')};
-  font-size: 11px;
-  font-weight: 500;
-`;
-const PaymentCardWrapper = styled.div`
-  width: 90%;
-  height: 90%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-const PaymentCard = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 70px;
-  border-radius: 5px;
-  margin-bottom: 15px;
-  background-color: ${({ bg }) => bg};
 `;
 const AccountName = styled.div`
   font-weight: 600;
@@ -225,7 +205,11 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 580px) {
+    width: 480px;
+  }
+
+  @media screen and (max-width: 500px) {
     width: 90%;
   }
 `;
@@ -243,22 +227,64 @@ const Button = styled.div`
   font-size: 14px;
   border-radius: 4px;
   transition: all 550ms;
-  margin-top: 25px;
+  margin: 25px 0;
   :hover {
     transform: scale(1.02);
   }
 `;
+const Select = styled.select`
+  width: 100%;
+  padding: 0 10px;
+  border: none;
+  outline: 1px solid lightgray;
+  border-radius: 5px;
+  font-family: work sans;
+  height: 40px;
+  option {
+    font-size: 11px;
+    color: gray;
+    font-family: work sans;
+  }
+`;
+const Input = styled.input`
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  /* border: none; */
+  /* outline: 1px solid lightgray; */
+  border-radius: 5px;
+  height: 40px;
 
+  ::placeholder {
+    font-size: 11px;
+    background: purple;
+    font-family: work sans;
+  }
+`;
+const Label = styled.div`
+  width: 100%;
+  justify-content: flex-start;
+  font-size: 15px;
+  font-weight: 500;
+  margin-left: 7px;
+`;
+const InputLabel = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  /* margin: px 0; */
+`;
 const MainInputHead = styled.div`
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 5px;
+  text-align: center;
+  margin-bottom: 10px;
 `;
 const SubInputText = styled.div`
-  width: 100%;
+  width: 85%;
   text-align: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 400;
   line-height: 20px;
 `;
@@ -271,7 +297,7 @@ const InputHead = styled.div`
   align-items: center;
 `;
 const InputContWrapper = styled.div`
-  width: 90%;
+  width: 85%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -279,10 +305,13 @@ const InputContWrapper = styled.div`
 const InputContainer = styled.div`
   width: 100%;
   display: flex;
-  height: 380px;
+  /* height: 330px; */
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   justify-content: center;
+  margin-bottom: 20px;
+  background: white;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -319,20 +348,22 @@ const Error = styled.div`
 
 const Icon = styled(AiOutlineLeft)`
   margin-right: 5px;
+  @media screen and (max-width: 400px) {
+    margin-right: 3px;
+  }
 `;
 const MiddleComp = styled.div`
-  width: 340px;
-  /* height: 500px; */
-  @media screen and (max-width: 450px) {
+  width: 380px;
+  @media screen and (max-width: 440px) {
     width: 100%;
   }
+  /* height: 500px; */
 `;
 
 const CreateText = styled.div`
-  display: flex;
   font-size: 15px;
   font-weight: 600;
-  @media screen and (max-width: 395px) {
+  @media screen and (max-width: 375px) {
     font-size: 13px;
   }
 `;
@@ -351,7 +382,7 @@ const IconAndBack = styled(Link)`
   }
   @media screen and (max-width: 400px) {
     font-size: 11px;
-    margin-right: 29px;
+    margin-right: 15px;
   }
 `;
 const CreateHeader = styled.div`
@@ -370,19 +401,24 @@ const AddChildWrapper = styled.div`
 
 const AddChildCard = styled.div`
   width: 550px;
-  height: 580px;
+  /* height: 520px; */
+  height: auto;
   display: flex;
   background-color: #ffffff;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
-  @media screen and (max-width: 600px) {
-    width: 90%;
+  @media screen and (max-width: 580px) {
+    width: 480px;
   }
-  @media screen and (max-width: 450px) {
-    width: 100%;
+  @media screen and (max-width: 500px) {
+    width: 90%;
     box-shadow: none;
-    border-radius: 0px;
+    background: #fafcff;
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    /* box-shadow:none; */
   }
 `;
 
@@ -394,7 +430,7 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 80px;
   margin-bottom: 30px;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 500px) {
     width: 100%;
   }
 `;

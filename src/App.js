@@ -16,6 +16,8 @@ import AddEarliStep1 from './components/dashboard/earliplans/AddEarliStep1';
 import AddEarliStep2 from './components/dashboard/earliplans/AddEarliStep2';
 import AddEarliStep3 from './components/dashboard/earliplans/AddEarliStep3';
 import KoloOverviewPage from './components/dashboard/KoloOverview/KoloOverviewPage';
+import TreasuryPlan1 from './components/dashboard/treasuryplans/TreasuryPlan1';
+import TreasuryPlan2 from './components/dashboard/treasuryplans/TreasuryPlan2';
 
 const App = () => {
   return (
@@ -54,6 +56,8 @@ const App = () => {
             element={<AddEarliStep3 />}
           />
           <Route exact path="/kolooverview" element={<KoloOverviewPage />} />
+          <Route exact path="/treasury1" element={<TreasuryPlan1 />} />
+          <Route exact path="/treasury2" element={<TreasuryPlan2 />} />
         </Routes>
       </Router>
     </div>

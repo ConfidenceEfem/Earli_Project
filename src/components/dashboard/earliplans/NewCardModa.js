@@ -34,9 +34,18 @@ const NewCardModa = ({ setShowPayment, showPayment }) => {
   });
 
   return (
-    <Container>
+    <Container
+      onClick={() => {
+        setShowPayment(!showPayment);
+      }}
+    >
       <Wrapper>
-        <Wrap onSubmit={submit}>
+        <Wrap
+          onSubmit={submit}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+        >
           <Title>Add New Card</Title>
           <InputHolder>
             <InputHold>
@@ -187,7 +196,7 @@ const Container = styled.div`
   align-items: center;
   position: fixed;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgb(0,0,0,0.3);
   font-family: work sans;
 `;
 const Wrapper = styled.div`
@@ -200,4 +209,8 @@ const Wrapper = styled.div`
   align-items: center;
   border-radius: 7px;
   padding: 30px 0;
+
+  @media screen and (max-width: 450px) {
+    width: 85%;
+  }
 `;
