@@ -83,33 +83,30 @@ const Step3Comp = () => {
     ? localStorage.getItem("frequency")
     : "";
   const createPlan = async () => {
-    const config = {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    };
-
-    const formData = new FormData();
-    formData.append("amount", plan_details.amount);
-    formData.append("startDate", plan_details.start);
-    formData.append("duration", plan_details.duration);
-    formData.append("frequency", frequency);
-    formData.append("cardId", cardsData[selectCard]._id);
-    formData.append("plan", "Earli");
+    const data = JSON.stringify({
+      amount: plan_details.amount,
+      startDate: plan_details.start,
+      duration: plan_details.duration,
+      frequency: frequency,
+      cardId: cardsData[selectCard]._id,
+      plan: "Earli",
+    });
 
     const mainLink = "https://earli.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "post",
+      url: `${mainLink}/createplan/${childid}`,
+      data: data,
+    };
     ctxDispatch({ type: "LoadingRequest" });
-    try {
-      const res = await axios({
-        method: "post",
-        url: `${mainLink}/createplan/${childid}`,
-        data: formData,
-        config,
-      });
-      console.log(res);
-      if (res) {
+
+    await axios(config)
+      .then((res) => {
         ctxDispatch({ type: "LoadingSuccess" });
         Swal.fire({
           position: "center",
@@ -122,17 +119,17 @@ const Step3Comp = () => {
           localStorage.removeItem("frequency");
           localStorage.removeItem("plan_detail");
         });
-      }
-    } catch (error) {
-      ctxDispatch({ type: "LoadingFailed" });
-      Swal.fire({
-        position: "center",
-        icon: "error",
-        title: `${ErrorFunction(error)}`,
-        showConfirmButton: false,
-        timer: 2500,
+      })
+      .catch((error) => {
+        ctxDispatch({ type: "LoadingFailed" });
+        Swal.fire({
+          position: "center",
+          icon: "error",
+          title: `${ErrorFunction(error)}`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
       });
-    }
   };
 
   const addCard = async () => {
@@ -140,7 +137,7 @@ const Step3Comp = () => {
     const mainLink1 = "http://localhost:2004";
     const onSuccess = (reference) => {
       console.log(reference);
-      const linkCard = axios
+      axios
         .get(
           `${mainLink}?trxref=${reference.reference}&reference=${reference.reference}`
         )
