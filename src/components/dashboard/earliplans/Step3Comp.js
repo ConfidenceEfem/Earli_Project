@@ -107,7 +107,7 @@ const Step3Comp = () => {
         formData,
         config
       );
-      console.log(res.data.data);
+      console.log(res);
       if (res) {
         ctxDispatch({ type: "LoadingSuccess" });
         Swal.fire({
