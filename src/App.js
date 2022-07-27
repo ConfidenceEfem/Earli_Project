@@ -42,15 +42,15 @@ const App = () => {
             element={<AddChildOverview />}
           />
           <Route
-            path="/firstearliplan/:parentid/:childid"
+            path="/firstearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep1 />}
           />
           <Route
-            path="/secondearliplan/:parentid/:childid"
+            path="/secondearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep2 />}
           />
           <Route
-            path="/thirdearliplan/:parentid/:childid"
+            path="/thirdearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep3 />}
           />
           <Route exact path="/kolooverview" element={<KoloOverviewPage />} />
