@@ -16,6 +16,7 @@ import { AuthContext } from "./../../AuthState/AuthProvider";
 import { ErrorFunction } from "./../../Error";
 import { usePaystackPayment } from "react-paystack";
 
+
 const Step3Comp = () => {
   const { parentid, childid, plan } = useParams();
 
@@ -30,6 +31,7 @@ const Step3Comp = () => {
   const [cardsData, setCardsData] = useState([]);
 
   const [selectCard, setSelectCard] = useState();
+
   const [config, setConfig] = useState({
     publicKey: "pk_test_e4cc9f3c174db31657087b8c9eb9102ba63cd1fc",
   });
@@ -147,7 +149,7 @@ const Step3Comp = () => {
           Swal.fire({
             position: "center",
             icon: "success",
-            title: `${res.message}`,
+            title: `Card added successfully`,
             showConfirmButton: false,
             timer: 2500,
           });
@@ -248,13 +250,17 @@ const Step3Comp = () => {
                       Add New Payment Method
                     </AddPay>
                   </PlusIconAndText>
-                  <Button
-                    onClick={() => {
-                      createPlan();
-                    }}
-                  >
-                    Next
-                  </Button>
+                  {!state.loading ? (
+                    <Button
+                      onClick={() => {
+                        createPlan();
+                      }}
+                    >
+                      Next
+                    </Button>
+                  ) : (
+                    <ProgressBar />
+                  )}
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
