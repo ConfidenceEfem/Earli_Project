@@ -18,6 +18,7 @@ import AddEarliStep3 from './components/dashboard/earliplans/AddEarliStep3';
 import KoloOverviewPage from './components/dashboard/KoloOverview/KoloOverviewPage';
 import TreasuryPlan1 from './components/dashboard/treasuryplans/TreasuryPlan1';
 import TreasuryPlan2 from './components/dashboard/treasuryplans/TreasuryPlan2';
+import AddEarliOverview from './components/dashboard/earliplans/AddEarliOverview';
 
 const App = () => {
   return (
@@ -44,15 +45,19 @@ const App = () => {
             element={<AddChildOverview />}
           />
           <Route
-            path="/firstearliplan/:parentid/:childid"
+            path="/firstearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep1 />}
           />
           <Route
-            path="/secondearliplan/:parentid/:childid"
+            path="/secondearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep2 />}
           />
           <Route
-            path="/thirdearliplan/:parentid/:childid"
+            path="/earlioverview/:parentid/:childid/:plan"
+            element={<AddEarliOverview />}
+          />
+          <Route
+            path="/thirdearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep3 />}
           />
           <Route exact path="/kolooverview" element={<KoloOverviewPage />} />

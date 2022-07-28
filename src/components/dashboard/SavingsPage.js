@@ -1,17 +1,37 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { FiPlus } from 'react-icons/fi';
 import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
 import { GrFormNext } from 'react-icons/gr';
 import { FaPiggyBank } from 'react-icons/fa';
+import avatar from '../images/avatar.png';
 import earli from '../images/eali.png';
-import kolo from '../images/kolo.png';
 import freedom from '../images/freedom.png';
+import kolo from '../images/kolo.png';
+import { FaWallet } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { EarliIcon } from '../AllIcons';
+import axios from 'axios';
 
 const SavingsPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
+
+  const [savingsData, setSavingsData] = useState([]);
+
+  const fetchData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+
+    const res = await axios.get(`${mainLink}/onechild/${childid}`);
+    console.log(res?.data?.data);
+    setSavingsData(res?.data?.data?.savings);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <LastCard>
       <CreateSavingsPlan>
@@ -20,7 +40,7 @@ const SavingsPage = ({ parentid, childid }) => {
           <SavingsCardHolder>
             <SavingsCard
               bg="#fff6de"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/Earli`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
@@ -40,7 +60,7 @@ const SavingsPage = ({ parentid, childid }) => {
             </SavingsCard>
             <SavingsCard
               bg="#d7eeff"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/Freedom`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
@@ -58,7 +78,7 @@ const SavingsPage = ({ parentid, childid }) => {
             </SavingsCard>
             <SavingsCard
               bg="#d7eeff"
-              to={`/firstearliplan/${parentid}/${childid}`}
+              to={`/firstearliplan/${parentid}/${childid}/kolo`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
@@ -79,7 +99,7 @@ const SavingsPage = ({ parentid, childid }) => {
       </CreateSavingsPlan>
       <CreateSavingsPlan>
         <SavingsPlanWrapper>
-          <SavingsHeading>Create New Savings Plan</SavingsHeading>
+          <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
             <CurrentCard>
               <CurrentCardWrapper>
@@ -169,6 +189,37 @@ const SavingsPage = ({ parentid, childid }) => {
                 <NextIcon1 color="#7b69dd" />
               </CurrentCardWrapper>
             </CurrentCard>
+
+            {savingsData.length > 1 ? (
+              savingsData?.map((props, i) =>
+                i <= 3 ? (
+                  <CurrentCard>
+                    <CurrentCardWrapper>
+                      <CurrentPlan>
+                        <CurrentIconCircle>
+                          <CurrentIcon />
+                        </CurrentIconCircle>
+                        <CurrentMainPlan>
+                          <PlanHead>Plan</PlanHead>
+                          <PlanAmount>{props.plan}</PlanAmount>
+                        </CurrentMainPlan>
+                      </CurrentPlan>
+                      <CurrentSaved>
+                        <PlanHead>Saved</PlanHead>
+                        <PlanAmount>N{props.balance}</PlanAmount>
+                      </CurrentSaved>
+                      <CurrentDuration>
+                        <PlanHead>Durations</PlanHead>
+                        <PlanAmount>{props.duration}</PlanAmount>
+                      </CurrentDuration>
+                      <NextIcon1 color="#7b69dd" />
+                    </CurrentCardWrapper>
+                  </CurrentCard>
+                ) : null
+              )
+            ) : (
+              <NoPlan>You do have any savings plan</NoPlan>
+            )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
       </CreateSavingsPlan>
@@ -186,6 +237,11 @@ const PlanAmount = styled.div`
 const PlanHead = styled.div`
   font-size: 11px;
   color: lightgray;
+`;
+const NoPlan = styled.div`
+  font-size: 13px;
+  color: lightgray;
+  text-align: center;
 `;
 
 const CurrentMainPlan = styled.div`

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
@@ -8,19 +8,33 @@ import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import { FiPlus } from 'react-icons/fi';
 import ProgressBar from '../ProgressBar';
-import img from '../../images/avatar.png';
 import earli from '../../images/eali.png';
 import master from '../../images/mastercard.png';
 import visa from '../../images/visa.png';
+import Swal from 'sweetalert2';
+import { AuthContext } from './../../AuthState/AuthProvider';
+import { ErrorFunction } from './../../Error';
+import { usePaystackPayment } from 'react-paystack';
 
-const Step3Comp = ({ showPayment, setShowPayment }) => {
-  const { parentid, childid } = useParams();
+const Step3Comp = () => {
+  const { parentid, childid, plan } = useParams();
+
+  const { currentUser, value } = useContext(AuthContext);
+
+  const { state, dispatch: ctxDispatch } = value;
 
   const navigate = useNavigate();
 
-  // const [paymentMethod, setPaymentMethod] = useState('Daily');
-
   const [childData, setChildData] = useState([]);
+
+  const [cardsData, setCardsData] = useState([]);
+
+  const [selectCard, setSelectCard] = useState();
+  const [config, setConfig] = useState({
+    publicKey: 'pk_test_e4cc9f3c174db31657087b8c9eb9102ba63cd1fc',
+  });
+
+  const initializePayment = usePaystackPayment(config);
 
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
@@ -35,6 +49,136 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
     ChildData();
   }, []);
 
+  const fetchCardsData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+    const res = await axios.get(`${mainLink}/parentcards/${parentid}`);
+    if (!res) {
+      console.log('error');
+    } else {
+      setCardsData(res?.data?.data?.cards);
+      console.log(res?.data?.data?.cards);
+    }
+  };
+  const fetchCofigData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+    const fetchPayData = await axios.get(`${mainLink}/cardlink/${parentid}`);
+
+    const payData = fetchPayData?.data;
+    console.log(payData);
+    setConfig((prev) => ({
+      ...prev,
+      ...payData,
+    }));
+  };
+
+  useEffect(() => {
+    fetchCardsData();
+    ChildData();
+    fetchCofigData();
+  }, []);
+
+  const plan_details = localStorage.getItem('plan_details')
+    ? JSON.parse(localStorage.getItem('plan_details'))
+    : [];
+
+  const frequency = localStorage.getItem('frequency')
+    ? localStorage.getItem('frequency')
+    : '';
+
+  const createPlan = async () => {
+    const data = JSON.stringify({
+      amount: plan_details.amount,
+      startDate: plan_details.start,
+      duration: plan_details.duration,
+      frequency: frequency,
+      cardId: cardsData[selectCard]?._id,
+      plan: plan,
+    });
+
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      method: 'post',
+      url: `${mainLink}/createplan/${childid}`,
+      data: data,
+    };
+    ctxDispatch({ type: 'LoadingRequest' });
+
+    await axios(config)
+      .then((res) => {
+        ctxDispatch({ type: 'LoadingSuccess' });
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `plan created successfully`,
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate(`/dashaccount/${parentid}/${childid}`);
+          localStorage.removeItem('frequency');
+          localStorage.removeItem('plan_detail');
+        });
+      })
+      .catch((error) => {
+        ctxDispatch({ type: 'LoadingFailed' });
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: `${ErrorFunction(error)}`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      });
+  };
+
+  const addCard = async () => {
+    const mainLink = 'https://earli.herokuapp.com/paystack/callback';
+    const mainLink1 = 'http://localhost:2004';
+    const onSuccess = (reference) => {
+      console.log(reference);
+      axios
+        .get(
+          `${mainLink}?trxref=${reference.reference}&reference=${reference.reference}`
+        )
+        .then((res) => {
+          fetchCardsData();
+          Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${res.message}`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        })
+        .catch((err) => {
+          Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: `Card Already Used`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
+        });
+    };
+
+    const onClose = (reference) => {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `Couldn't complete card link`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
+    };
+    initializePayment(onSuccess, onClose);
+  };
+
   return (
     <Container>
       <Wrapper>
@@ -42,7 +186,10 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
           <ChildImage src={childData?.image} />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
-            <AccountName>Adebimpe Adesanya</AccountName>
+            <AccountName>
+              {childData?.firstname}
+              {childData?.lastname}
+            </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
@@ -72,43 +219,50 @@ const Step3Comp = ({ showPayment, setShowPayment }) => {
                     <MainInputHead> Payment Method </MainInputHead>
                     <SubInputText>Choose a Payment Method</SubInputText>
                   </InputHead>
-                  {/* This is where you would map all your card you have added and choose the one you want to use*/}
-                  <PaymentCard bg="#f2f0fc">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage src={master} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
-                  <PaymentCard bg="#f9f9f9">
-                    <PaymentCardWrapper>
-                      <PayNoAndName fl>
-                        <PayNo>**** *** ** 543</PayNo>
-                        <PayName>Chioma Adesanya</PayName>
-                      </PayNoAndName>
-                      <PayNoAndName>
-                        <PayImage1 src={visa} />
-                        <PayExpire>Exp: 02/2026</PayExpire>
-                      </PayNoAndName>
-                    </PaymentCardWrapper>
-                  </PaymentCard>
+
+                  {cardsData?.map((props, i) => (
+                    <PaymentCard
+                      bg={i % 2 === 0 ? '#f2f0fc' : '#f9f9f9'}
+                      key={props._id}
+                      onClick={() => {
+                        setSelectCard(i);
+                      }}
+                    >
+                      <PaymentCardWrapper>
+                        <PayNoAndName fl>
+                          <PayNo>**** *** *** {props?.last4}</PayNo>
+                          <PayName>{props?.bank}</PayName>
+                        </PayNoAndName>
+                        <PayNoAndName>
+                          <PayImage
+                            src={props?.card_type === 'master' ? master : visa}
+                          />
+                          <PayExpire>{props?.exp_month}</PayExpire>
+                        </PayNoAndName>
+                      </PaymentCardWrapper>
+                    </PaymentCard>
+                  ))}
+
                   <PlusIconAndText>
                     <PlusIcon />
                     <AddPay
                       // this is to trigger the add card page
                       onClick={() => {
-                        setShowPayment(!showPayment);
+                        addCard();
+                        console.log('add card');
                       }}
                     >
                       Add New Payment Method
                     </AddPay>
                   </PlusIconAndText>
-                  <Button>Next</Button>
+
+                  <Button
+                    onClick={() => {
+                      createPlan();
+                    }}
+                  >
+                    Next
+                  </Button>
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
@@ -159,18 +313,18 @@ const PayExpire = styled.div`
   font-size: 9px;
   color: gray;
 `;
-const PayImage1 = styled.img`
+const PayImage = styled.img`
   width: 50px;
   height: 30px;
   object-fit: cover;
   margin-bottom: 13px;
 `;
-const PayImage = styled.img`
-  width: 30px;
-  height: 25px;
-  object-fit: contain;
-  margin-bottom: 13px;
-`;
+// const PayImage = styled.img`
+//   width: 30px;
+//   height: 25px;
+//   object-fit: contain;
+//   margin-bottom: 13px;
+// `;
 const PayName = styled.div`
   margin-top: 13px;
 `;

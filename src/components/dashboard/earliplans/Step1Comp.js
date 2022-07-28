@@ -11,7 +11,7 @@ import earli from '../../images/eali.png';
 import Swal from 'sweetalert2';
 
 const Step1Comp = () => {
-  const { parentid, childid } = useParams();
+  const { parentid, childid , plan} = useParams();
 
   const navigate = useNavigate();
 
@@ -54,8 +54,8 @@ const Step1Comp = () => {
         timer: 2500,
       });
     } else {
-      localStorage.setItem('frequency', paymentMethod);
-      navigate(`/secondearliplan/${parentid}/${childid}`);
+      localStorage.setItem('frequency', paymentMethod.toLowerCase());
+      navigate(`/secondearliplan/${parentid}/${childid}/${plan}`);
     }
   };
 
