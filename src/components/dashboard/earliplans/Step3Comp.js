@@ -232,7 +232,7 @@ const Step3Comp = () => {
                           <PayImage
                             src={props?.card_type === "master" ? master : visa}
                           />
-                          <PayExpire>{props?.exp_month}</PayExpire>
+                          <PayExpire>EXP:{props?.exp_month}/2026</PayExpire>
                         </PayNoAndName>
                       </PaymentCardWrapper>
                     </PaymentCard>
