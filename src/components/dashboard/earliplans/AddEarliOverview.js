@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import AddEarliOverviewComp from './AddEarliOverviewComp';
-import DashBoardHeader from './DashBoardHeader';
-import DashNav from './DashNavs';
+import DashBoardHeader from '../DashBoardHeader';
+import DashNav from '../DashNavs';
 
 const AddEarliOverview = () => {
   return (

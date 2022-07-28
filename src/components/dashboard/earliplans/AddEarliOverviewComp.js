@@ -1,15 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import avatar from '../images/avatar.png';
+import avatar from '../../images/avatar.png';
 import * as yup from 'yup';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import Swal from 'sweetalert2';
 import moment from 'moment';
-import ProgressBar from './ProgressBar';
-import { AuthContext } from '../AuthState/AuthProvider';
-import { ErrorFunction } from '../Error';
+import ProgressBar from '../ProgressBar';
+import { AuthContext } from '../../AuthState/AuthProvider';
+import { ErrorFunction } from '../../Error';
 
 const AddEarliOverviewComp = () => {
   const { parentid } = useParams();

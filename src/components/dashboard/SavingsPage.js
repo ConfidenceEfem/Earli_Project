@@ -101,95 +101,6 @@ const SavingsPage = ({ parentid, childid }) => {
         <SavingsPlanWrapper>
           <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle bg="#fff6de">
-                    <CurrentIcon src={kolo} />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Kolo</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle bg="#FDF7DE">
-                    <CurrentIcon src={freedom} />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Freedom</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N139,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>3 Years</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle bg="#DBF1E1">
-                    <CurrentIcon src={earli} />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Earli</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle bg="#fff6de">
-                    <CurrentIcon src={kolo} />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Kolo</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Saved</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Durations</PlanHead>
-                  <PlanAmount>6 Months</PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
-
             {savingsData.length > 1 ? (
               savingsData?.map((props, i) =>
                 i <= 3 ? (
@@ -197,7 +108,13 @@ const SavingsPage = ({ parentid, childid }) => {
                     <CurrentCardWrapper>
                       <CurrentPlan>
                         <CurrentIconCircle>
-                          <CurrentIcon />
+                          {props?.plan === 'Earli' ? (
+                            <CurrentIcon src={earli} />
+                          ) : props?.plan === 'Kolo' ? (
+                            <CurrentIcon src={kolo} />
+                          ) : props?.plan === 'Freedom' ? (
+                            <CurrentIcon src={freedom} />
+                          ) : null}
                         </CurrentIconCircle>
                         <CurrentMainPlan>
                           <PlanHead>Plan</PlanHead>
