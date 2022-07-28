@@ -16,7 +16,6 @@ import { AuthContext } from "./../../AuthState/AuthProvider";
 import { ErrorFunction } from "./../../Error";
 import { usePaystackPayment } from "react-paystack";
 
-
 const Step3Comp = () => {
   const { parentid, childid, plan } = useParams();
 
@@ -218,6 +217,7 @@ const Step3Comp = () => {
                   {cardsData?.map((props, i) => (
                     <PaymentCard
                       bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
+                      bd={i === selectCard ? " 0.5px solid #A594F9" : "none"}
                       key={props._id}
                       onClick={() => {
                         setSelectCard(i);
@@ -332,6 +332,7 @@ const PaymentCard = styled.div`
   border-radius: 5px;
   margin-bottom: 15px;
   background-color: ${({ bg }) => bg};
+  border: ${({ bd }) => bd};
 `;
 const AccountName = styled.div`
   font-weight: 600;
