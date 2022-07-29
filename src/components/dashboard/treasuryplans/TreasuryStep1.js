@@ -11,7 +11,7 @@ import treasury from '../../images/treasury.png';
 import Swal from 'sweetalert2';
 
 const TreasuryStep1 = () => {
-  const { parentid, childid } = useParams();
+  const { parentid, childid, invest } = useParams();
 
   const navigate = useNavigate();
 
@@ -54,8 +54,8 @@ const TreasuryStep1 = () => {
         timer: 2500,
       });
     } else {
-      localStorage.setItem('frequency', paymentMethod);
-      navigate(`/treasury2`);
+      localStorage.setItem('invest_frequency', paymentMethod);
+      navigate(`/${parentid}/${childid}/${invest}/amount`);
     }
   };
 
@@ -81,12 +81,12 @@ const TreasuryStep1 = () => {
               </IconAndBack>
               <CreateAndIcon>
                 <CreateIcon src={treasury} />
-                <CreateText>Invest In Treasury Bills</CreateText>
+                <CreateText>Invest In {invest}</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 1 of 3</ProgressText>
+                <ProgressText>Step 1 of 3 </ProgressText>
                 <LineCont>
                   <Line></Line>
                 </LineCont>

@@ -60,7 +60,7 @@ const Step2Comp = () => {
 
     localStorage.setItem('plan_details', JSON.stringify(data));
 
-    navigate(`/thirdearliplan/${parentid}/${childid}/${plan}`);
+    navigate(`/earlioverview/${parentid}/${childid}/${plan}`);
   });
   return (
     <Container>
@@ -78,7 +78,9 @@ const Step2Comp = () => {
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/firstearliplan/${parentid}/${childid}/${plan}`}>
+              <IconAndBack
+                to={`/firstearliplan/${parentid}/${childid}/${plan}`}
+              >
                 <Icon />
                 <span>Back</span>
               </IconAndBack>

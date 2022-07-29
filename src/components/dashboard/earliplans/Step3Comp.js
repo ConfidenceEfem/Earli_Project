@@ -64,13 +64,21 @@ const Step3Comp = () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const fetchPayData = await axios.get(`${mainLink}/cardlink/${parentid}`);
-
-    const payData = fetchPayData?.data;
-    console.log(payData);
-    setConfig((prev) => ({
-      ...prev,
-      ...payData,
-    }));
+    if (fetchPayData) {
+      const payData = fetchPayData?.data;
+      console.log(payData);
+      setConfig((prev) => ({
+        ...prev,
+        ...payData,
+      }));
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unable to load Paystack',
+        timer: 4000,
+        showConfirmButton: false,
+      });
+    }
   };
 
   useEffect(() => {

@@ -3,15 +3,22 @@ import styled from 'styled-components';
 import { MdNavigateNext } from 'react-icons/md';
 import treasury from '../images/treasury.png';
 import stocks from '../images/stocks.png';
+import { useNavigate } from 'react-router-dom';
 
-const InvestmentPage = () => {
+const InvestmentPage = ({ parentid, childid }) => {
+  const navigate = useNavigate();
   return (
     <LastCard>
       <CreateSavingsPlan>
         <SavingsPlanWrapper>
           <SavingsHeading>Create New Investment Plan</SavingsHeading>
           <SavingsCardHolder>
-            <SavingsCard bg="#d7eeff">
+            <SavingsCard
+              bg="#d7eeff"
+              onClick={() => {
+                navigate(`/${parentid}/${childid}/Treasury Bills`);
+              }}
+            >
               <SavingsCardWrapper>
                 <IconAndDetails>
                   <IconImage src={treasury} />
@@ -26,7 +33,12 @@ const InvestmentPage = () => {
                 <NextIcon />
               </SavingsCardWrapper>
             </SavingsCard>
-            <SavingsCard bg="#fff6de">
+            <SavingsCard
+              bg="#fff6de"
+              onClick={() => {
+                navigate(`/${parentid}/${childid}/Stocks`);
+              }}
+            >
               <SavingsCardWrapper>
                 <IconAndDetails>
                   <IconImage src={stocks} />
@@ -41,7 +53,12 @@ const InvestmentPage = () => {
                 <NextIcon />
               </SavingsCardWrapper>
             </SavingsCard>
-            <SavingsCard bg="#d7eeff">
+            <SavingsCard
+              bg="#d7eeff"
+              onClick={() => {
+                navigate(`/${parentid}/${childid}/Real Estate`);
+              }}
+            >
               <SavingsCardWrapper>
                 <IconAndDetails>
                   <IconImage src={treasury} />
@@ -230,6 +247,7 @@ const SavingsCard = styled.div`
   background-color: ${({ bg }) => bg};
   margin: 10px 0;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const SavingsCardHolder = styled.div`
@@ -260,19 +278,19 @@ const CreateSavingsPlan = styled.div`
   height: 100%;
   justify-content: center;
 `;
-const Navs = styled.div`
-  font-size: 15px;
-  font-weight: 700;
-  padding-bottom: 10px;
-  margin-right: 50px;
-  cursor: pointer;
-  transition: all 350ms;
-  border-bottom: 5px solid #7b69dd;
-`;
+// const Navs = styled.div`
+//   font-size: 15px;
+//   font-weight: 700;
+//   padding-bottom: 10px;
+//   margin-right: 50px;
+//   cursor: pointer;
+//   transition: all 350ms;
+//   border-bottom: 5px solid #7b69dd;
+// `;
 const LastCard = styled.div`
   width: 100%;
   min-height: 530px;
-  height: 100%auto;
+  height: 100%;
   justify-content: space-between;
   display: flex;
 `;

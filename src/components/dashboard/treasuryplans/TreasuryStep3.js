@@ -3,13 +3,12 @@ import styled from 'styled-components';
 import earli from '../../images/treasury.png';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import moment from 'moment';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
 
-const TreasuryStep2 = () => {
+const TreasuryStep3 = () => {
   const { parentid, childid, invest } = useParams();
 
   const navigate = useNavigate();
@@ -36,81 +35,99 @@ const TreasuryStep2 = () => {
     console.log(childData);
   };
 
+  let invest_frequency = localStorage.getItem('invest_frequency')
+    ? localStorage.getItem('invest_frequency')
+    : '';
+  let treasury_details = localStorage.getItem('treasury_details')
+    ? JSON.parse(localStorage.getItem('treasury_details'))
+    : [];
+
+  const navigateToPayment = () => {
+    if (invest_frequency && treasury_details) {
+      // to navigate to payment
+    } else {
+    }
+  };
+
   useEffect(() => {
     fetchData();
     ChildData();
   }, []);
 
-  const schema = yup.object().shape({
-    amount: yup.number().required('This field is reequired'),
-    start: yup.date().required('This field is required'),
-  });
-
-  const {
-    register,
-    reset,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-
-  const submit = handleSubmit(async (data) => {
-    // console.log(data);
-    const { amount, duration, start } = data;
-    localStorage.setItem('treasury_details', JSON.stringify(data));
-    // console.log('Hello World');
-
-    navigate(`/${parentid}/${childid}/${invest}/overview`);
-  });
   return (
     <Container>
       <Wrapper>
         <ChildAccountCard>
-          <ChildImage src={childData?.image} />
+          <ChildImage src={childData?.image} alt="child img" />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
-            <AccountName>Confidence Efem</AccountName>
+            <AccountName>
+              {childData?.firstName} {childData?.lastName}
+            </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/${parentid}/${childid}/${invest}`}>
+              <IconAndBack to={`/${parentid}/${childid}/${invest}/amount`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
                 <CreateIcon src={earli} />
-                <CreateText>Invest In {invest}</CreateText>
+                <CreateText>Invest In Treasury Bills</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 2 of 3</ProgressText>
+                <ProgressText>Step 3 of 3</ProgressText>
                 <LineCont>
+                  <Line></Line>
                   <Line></Line>
                   <Line></Line>
                 </LineCont>
               </ProgressContianer>
-              <InputContainer onSubmit={submit}>
+              <InputContainer>
                 <InputContWrapper>
-                  <InputHead>Amount</InputHead>
-                  <InputLabel>
-                    <Label>How much?</Label>
-                    <Input
-                      type="number"
-                      placeholder="Input Amount"
-                      {...register('amount')}
-                    />
-                    <Error>{errors?.amount?.message}</Error>
-                  </InputLabel>
-
-                  <InputLabel>
-                    <Label>Start Date</Label>
-                    <Input type="date" {...register('start')} />
-                    <Error>{errors?.start?.message}</Error>
-                  </InputLabel>
-
-                  <Button>Next</Button>
+                  <InputHead>Overview</InputHead>
+                  <Label>
+                    Confirm the details of the plan you are about to create.
+                  </Label>
+                  <DetailsCont>
+                    <DetailItem>
+                      <ItemName>Account</ItemName>
+                      <ItemValue>
+                        {' '}
+                        {childData?.firstName} {childData?.lastName}
+                      </ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Duration</ItemName>
+                      <ItemValue>{invest_frequency}</ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>How Much?</ItemName>
+                      <ItemValue>{treasury_details?.amount}</ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Start Date</ItemName>
+                      <ItemValue>
+                        {moment(treasury_details?.start).format('DD MM yy')}
+                      </ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Expected Return</ItemName>
+                      <ItemValue>N600,500</ItemValue>
+                    </DetailItem>
+                  </DetailsCont>
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigateToPayment();
+                    }}
+                  >
+                    Proceed to Payment
+                  </Button>
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
@@ -121,7 +138,32 @@ const TreasuryStep2 = () => {
   );
 };
 
-export default TreasuryStep2;
+export default TreasuryStep3;
+
+const ItemValue = styled.div`
+  font-weight: 500;
+  color: black;
+`;
+
+const ItemName = styled.div``;
+
+const DetailItem = styled.div`
+  display: flex;
+  font-size: 12px;
+  color: lightgray;
+  justify-content: space-between;
+  padding-bottom: 13px;
+  margin-top: 13px;
+  border-bottom: 1px solid lightgray;
+`;
+const DetailsCont = styled.div`
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 20px;
+  @media screen and (max-width: 375px) {
+    margin-bottom: 20px;
+  }
+`;
 
 const CreateIcon = styled.img`
   width: 22px;
@@ -175,7 +217,7 @@ const ChildAccountCard = styled.div`
 `;
 
 const Button = styled.button`
-  width: 140px;
+  width: 100%;
   height: 45px;
   display: flex;
   justify-content: center;
@@ -189,6 +231,7 @@ const Button = styled.button`
   border-radius: 4px;
   transition: all 550ms;
   margin-top: 25px;
+  font-family: work sans;
   :hover {
     transform: scale(1.02);
   }
@@ -227,14 +270,10 @@ const Label = styled.div`
   justify-content: flex-start;
   font-size: 11px;
   margin-bottom: 7px;
+  text-align: center;
+  line-height: 22px;
 `;
-const InputLabel = styled.div`
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  margin: 10px 0;
-`;
+
 const InputHead = styled.div`
   display: flex;
   font-size: 17px;
@@ -255,7 +294,7 @@ const InputContainer = styled.form`
   border-radius: 10px;
   justify-content: center;
   background: white;
-  padding-bottom: 15px;
+  padding-bottom: 20px;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -380,4 +419,5 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   min-height: calc(100vh - 90px);
+  margin-bottom: 40px;
 `;

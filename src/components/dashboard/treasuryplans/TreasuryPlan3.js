@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import DashBoardHeader from './DashBoardHeader';
-import DashNav from './DashNavs';
-import DashWelcome from './DashWelcome';
-import UserAccountDash from './UserAccountDash';
+import DashBoardHeader from '../DashBoardHeader';
+import DashNav from '../DashNavs';
+import TreasuryStep3 from './TreasuryStep3';
 
-const DashBoardAccount = () => {
+const TreasuryPlan3 = () => {
   return (
     <Container>
       <Wrapper>
@@ -13,7 +12,7 @@ const DashBoardAccount = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <UserAccountDash />
+            <TreasuryStep3 />
           </Wrap>
         </Cont>
       </Wrapper>
@@ -21,7 +20,7 @@ const DashBoardAccount = () => {
   );
 };
 
-export default DashBoardAccount;
+export default TreasuryPlan3;
 
 const Wrap = styled.div`
   display: flex;
@@ -34,6 +33,9 @@ const Cont = styled.div`
   height: 100%auto;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -48,4 +50,7 @@ const Container = styled.div`
   display: flex;
   background-color: #fafcff;
   font-family: work sans;
+  @media screen and (max-width: 500px) {
+    /* background: white; */
+  }
 `;

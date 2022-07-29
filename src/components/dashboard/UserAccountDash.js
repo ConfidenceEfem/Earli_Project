@@ -13,6 +13,7 @@ import InvestmentPage from './InvestmentPage';
 import { FiChevronDown } from 'react-icons/fi';
 import { useParams } from 'react-router';
 import axios from 'axios';
+import SelectChildCard from './SelectChildCard';
 
 const UserAccountDash = () => {
   const { parentid, childid } = useParams();
@@ -57,7 +58,7 @@ const UserAccountDash = () => {
               <AccoutNo>Account 1</AccoutNo>
               <NameAndIcon>
                 {/* <AccountName>Adebimpe Adesanya</AccountName> */}
-                <Select name={childData?.firstname} id={childData?._id}>
+                {/* <Select name={childData?.firstname} id={childData?._id}>
                   {data.map((props) => (
                     <Options
                       key={props._id}
@@ -66,7 +67,8 @@ const UserAccountDash = () => {
                       {props.firstname} {props.lastname}
                     </Options>
                   ))}
-                </Select>
+                </Select> */}
+                <SelectChildCard parentid={parentid} childid={childid} />
                 {/* <CaretIcon/> */}
               </NameAndIcon>
             </AccoutNoAndName>
@@ -75,7 +77,7 @@ const UserAccountDash = () => {
         </Heading>
         <UserAccountMainCardHolder>
           <AccountMaincardWrapper>
-            <WalletPage />
+            <WalletPage childid={childid} />
             <CardNavigations>
               {toggle === false ? (
                 <Navs

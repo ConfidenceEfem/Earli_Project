@@ -14,8 +14,8 @@ const VerifyLoginCard = () => {
   const { state, dispatch: ctxDispatch } = value;
   const navigate = useNavigate();
 
-  const email = useSelector((state) => state.reducer.email);
-  const password = useSelector((state) => state.reducer.password);
+  const email = useSelector((state) => state?.persistedReducer?.email);
+  const password = useSelector((state) => state?.persistedReducer?.password);
 
   const [num, setNum] = useState('');
   const [num1, setNum1] = useState('');
@@ -83,36 +83,42 @@ const VerifyLoginCard = () => {
               onChange={(e) => {
                 setNum(e.target.value);
               }}
+              maxLength="1"
             />
             <Inputs
               value={num1}
               onChange={(e) => {
                 setNum1(e.target.value);
               }}
+              maxLength="1"
             />
             <Inputs
               value={num2}
               onChange={(e) => {
                 setNum2(e.target.value);
               }}
+              maxLength="1"
             />
             <Inputs
               value={num3}
               onChange={(e) => {
                 setNum3(e.target.value);
               }}
+              maxLength="1"
             />
             <Inputs
               value={num4}
               onChange={(e) => {
                 setNum4(e.target.value);
               }}
+              maxLength="1"
             />
             <Inputs
               value={num5}
               onChange={(e) => {
                 setNum5(e.target.value);
               }}
+              maxLength="1"
             />
           </InputHolder>
           {counter === 0 || counter < 0 ? (
@@ -220,7 +226,7 @@ const VerifySub = styled.div`
   font-family: work sans;
   margin: 8px 0;
   span {
-    font-weight: 300;
+    font-weight: 500;
     color: black;
   }
   @media screen and (max-width: 400px) {
