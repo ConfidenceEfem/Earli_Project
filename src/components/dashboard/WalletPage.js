@@ -34,7 +34,7 @@ const WalletPage = ({ childid }) => {
             <Icon />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}'s Wallet</WalletName>
+            <WalletName>{childData?.firstname}Confidence 's Wallet</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -43,7 +43,8 @@ const WalletPage = ({ childid }) => {
             <Icon2 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}'s Savings</WalletName>
+            <WalletName>{childData?.firstname}Confidence 
+            's Savings</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -52,7 +53,7 @@ const WalletPage = ({ childid }) => {
             <Icon3 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}'s Investments</WalletName>
+            <WalletName>{childData?.firstname}Confidence 's Investments</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -68,10 +69,25 @@ const FirstMainCard = styled.div`
   border-left: ${({ bl }) => bl};
   align-items: center;
   justify-content: center;
-  padding: 0 70px;
+  padding: 0 60px;
   display: flex;
   margin-right: ${({ mr }) => mr};
   margin-left: ${({ ml }) => ml};
+  @media screen and (max-width: 1400px){
+    padding: 0 50px;
+  }
+  @media screen and (max-width: 1300px){
+    padding: 0 40px;
+    // background-color: red;
+  }
+  @media screen and (max-width: 1350px){
+    padding: 0 30px;
+  }
+  @media screen and (max-width: 1250px){
+    padding: 0 20px;
+    // background-color: red;
+  }
+
 `;
 
 const Icon3 = styled(BsFillBarChartFill)``;
@@ -111,6 +127,12 @@ const FirstCardWrapper = styled.div`
   display: flex;
   justify-content: center;
   /* justify-content: space-between; */
+  @media screen and (max-width: 1300px){
+   width: 95%;
+  }
+  @media screen and (max-width: 1350px){
+    width: 98%;
+  }
 `;
 
 const FirstCard = styled.div`
@@ -121,4 +143,7 @@ const FirstCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  @media screen and (max-width: 1000px){
+    display:none;
+  }
 `;

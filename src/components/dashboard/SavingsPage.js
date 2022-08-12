@@ -298,8 +298,35 @@ const CreateSavingsPlan = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 10px;
-  height: 100%;
-  justify-content: center;
+  height: 420px;
+    justify-content: center;
+  @media screen and (max-width: 1000px){
+    width: 410px;
+    // background-color: red;
+  }
+  @media screen and (max-width: 980px){
+    width: 395px;
+   
+  }
+  @media screen and (max-width: 970px){
+    width: 385px;
+  }
+  @media screen and (max-width: 950px){
+    // width: 380px;
+    width: 90%;
+    margin: 15px 0;
+  }
+  @media screen and (max-width: 910px){
+    // width: 380px;
+  
+    // background-color: red;
+  }
+  @media screen and (max-width: 600px){
+    width: 90%;
+    // background-color: red;
+    
+    
+  }
 `;
 const Navs = styled.div`
   font-size: 15px;
@@ -312,7 +339,15 @@ const Navs = styled.div`
 `;
 const LastCard = styled.div`
   width: 100%;
-  height: 450px;
+  height:100%;
+  // padding-bottom: 40px;
   justify-content: space-between;
+  // background-color: red;
   display: flex;
+  flex-wrap: wrap;
+  // margin-bottom: 40px;
+  @media screen and (max-width: 950px){
+    justify-content: center;
+    // background-color: red;
+  }
 `;

@@ -14,6 +14,7 @@ import { FiChevronDown } from 'react-icons/fi';
 import { useParams } from 'react-router';
 import axios from 'axios';
 import SelectChildCard from './SelectChildCard';
+import WalletMediaView from './WalletMediaView';
 
 const UserAccountDash = () => {
   const { parentid, childid } = useParams();
@@ -78,6 +79,8 @@ const UserAccountDash = () => {
         <UserAccountMainCardHolder>
           <AccountMaincardWrapper>
             <WalletPage childid={childid} />
+            <WalletMediaView/>
+
             <CardNavigations>
               {toggle === false ? (
                 <Navs
@@ -174,6 +177,9 @@ const AccountMaincardWrapper = styled.div`
   width: 95%;
   height: 90%;
   align-items: center;
+  // @media screen and (max-width: 900px){
+  //   height: 95%;
+  // }
 `;
 const UserAccountMainCardHolder = styled.div`
   width: 100%;
@@ -181,8 +187,8 @@ const UserAccountMainCardHolder = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  min-height: 110vh;
-  height: 100%auto;
+  // min-height: 110vh;
+  // height:auto;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
@@ -252,10 +258,13 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
+  height: 100%;
 `;
 const Container = styled.div`
   width: 100%;
   justify-content: center;
   display: flex;
-  min-height: calc(100vh - 90px);
+  height: auto;
+  // min-height: calc(100vh - 90px);
+
 `;

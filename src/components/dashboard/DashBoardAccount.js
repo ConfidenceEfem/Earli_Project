@@ -34,6 +34,9 @@ const Cont = styled.div`
   height: 100%auto;
   display: flex;
   justify-content: center;
+  @media screen and (max-width: 1000px) {
+    width: 100%;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -48,4 +51,5 @@ const Container = styled.div`
   display: flex;
   background-color: #fafcff;
   font-family: work sans;
+
 `;
