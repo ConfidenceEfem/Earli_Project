@@ -9,7 +9,7 @@ import img from "../../images/avatar.png";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const KoloOverviewComp = ({ savingsid }) => {
+const KoloOverviewComp = ({ id }) => {
   const navigate = useNavigate();
 
   const [savings, setSavings] = useState({});
@@ -18,7 +18,7 @@ const KoloOverviewComp = ({ savingsid }) => {
     const mainLink = "https://earli.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
-    const res = await axios.get(`${mainLink}/savings/${savingsid}`);
+    const res = await axios.get(`${mainLink}/savings/${id}`);
     setSavings(res?.data?.plan);
   };
 
@@ -32,7 +32,7 @@ const KoloOverviewComp = ({ savingsid }) => {
         <BackComp>
           <IconAndText>
             <BackIcon />
-            <IconText onClick={navigate(-1)}>Back</IconText>
+            <IconText>Back</IconText>
           </IconAndText>
         </BackComp>
         <CardComp>
