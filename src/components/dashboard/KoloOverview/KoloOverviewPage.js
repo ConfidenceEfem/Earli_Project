@@ -1,10 +1,13 @@
-import React from 'react';
-import styled from 'styled-components';
-import DashBoardHeader from '../DashBoardHeader';
-import DashNav from '../DashNavs';
-import KoloOverviewComp from './KoloOverviewComp';
+import React from "react";
+import styled from "styled-components";
+import DashBoardHeader from "../DashBoardHeader";
+import DashNav from "../DashNavs";
+import KoloOverviewComp from "./KoloOverviewComp";
+import { useParams } from "react-router-dom";
 
 const KoloOverviewPage = () => {
+  const { savingsid } = useParams();
+
   return (
     <Container>
       <Wrapper>
@@ -12,7 +15,7 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <KoloOverviewComp />
+            <KoloOverviewComp savingsid={savingsid} />
           </Wrap>
         </Cont>
       </Wrapper>

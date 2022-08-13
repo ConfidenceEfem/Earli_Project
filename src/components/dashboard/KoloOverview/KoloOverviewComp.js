@@ -6,11 +6,10 @@ import { FaPiggyBank } from "react-icons/fa";
 import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const KoloOverviewComp = () => {
-  const { savingsid } = useParams();
+const KoloOverviewComp = ({ savingsid }) => {
   const navigate = useNavigate();
 
   const [savings, setSavings] = useState({});
