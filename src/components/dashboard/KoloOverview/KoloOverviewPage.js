@@ -15,7 +15,7 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <KoloOverviewComp savingsid={savingsid} />
+            {/* <KoloOverviewComp savingsid={savingsid} /> */}
           </Wrap>
         </Cont>
       </Wrapper>
