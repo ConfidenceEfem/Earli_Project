@@ -11,18 +11,13 @@ const KoloOverviewPage = () => {
   console.log(savingsid);
   const [savings, setSavings] = useState({});
 
-  const fetchData = async () => {
+  useEffect(() => {
     const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
 
-    const res = await axios.get(`${mainLink}/savings/${savingsid}`);
+    const res = axios.get(`${mainLink}/savings/${savingsid}`);
     setSavings(res?.data?.data);
     console.log(res);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  }, [savingsid]);
 
   return (
     <Container>
