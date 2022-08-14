@@ -32,7 +32,7 @@ const Step3Comp = () => {
   const [selectCard, setSelectCard] = useState();
 
   const [config, setConfig] = useState({
-    publicKey: "pk_test_e4cc9f3c174db31657087b8c9eb9102ba63cd1fc",
+    publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
   });
 
   const initializePayment = usePaystackPayment(config);

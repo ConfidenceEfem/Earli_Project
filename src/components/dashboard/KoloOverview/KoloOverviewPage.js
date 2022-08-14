@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 
 const KoloOverviewPage = () => {
   const { savingsid } = useParams();
+  console.log(savingsid);
 
   return (
     <Container>

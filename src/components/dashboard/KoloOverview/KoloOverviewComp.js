@@ -10,15 +10,15 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const KoloOverviewComp = ({ id }) => {
-
-  const [savings, setSavings] = useState({});
+  const [savings, setSavings] = useState(null);
 
   const fetchData = async () => {
     const mainLink = "https://earli.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/savings/${id}`);
-    setSavings(res?.data?.plan);
+    setSavings(res?.data?.data);
+    console.log(res);
   };
 
   useEffect(() => {
@@ -116,25 +116,27 @@ const KoloOverviewComp = ({ id }) => {
                     <TransHeading>Transaction History</TransHeading>
                   </TransactionHeading>
                   <TransactionBody>
-                    {savings.savingsTransaction.map((el) => {
-                      return (
-                        <TransactionCard>
-                          <TransactionDetails>
-                            {/* <TransactionImage src={avatar} /> */}
-                            <TransactionNameDetail>
-                              <TransactionName>Money Added</TransactionName>
-                              <TranDetail>
-                                {`**** **** **** ${savings.card.last4} was debited`}
-                              </TranDetail>
-                            </TransactionNameDetail>
-                          </TransactionDetails>
-                          <AmountDate>
-                            <TransAmount>+N{el.amount}</TransAmount>
-                            <TransDate>{el.createdAt}</TransDate>
-                          </AmountDate>
-                        </TransactionCard>
-                      );
-                    })}
+                    {savings.savingsTransaction.length > 0
+                      ? savings.savingsTransaction.map((el) => {
+                          return (
+                            <TransactionCard>
+                              <TransactionDetails>
+                                {/* <TransactionImage src={avatar} /> */}
+                                <TransactionNameDetail>
+                                  <TransactionName>Money Added</TransactionName>
+                                  <TranDetail>
+                                    {`**** **** **** ${savings.card.last4} was debited`}
+                                  </TranDetail>
+                                </TransactionNameDetail>
+                              </TransactionDetails>
+                              <AmountDate>
+                                <TransAmount>{`+N${el.amount}`}</TransAmount>
+                                <TransDate>{el.createdAt}</TransDate>
+                              </AmountDate>
+                            </TransactionCard>
+                          );
+                        })
+                      : null}
                   </TransactionBody>
                 </TransactionWrapper>
               </TransactionHolder>

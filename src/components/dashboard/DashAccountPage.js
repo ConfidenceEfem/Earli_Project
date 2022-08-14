@@ -82,7 +82,7 @@ const DashAccountPage = () => {
             {' '}
             <WelcomeName>
               Welcome {currentUser?.data?.firstname}{' '}
-              {currentUser?.data?.lastname}! 
+              {currentUser?.data?.lastname}!
             </WelcomeName>{' '}
             <InvestText>Your Investments and Savings are booming</InvestText>
           </NameAndSubHolder>
