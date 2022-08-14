@@ -26,9 +26,7 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            {savings === undefined ? null : (
-              <KoloOverviewComp savings={savings} />
-            )}
+            <KoloOverviewComp savings={savings} />
           </Wrap>
         </Cont>
       </Wrapper>

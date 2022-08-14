@@ -9,6 +9,7 @@ import img from "../../images/avatar.png";
 import { useNavigate } from "react-router-dom";
 
 const KoloOverviewComp = ({ savings }) => {
+  console.log(savings);
   return (
     <Container>
       <Wrapper>
