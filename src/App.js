@@ -53,7 +53,7 @@ const App = () => {
             path="/thirdearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep3 />}
           />
-          <Route exact path="/kolooverview/:savingsid" element={<KoloOverviewPage />} />
+          <Route exact path="/kolooverview/:parentid/:savingsid" element={<KoloOverviewPage />} />
         </Routes>
       </Router>
     </div>
