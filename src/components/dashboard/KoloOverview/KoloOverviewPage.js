@@ -9,7 +9,7 @@ import axios from "axios";
 const KoloOverviewPage = () => {
   const { savingsid } = useParams();
   console.log(savingsid);
-  const [savings, setSavings] = useState({});
+  const [savings, setSavings] = useState();
 
   useEffect(() => {
     const mainLink = "https://earli.herokuapp.com";
@@ -17,7 +17,7 @@ const KoloOverviewPage = () => {
     const res = axios.get(`${mainLink}/savings/${savingsid}`);
     setSavings(res?.data?.data);
     console.log(res);
-  }, [savingsid]);
+  }, []);
 
   return (
     <Container>
@@ -26,7 +26,9 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <KoloOverviewComp savings={savings} />
+            {savings === undefined ? null : (
+              <KoloOverviewComp savings={savings} />
+            )}
           </Wrap>
         </Cont>
       </Wrapper>
