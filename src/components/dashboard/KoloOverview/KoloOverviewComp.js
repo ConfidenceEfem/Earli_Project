@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const KoloOverviewComp = ({ id }) => {
-  const navigate = useNavigate();
 
   const [savings, setSavings] = useState({});
 
