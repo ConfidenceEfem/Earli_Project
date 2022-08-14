@@ -1,13 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import DashBoardHeader from "../DashBoardHeader";
 import DashNav from "../DashNavs";
 import KoloOverviewComp from "./KoloOverviewComp";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const KoloOverviewPage = () => {
   const { savingsid } = useParams();
   console.log(savingsid);
+  const [savings, setSavings] = useState({});
+
+  const fetchData = async () => {
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
+
+    const res = await axios.get(`${mainLink}/savings/${savingsid}`);
+    setSavings(res?.data?.data);
+    console.log(res);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <Container>
@@ -16,7 +31,7 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <KoloOverviewComp id={savingsid} />
+            <KoloOverviewComp savings={savings} />
           </Wrap>
         </Cont>
       </Wrapper>

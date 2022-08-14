@@ -7,64 +7,8 @@ import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
-const KoloOverviewComp = ({ id }) => {
-  const [savings, setSavings] = useState({
-    _id: "62ee2b5e9ec564f34da1c27e",
-    plan: "Freedom",
-    balance: 50000,
-    frequency: "weekly",
-    startDate: "2022-08-12T23:00:00.000Z",
-    card: {
-      _id: "62ee09c1279af52677d29b89",
-      email: "preciousmacaulay001@gmail.com",
-      authorization_code: "AUTH_sqe996ez3t",
-      bin: "408408",
-      last4: "4081",
-      exp_month: "08",
-      exp_year: "2023",
-      card_type: "visa ",
-      bank: "TEST BANK",
-      country_code: "NG",
-      brand: "visa",
-      reusable: "true",
-      signature: "SIG_gaCOKJk08Yvbp5x4v7Hu",
-      __v: 0,
-    },
-    duration: "6 Months",
-    amount: 250,
-    childId: "62e30d26173e6a034eac5b0f",
-    createdAt: "2022-08-06T08:50:38.611Z",
-    updatedAt: "2022-08-14T11:47:29.318Z",
-    __v: 0,
-    savingsTransaction: [
-      {
-        _id: "62f8e0d175b8e1559c91d619",
-        amount: 25000,
-        childId: "62e30d26173e6a034eac5b0f",
-        isInflow: true,
-        paymentMethod: "paystack",
-        currency: "NGN",
-        status: "success",
-        __v: 0,
-      },
-    ],
-  });
-
-  const fetchData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
-
-    const res = await axios.get(`${mainLink}/savings/${id}`);
-    setSavings(res?.data?.data);
-    console.log(res);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
+const KoloOverviewComp = ({ savings }) => {
   return (
     <Container>
       <Wrapper>
