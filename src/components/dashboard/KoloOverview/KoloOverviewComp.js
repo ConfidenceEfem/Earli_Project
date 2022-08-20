@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 // import * as yup from 'yup';
 import { AiOutlineInfoCircle, AiOutlineLeft } from "react-icons/ai";
@@ -5,9 +6,27 @@ import { FaPiggyBank } from "react-icons/fa";
 import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const KoloOverviewComp = ({ savings }) => {
-  console.log(savings);
+const KoloOverviewComp = () => {
+  const { savingsid } = useParams();
+
+  console.log(savingsid);
+  const [savings, setSavings] = useState();
+
+  const fetchSavingsData = async () => {
+    const mainLink = "https://earli.herokuapp.com";
+
+    const res = await axios.get(`${mainLink}/savings/${savingsid}`);
+    setSavings(res?.data?.data);
+    console.log(res);
+  };
+
+  useEffect(() => {
+    fetchSavingsData();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
