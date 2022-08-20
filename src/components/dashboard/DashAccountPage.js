@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { HiOutlineDotsVertical } from 'react-icons/hi';
 import { FiPlus } from 'react-icons/fi';
-import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
+import { BsBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank } from 'react-icons/fa';
 import avatar from '../images/avatar.png';
 import { Link, useParams, useNavigate } from 'react-router-dom';

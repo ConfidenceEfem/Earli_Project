@@ -1,12 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
-import ProgressBar from '../ProgressBar';
 import treasury from '../../images/treasury.png';
 import Swal from 'sweetalert2';
 

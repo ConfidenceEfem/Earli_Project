@@ -1,9 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { FiPlus } from 'react-icons/fi';
-import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
-import { GrFormNext } from 'react-icons/gr';
+import { BsFillBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank, FaWallet } from 'react-icons/fa';
 import { AuthContext } from '../AuthState/AuthProvider';
 import axios from 'axios';

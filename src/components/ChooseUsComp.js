@@ -1,10 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import {FcUnlock} from "react-icons/fc"
 import img from "./images/chooseicon.png"
 import img1 from "./images/chooseicon1.png"
 import img2 from "./images/chooseicon2.png"
-import img3 from "./images/chooseicon3.png"
+// import img3 from "./images/chooseicon3.png"
+
+
 
 const ChooseUsComp = () => {
 

@@ -1,15 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import earli from '../../images/treasury.png';
-import * as yup from 'yup';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import moment from 'moment';
-import axios from 'axios';
-import { AiOutlineLeft } from 'react-icons/ai';
-import ProgressBar from '../ProgressBar';
+import React, { useEffect, useState, useContext } from "react";
+import styled from "styled-components";
+import earli from "../../images/treasury.png";
+import * as yup from "yup";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import moment from "moment";
+import axios from "axios";
+import { AiOutlineLeft } from "react-icons/ai";
+import ProgressBar from "../ProgressBar";
+import Swal from 'sweetalert2';
+import { AuthContext } from './../../AuthState/AuthProvider';
+import { ErrorFunction } from './../../Error';
 
 const TreasuryStep3 = () => {
   const { parentid, childid, invest } = useParams();
+  const { currentUser, value } = useContext(AuthContext);
+
+  const { state, dispatch: ctxDispatch } = value;
 
   const navigate = useNavigate();
 
@@ -18,8 +24,8 @@ const TreasuryStep3 = () => {
   const [childData, setChildData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
@@ -27,25 +33,76 @@ const TreasuryStep3 = () => {
   };
 
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
     setChildData(res?.data?.data);
     console.log(childData);
   };
 
-  let invest_frequency = localStorage.getItem('invest_frequency')
-    ? localStorage.getItem('invest_frequency')
-    : '';
-  let treasury_details = localStorage.getItem('treasury_details')
-    ? JSON.parse(localStorage.getItem('treasury_details'))
+  let invest_frequency = localStorage.getItem("invest_frequency")
+    ? localStorage.getItem("invest_frequency")
+    : "";
+  let treasury_details = localStorage.getItem("treasury_details")
+    ? JSON.parse(localStorage.getItem("treasury_details"))
     : [];
 
-  const navigateToPayment = () => {
+  const navigateToPayment = async () => {
     if (invest_frequency && treasury_details) {
-      // to navigate to payment
+      // pay with wallet
+      const data = JSON.stringify({
+        investmentType: invest,
+        amount: treasury_details.amount,
+        duration: invest_frequency,
+        interest: 10,
+      });
+
+      const mainLink = 'https://earli.herokuapp.com';
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'post',
+        url: `${mainLink}/invest/${childid}`,
+        data: data,
+      };
+      ctxDispatch({ type: 'LoadingRequest' });
+
+      await axios(config)
+      .then((res) => {
+        console.log(res)
+        ctxDispatch({ type: 'LoadingSuccess' });
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: res?.data?.message,
+          showConfirmButton: false,
+          timer: 2500,
+        }).then(() => {
+          navigate(`/dashaccount/${parentid}/${childid}`);
+          localStorage.removeItem('invest_frequency');
+          localStorage.removeItem('treasury_details');
+        });
+      })
+      .catch((error) => {
+        ctxDispatch({ type: 'LoadingFailed' });
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: `${ErrorFunction(error)}`,
+          showConfirmButton: false,
+          timer: 2500,
+        });
+      });
     } else {
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: `invalid details`,
+        showConfirmButton: false,
+        timer: 2500,
+      });
     }
   };
 
@@ -97,7 +154,7 @@ const TreasuryStep3 = () => {
                     <DetailItem>
                       <ItemName>Account</ItemName>
                       <ItemValue>
-                        {' '}
+                        {" "}
                         {childData?.firstName} {childData?.lastName}
                       </ItemValue>
                     </DetailItem>
@@ -112,7 +169,7 @@ const TreasuryStep3 = () => {
                     <DetailItem>
                       <ItemName>Start Date</ItemName>
                       <ItemValue>
-                        {moment(treasury_details?.start).format('DD MM yy')}
+                        {moment(treasury_details?.start).format("DD MM yy")}
                       </ItemValue>
                     </DetailItem>
                     <DetailItem>
@@ -120,14 +177,18 @@ const TreasuryStep3 = () => {
                       <ItemValue>N600,500</ItemValue>
                     </DetailItem>
                   </DetailsCont>
-                  <Button
+                  {!state.loading ? (
+                    <Button
                     onClick={(e) => {
                       e.preventDefault();
                       navigateToPayment();
                     }}
                   >
-                    Proceed to Payment
+                    Create Investment
                   </Button>
+                  ) : (
+                    <ProgressBar />
+                  )}
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
