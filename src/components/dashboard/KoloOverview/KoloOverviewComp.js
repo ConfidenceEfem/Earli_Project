@@ -7,6 +7,7 @@ import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
 import { useParams } from "react-router-dom";
+import { NoIcon } from './../../AllIcons';
 import axios from "axios";
 
 const KoloOverviewComp = () => {
@@ -138,7 +139,21 @@ const KoloOverviewComp = () => {
                             </TransactionCard>
                           );
                         })
-                      : null}
+                      : (
+                        <TransactionHolder>
+                        <TransactionWrapper>
+                          <ChildrenHeading>Transaction History</ChildrenHeading>
+                          <MiddleBody>
+                            <NoIcon />
+                            <NoHeadText>No History Made Yet</NoHeadText>
+                            <SubTextHold>
+                              You have not made any transaction yet. Carry out
+                              transactions to get started
+                            </SubTextHold>
+                          </MiddleBody>
+                        </TransactionWrapper>
+                      </TransactionHolder>
+                      )}
                   </TransactionBody>
                 </TransactionWrapper>
               </TransactionHolder>
@@ -493,4 +508,39 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   min-height: calc(100vh - 90px);
+`;
+
+const SubTextHold = styled.div`
+  width: 330px;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  line-height: 24px;
+  @media screen and (max-width: 375px) {
+    width: 90%;
+    text-align: center;
+  }
+`;
+const NoHeadText = styled.div`
+  font-weight: 600;
+  font-size: 18px;
+  margin: 15px 0;
+`;const MiddleBody = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 70%;
+justify-content: center;
+`;
+const ChildrenHeading = styled.div`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px lightgray solid;
+  margin-bottom: 20px;
 `;
