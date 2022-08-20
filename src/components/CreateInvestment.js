@@ -1,6 +1,4 @@
-import React from "react"
 import styled from "styled-components"
-import img from "./images/one.png"
 import {FaChevronRight} from "react-icons/fa"
 
 const CreateInvestment = ({topic,desc,bt,fdd,image}) => {

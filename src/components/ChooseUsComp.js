@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import {FcUnlock} from "react-icons/fc"
 
 const ChooseUsComp = () => {
 

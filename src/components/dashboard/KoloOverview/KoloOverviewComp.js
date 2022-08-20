@@ -6,10 +6,28 @@ import { FaPiggyBank } from "react-icons/fa";
 import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
-import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { NoIcon } from './../../AllIcons';
+import axios from "axios";
 
-const KoloOverviewComp = ({ savings }) => {
-  console.log(savings);
+const KoloOverviewComp = () => {
+  const { savingsid } = useParams();
+
+  console.log(savingsid);
+  const [savings, setSavings] = useState();
+
+  const fetchSavingsData = async () => {
+    const mainLink = "https://earli.herokuapp.com";
+
+    const res = await axios.get(`${mainLink}/savings/${savingsid}`);
+    setSavings(res?.data?.data);
+    console.log(res);
+  };
+
+  useEffect(() => {
+    fetchSavingsData();
+  }, []);
+
   return (
     <Container>
       <Wrapper>
@@ -71,7 +89,7 @@ const KoloOverviewComp = ({ savings }) => {
                       <GrayAcc>Account</GrayAcc>
                       <ImageandName>
                         <ChildImage src={img} />
-                        <ChildName>Adebimpe Adesanya</ChildName>
+                        <ChildName>{`${savings?.childId?.lastname} ${savings?.childId?.firstname}`}</ChildName>
                       </ImageandName>
                     </DetailData>
                     <DurationMonth>
@@ -101,8 +119,8 @@ const KoloOverviewComp = ({ savings }) => {
                     <TransHeading>Transaction History</TransHeading>
                   </TransactionHeading>
                   <TransactionBody>
-                    {savings.savingsTransaction.length > 0
-                      ? savings.savingsTransaction.map((el) => {
+                    {savings?.savingsTransaction.length > 0
+                      ? savings?.savingsTransaction.map((el) => {
                           return (
                             <TransactionCard>
                               <TransactionDetails>
@@ -121,7 +139,19 @@ const KoloOverviewComp = ({ savings }) => {
                             </TransactionCard>
                           );
                         })
-                      : null}
+                      : (
+                        <TransactionHolder>
+                        <TransactionWrapper>
+                          <MiddleBody>
+                            <NoIcon />
+                            <NoHeadText>No Charge Made Yet</NoHeadText>
+                            <SubTextHold>
+                              We have not made any transaction yet.
+                            </SubTextHold>
+                          </MiddleBody>
+                        </TransactionWrapper>
+                      </TransactionHolder>
+                      )}
                   </TransactionBody>
                 </TransactionWrapper>
               </TransactionHolder>
@@ -476,4 +506,39 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   min-height: calc(100vh - 90px);
+`;
+
+const SubTextHold = styled.div`
+  width: 330px;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  line-height: 24px;
+  @media screen and (max-width: 375px) {
+    width: 90%;
+    text-align: center;
+  }
+`;
+const NoHeadText = styled.div`
+  font-weight: 600;
+  font-size: 18px;
+  margin: 15px 0;
+`;const MiddleBody = styled.div`
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+height: 70%;
+justify-content: center;
+`;
+const ChildrenHeading = styled.div`
+  width: 100%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-bottom: 1px lightgray solid;
+  margin-bottom: 20px;
 `;

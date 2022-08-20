@@ -1,9 +1,6 @@
-import React from "react"
 import styled from "styled-components"
-import DashBoardHeader from "./DashBoardHeader"
 import DashNav from "./DashNavs"
 import DashWelcome from "./DashWelcome"
-import UserAccountDash from "./UserAccountDash"
 
 const DashboardOn = () => {
     return (

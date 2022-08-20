@@ -1,12 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { FiPlus } from 'react-icons/fi';
-import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
-import { GrFormNext } from 'react-icons/gr';
-import { FaPiggyBank } from 'react-icons/fa';
-import avatar from '../images/avatar.png';
-import { FaWallet } from 'react-icons/fa';
 import SavingsPage from './SavingsPage';
 import WalletPage from './WalletPage';
 import InvestmentPage from './InvestmentPage';
