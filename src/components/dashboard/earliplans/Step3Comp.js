@@ -1,20 +1,20 @@
-import React, { useState, useEffect, useContext } from "react";
-import styled from "styled-components";
-import * as yup from "yup";
-import { Link, useParams, useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import { AiOutlineLeft } from "react-icons/ai";
-import { FiPlus } from "react-icons/fi";
-import ProgressBar from "../ProgressBar";
-import img from "../../images/avatar.png";
-import master from "../../images/mastercard.png";
-import visa from "../../images/visa.png";
-import Swal from "sweetalert2";
-import { AuthContext } from "./../../AuthState/AuthProvider";
-import { ErrorFunction } from "./../../Error";
-import { usePaystackPayment } from "react-paystack";
+import React, { useState, useEffect, useContext } from 'react';
+import styled from 'styled-components';
+import * as yup from 'yup';
+import { Link, useParams, useNavigate } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import axios from 'axios';
+import { AiOutlineLeft } from 'react-icons/ai';
+import { FiPlus } from 'react-icons/fi';
+import ProgressBar from '../ProgressBar';
+import earli from '../../images/eali.png';
+import master from '../../images/mastercard.png';
+import visa from '../../images/visa.png';
+import Swal from 'sweetalert2';
+import { AuthContext } from './../../AuthState/AuthProvider';
+import { ErrorFunction } from './../../Error';
+import { usePaystackPayment } from 'react-paystack';
 
 const Step3Comp = () => {
   const { parentid, childid, plan } = useParams();
@@ -38,36 +38,48 @@ const Step3Comp = () => {
   const initializePayment = usePaystackPayment(config);
 
   const ChildData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
     setChildData(res?.data?.data);
     console.log(childData);
   };
 
+  React.useEffect(() => {
+    ChildData();
+  }, []);
+
   const fetchCardsData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
     const res = await axios.get(`${mainLink}/parentcards/${parentid}`);
     if (!res) {
-      console.log("error");
+      console.log('error');
     } else {
       setCardsData(res?.data?.data?.cards);
       console.log(res?.data?.data?.cards);
     }
   };
   const fetchCofigData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
     const fetchPayData = await axios.get(`${mainLink}/cardlink/${parentid}`);
-
-    const payData = fetchPayData?.data;
-    console.log(payData);
-    setConfig((prev) => ({
-      ...prev,
-      ...payData,
-    }));
+    if (fetchPayData) {
+      const payData = fetchPayData?.data;
+      console.log(payData);
+      setConfig((prev) => ({
+        ...prev,
+        ...payData,
+      }));
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Unable to load Paystack',
+        timer: 4000,
+        showConfirmButton: false,
+      });
+    }
   };
 
   useEffect(() => {
@@ -76,13 +88,13 @@ const Step3Comp = () => {
     fetchCofigData();
   }, []);
 
-  const plan_details = localStorage.getItem("plan_details")
-    ? JSON.parse(localStorage.getItem("plan_details"))
+  const plan_details = localStorage.getItem('plan_details')
+    ? JSON.parse(localStorage.getItem('plan_details'))
     : [];
 
-  const frequency = localStorage.getItem("frequency")
-    ? localStorage.getItem("frequency")
-    : "";
+  const frequency = localStorage.getItem('frequency')
+    ? localStorage.getItem('frequency')
+    : '';
 
   const createPlan = async () => {
     const data = JSON.stringify({
@@ -90,43 +102,43 @@ const Step3Comp = () => {
       startDate: plan_details.start,
       duration: plan_details.duration,
       frequency: frequency,
-      cardId: cardsData[selectCard]._id,
+      cardId: cardsData[selectCard]?._id,
       plan: plan,
     });
 
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
 
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      method: "post",
+      method: 'post',
       url: `${mainLink}/createplan/${childid}`,
       data: data,
     };
-    ctxDispatch({ type: "LoadingRequest" });
+    ctxDispatch({ type: 'LoadingRequest' });
 
     await axios(config)
       .then((res) => {
-        ctxDispatch({ type: "LoadingSuccess" });
+        ctxDispatch({ type: 'LoadingSuccess' });
         Swal.fire({
-          position: "center",
-          icon: "success",
+          position: 'center',
+          icon: 'success',
           title: `plan created successfully`,
           showConfirmButton: false,
           timer: 2500,
         }).then(() => {
           navigate(`/dashaccount/${parentid}/${childid}`);
-          localStorage.removeItem("frequency");
-          localStorage.removeItem("plan_detail");
+          localStorage.removeItem('frequency');
+          localStorage.removeItem('plan_detail');
         });
       })
       .catch((error) => {
-        ctxDispatch({ type: "LoadingFailed" });
+        ctxDispatch({ type: 'LoadingFailed' });
         Swal.fire({
-          position: "center",
-          icon: "error",
+          position: 'center',
+          icon: 'error',
           title: `${ErrorFunction(error)}`,
           showConfirmButton: false,
           timer: 2500,
@@ -135,8 +147,8 @@ const Step3Comp = () => {
   };
 
   const addCard = async () => {
-    const mainLink = "https://earli.herokuapp.com/paystack/callback";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com/paystack/callback';
+    const mainLink1 = 'http://localhost:2004';
     const onSuccess = (reference) => {
       console.log(reference);
       axios
@@ -155,8 +167,8 @@ const Step3Comp = () => {
         })
         .catch((err) => {
           Swal.fire({
-            position: "center",
-            icon: "error",
+            position: 'center',
+            icon: 'error',
             title: `Card Already Used`,
             showConfirmButton: false,
             timer: 2500,
@@ -166,8 +178,8 @@ const Step3Comp = () => {
 
     const onClose = (reference) => {
       Swal.fire({
-        position: "center",
-        icon: "error",
+        position: 'center',
+        icon: 'error',
         title: `Couldn't complete card link`,
         showConfirmButton: false,
         timer: 2500,
@@ -180,7 +192,7 @@ const Step3Comp = () => {
     <Container>
       <Wrapper>
         <ChildAccountCard>
-          <ChildImage src={img} />
+          <ChildImage src={childData?.image} />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
             <AccountName>
@@ -192,11 +204,14 @@ const Step3Comp = () => {
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/home/${parentid}`}>
+              <IconAndBack to={`/thirdearliplan/${parentid}/${childid}`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
-              <CreateText>Create An Earli Saving Plan</CreateText>
+              <CreateAndIcon>
+                <CreateIcon src={earli} />
+                <CreateText>Create An Earli Saving Plan</CreateText>
+              </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
@@ -230,7 +245,7 @@ const Step3Comp = () => {
                         </PayNoAndName>
                         <PayNoAndName>
                           <PayImage
-                            src={props?.card_type === "master" ? master : visa}
+                            src={props?.card_type === 'master' ? master : visa}
                           />
                           <PayExpire>EXP:{props?.exp_month}/2026</PayExpire>
                         </PayNoAndName>
@@ -244,7 +259,7 @@ const Step3Comp = () => {
                       // this is to trigger the add card page
                       onClick={() => {
                         addCard();
-                        console.log("add card");
+                        console.log('add card');
                       }}
                     >
                       Add New Payment Method
@@ -272,6 +287,24 @@ const Step3Comp = () => {
 };
 
 export default Step3Comp;
+
+const CreateIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin-right: 10px;
+  @media screen and (max-width: 370px) {
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+const CreateAndIcon = styled.div`
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex: 2;
+`;
 
 const AddPay = styled.div`
   font-size: 13px;
@@ -312,7 +345,7 @@ const PayNo = styled.div``;
 const PayNoAndName = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: ${({ fl }) => (fl ? "flex-start" : "flex-end")};
+  align-items: ${({ fl }) => (fl ? 'flex-start' : 'flex-end')};
   font-size: 11px;
   font-weight: 500;
 `;
@@ -360,6 +393,9 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
 `;
 const Button = styled.div`
   width: 140px;
@@ -455,13 +491,18 @@ const Icon = styled(AiOutlineLeft)`
 const MiddleComp = styled.div`
   width: 340px;
   /* height: 500px; */
+  @media screen and (max-width: 450px) {
+    width: 100%;
+  }
 `;
 
 const CreateText = styled.div`
   display: flex;
-  flex: 2;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
+  @media screen and (max-width: 395px) {
+    font-size: 13px;
+  }
 `;
 const IconAndBack = styled(Link)`
   display: flex;
@@ -472,6 +513,14 @@ const IconAndBack = styled(Link)`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  @media screen and (max-width: 500px) {
+    flex: 0;
+    margin-right: 25px;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 11px;
+    margin-right: 29px;
+  }
 `;
 const CreateHeader = styled.div`
   width: 100%;
@@ -495,6 +544,14 @@ const AddChildCard = styled.div`
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 600px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 450px) {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -505,6 +562,9 @@ const Wrapper = styled.div`
   align-items: center;
   margin-top: 80px;
   margin-bottom: 30px;
+  @media screen and (max-width: 600px) {
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`

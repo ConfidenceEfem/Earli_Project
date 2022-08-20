@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import DashBoardHeader from '../DashBoardHeader';
 import DashNav from '../DashNavs';
-import Step2Comp from './Step2Comp';
+import TreasuryStep3 from './TreasuryStep3';
 
-const AddEarliStep2 = () => {
+const TreasuryPlan3 = () => {
   return (
     <Container>
       <Wrapper>
@@ -12,7 +12,7 @@ const AddEarliStep2 = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <Step2Comp />
+            <TreasuryStep3 />
           </Wrap>
         </Cont>
       </Wrapper>
@@ -20,7 +20,7 @@ const AddEarliStep2 = () => {
   );
 };
 
-export default AddEarliStep2;
+export default TreasuryPlan3;
 
 const Wrap = styled.div`
   display: flex;
@@ -51,6 +51,6 @@ const Container = styled.div`
   background-color: #fafcff;
   font-family: work sans;
   @media screen and (max-width: 500px) {
-    background: white;
+    /* background: white; */
   }
 `;

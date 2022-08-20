@@ -6,9 +6,26 @@ import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
 import { GrFormNext } from 'react-icons/gr';
 import { FaPiggyBank, FaWallet } from 'react-icons/fa';
 import { AuthContext } from '../AuthState/AuthProvider';
+import axios from 'axios';
 
-const WalletPage = () => {
+const WalletPage = ({ childid }) => {
   const { currentUser } = useContext(AuthContext);
+
+  const [childData, setChildData] = React.useState([]);
+
+  const ChildData = async () => {
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
+
+    const res = await axios.get(`${mainLink}/child/${childid}`);
+    setChildData(res?.data?.data);
+    console.log(childData);
+  };
+
+  React.useEffect(() => {
+    ChildData();
+  }, []);
+
 
   
   return (
@@ -19,7 +36,7 @@ const WalletPage = () => {
             <Icon />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{currentUser?.data?.firstname}'s Wallet</WalletName>
+            <WalletName>{childData?.firstname}'s Wallet</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -28,7 +45,7 @@ const WalletPage = () => {
             <Icon2 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{currentUser?.data?.firstname}'s Savings</WalletName>
+            <WalletName>{childData?.firstname}'s Savings</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -37,9 +54,7 @@ const WalletPage = () => {
             <Icon3 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>
-              {currentUser?.data?.firstname}'s Investments
-            </WalletName>
+            <WalletName>{childData?.firstname}'s Investments</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>

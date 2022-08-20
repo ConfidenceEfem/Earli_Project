@@ -1,5 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import earli from '../../images/eali.png';
+import freedom from '../../images/freedom.png';
+import kolo from '../../images/kolo.png';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -7,11 +10,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
-import earli from '../../images/eali.png';
-import Swal from 'sweetalert2';
+import moment from 'moment';
 
-const Step1Comp = () => {
-  const { parentid, childid , plan} = useParams();
+const AddEarliOverviewComp = () => {
+  const { parentid, childid, plan } = useParams();
 
   const navigate = useNavigate();
 
@@ -25,7 +27,7 @@ const Step1Comp = () => {
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
-    // console.log(data);
+    console.log(data);
   };
 
   const ChildData = async () => {
@@ -37,118 +39,116 @@ const Step1Comp = () => {
     console.log(childData);
   };
 
+  const plan_details = localStorage.getItem('plan_details')
+    ? JSON.parse(localStorage.getItem('plan_details'))
+    : [];
+
+  const frequency = localStorage.getItem('frequency')
+    ? localStorage.getItem('frequency')
+    : '';
+
   useEffect(() => {
     fetchData();
     ChildData();
   }, []);
 
-  const [paymentMethod, setPaymentMethod] = useState('Daily');
-
-  const submitPayment = () => {
-    if (paymentMethod === '') {
-      Swal.fire({
-        position: 'center',
-        icon: 'error',
-        title: `Please Choose A Duration`,
-        showConfirmButton: false,
-        timer: 2500,
-      });
+  const submit = () => {
+    if (plan_details && frequency) {
+      navigate(`/thirdearliplan/${parentid}/${childid}/${plan}`);
     } else {
-      localStorage.setItem('frequency', paymentMethod.toLowerCase());
-      navigate(`/secondearliplan/${parentid}/${childid}/${plan}`);
+      alert('Error');
     }
   };
-
   return (
     <Container>
       <Wrapper>
         <ChildAccountCard>
-          <ChildImage src={childData?.image} />
+          <ChildImage src={childData?.image} alt="child img" />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
             <AccountName>
+              {' '}
               {childData?.firstname}
-              {childData?.lastname}
+              {childData?.lastname}{' '}
             </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/dashaccount/${parentid}/${childid}`}>
+              <IconAndBack
+                to={`/secondearliplan/${parentid}/${childid}/${plan}`}
+              >
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
-                <CreateIcon src={earli} />
-                <CreateText>Create An Earli Saving Plan</CreateText>
+                {plan === 'Earli' ? (
+                  <CreateIcon src={earli} />
+                ) : plan === 'Kolo' ? (
+                  <CreateIcon src={kolo} />
+                ) : plan === 'Freedom' ? (
+                  <CreateIcon src={freedom} />
+                ) : null}
+
+                <CreateText>Creating an {plan} Savings Plan</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 1 of 3</ProgressText>
+                <ProgressText>Step 3 of 3</ProgressText>
                 <LineCont>
+                  <Line></Line>
+                  <Line></Line>
                   <Line></Line>
                 </LineCont>
               </ProgressContianer>
               <InputContainer>
                 <InputContWrapper>
-                  <InputHead>
-                    <MainInputHead>
-                      {' '}
-                      At what Frequency will you like to save?
-                    </MainInputHead>
-                    <SubInputText>
-                      Savings account of this child will be credited at this
-                      frequency
-                    </SubInputText>
-                  </InputHead>
-                  <InputLabel>
-                    <Input
-                      type="radio"
-                      id="Daily"
-                      label="Daily"
-                      value="Daily"
-                      checked={paymentMethod === 'Daily'}
-                      onChange={(e) => {
-                        setPaymentMethod(e.target.value);
-                      }}
-                    />
-                    <Label>Daily</Label>
-                  </InputLabel>
-                  <InputLabel>
-                    <Input
-                      type="radio"
-                      id="Weekly"
-                      value="Weekly"
-                      label="Weekly"
-                      checked={paymentMethod === 'Weekly'}
-                      onChange={(e) => {
-                        setPaymentMethod(e.target.value);
-                      }}
-                    />
-                    <Label>Weekly</Label>
-                  </InputLabel>
-                  <InputLabel>
-                    <Input
-                      type="radio"
-                      id="Monthly"
-                      label="Monthly"
-                      value="Monthly"
-                      checked={paymentMethod === 'Monthly'}
-                      onChange={(e) => {
-                        setPaymentMethod(e.target.value);
-                      }}
-                    />
-                    <Label>Monthly</Label>
-                  </InputLabel>
+                  <InputHead>Overview</InputHead>
+                  <Label>
+                    Confirm the details of the plan you are about to create.
+                  </Label>
+
+                  <DetailsCont>
+                    <DetailItem>
+                      <ItemName>Account</ItemName>
+                      <ItemValue>
+                        {' '}
+                        {childData?.firstname}
+                        {childData?.lastname}
+                      </ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName> Frequency</ItemName>
+                      <ItemValue>{frequency.toLocaleUpperCase()}</ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>How Much Daily?</ItemName>
+                      <ItemValue>N{plan_details?.amount}</ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Start Date</ItemName>
+                      <ItemValue>
+                        {moment(plan_details?.start)?.format('DD MM yy')}
+                      </ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Duration</ItemName>
+                      <ItemValue>{plan_details?.duration}</ItemValue>
+                    </DetailItem>
+                    <DetailItem>
+                      <ItemName>Expected Return</ItemName>
+                      <ItemValue>N600,500</ItemValue>
+                    </DetailItem>
+                  </DetailsCont>
 
                   <Button
                     onClick={() => {
-                      submitPayment();
+                      submit();
                     }}
                   >
-                    Next
+                    Proceed to Payment{' '}
                   </Button>
                 </InputContWrapper>
               </InputContainer>
@@ -160,14 +160,39 @@ const Step1Comp = () => {
   );
 };
 
-export default Step1Comp;
+export default AddEarliOverviewComp;
+
+const ItemValue = styled.div`
+  font-weight: 500;
+  color: black;
+`;
+
+const ItemName = styled.div``;
+
+const DetailItem = styled.div`
+  display: flex;
+  font-size: 12px;
+  color: lightgray;
+  justify-content: space-between;
+  padding-bottom: 13px;
+  margin-top: 13px;
+  border-bottom: 1px solid lightgray;
+`;
+const DetailsCont = styled.div`
+  width: 100%;
+  flex-direction: column;
+  margin-bottom: 40px;
+  @media screen and (max-width: 375px) {
+    margin-bottom: 20px;
+  }
+`;
 
 const CreateIcon = styled.img`
   width: 22px;
   height: 22px;
   object-fit: contain;
   margin-right: 10px;
-  @media screen and (max-width: 340px) {
+  @media screen and (max-width: 370px) {
     margin-right: 6px;
     width: 20px;
     height: 20px;
@@ -179,6 +204,7 @@ const CreateAndIcon = styled.div`
   display: flex;
   flex: 2;
 `;
+
 const AccountName = styled.div`
   font-weight: 600;
   font-size: 18px;
@@ -205,16 +231,15 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
-  @media screen and (max-width: 580px) {
-    width: 480px;
-  }
-
-  @media screen and (max-width: 500px) {
+  /* background: green; */
+  @media screen and (max-width: 620px) {
     width: 90%;
+    /* box-shadow:none; */
   }
 `;
+
 const Button = styled.div`
-  width: 140px;
+  width: 100%;
   height: 45px;
   display: flex;
   justify-content: center;
@@ -222,12 +247,14 @@ const Button = styled.div`
   border: none;
   align-items: center;
   color: white;
+  font-family: work sans;
   background-color: #7b69dd;
   cursor: pointer;
   font-size: 14px;
   border-radius: 4px;
   transition: all 550ms;
-  margin: 25px 0;
+  /* margin-top: 25px; */
+  font-family: work sans;
   :hover {
     transform: scale(1.02);
   }
@@ -238,79 +265,60 @@ const Select = styled.select`
   border: none;
   outline: 1px solid lightgray;
   border-radius: 5px;
-  font-family: work sans;
   height: 40px;
+  font-size: 12px;
+  color: gray;
+  font-family: work sans;
   option {
-    font-size: 11px;
+    /* font-size: 13px;
     color: gray;
-    font-family: work sans;
+    font-family: work sans; */
   }
 `;
 const Input = styled.input`
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  /* border: none; */
-  /* outline: 1px solid lightgray; */
+  width: 95%;
+  padding: 0 10px;
+  border: none;
+  outline: 1px solid lightgray;
   border-radius: 5px;
   height: 40px;
-
   ::placeholder {
     font-size: 11px;
-    background: purple;
+    color: gray;
     font-family: work sans;
   }
 `;
 const Label = styled.div`
   width: 100%;
   justify-content: flex-start;
-  font-size: 15px;
-  font-weight: 500;
-  margin-left: 7px;
-`;
-const InputLabel = styled.div`
-  display: flex;
-  width: 100%;
-  align-items: center;
-  /* margin: px 0; */
-`;
-const MainInputHead = styled.div`
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 11px;
+  margin-bottom: 7px;
   text-align: center;
-  margin-bottom: 10px;
+  line-height: 22px;
+  /* font-weight: 500; */
 `;
-const SubInputText = styled.div`
-  width: 85%;
-  text-align: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 20px;
-`;
+
 const InputHead = styled.div`
   display: flex;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 600;
   margin: 20px 0;
-  flex-direction: column;
-  align-items: center;
 `;
 const InputContWrapper = styled.div`
-  width: 85%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
-const InputContainer = styled.div`
+const InputContainer = styled.form`
   width: 100%;
   display: flex;
-  /* height: 330px; */
   height: auto;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   justify-content: center;
-  margin-bottom: 20px;
+  background: white;
+  padding-bottom: 20px;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -347,22 +355,20 @@ const Error = styled.div`
 
 const Icon = styled(AiOutlineLeft)`
   margin-right: 5px;
-  @media screen and (max-width: 400px) {
-    margin-right: 3px;
-  }
 `;
 const MiddleComp = styled.div`
-  width: 380px;
-  @media screen and (max-width: 440px) {
+  width: 370px;
+  @media screen and (max-width: 420px) {
     width: 100%;
   }
   /* height: 500px; */
 `;
 
 const CreateText = styled.div`
+  display: flex;
   font-size: 15px;
   font-weight: 600;
-  @media screen and (max-width: 375px) {
+  @media screen and (max-width: 395px) {
     font-size: 13px;
   }
 `;
@@ -381,7 +387,7 @@ const IconAndBack = styled(Link)`
   }
   @media screen and (max-width: 400px) {
     font-size: 11px;
-    margin-right: 15px;
+    margin-right: 29px;
   }
 `;
 const CreateHeader = styled.div`
@@ -400,32 +406,35 @@ const AddChildWrapper = styled.div`
 
 const AddChildCard = styled.div`
   width: 550px;
-  /* height: 520px; */
   height: auto;
   display: flex;
+  padding-bottom: 25px;
   background-color: #ffffff;
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
-  @media screen and (max-width: 580px) {
-    width: 480px;
-  }
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 620px) {
     width: 90%;
-    /* box-shadow:none; */
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0px;
+    background: #fafcff;
   }
 `;
 
 const Wrapper = styled.div`
   width: 93%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   margin-top: 80px;
   margin-bottom: 30px;
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 620px) {
     width: 100%;
+    margin-top: 30px;
   }
 `;
 
@@ -435,4 +444,5 @@ const Container = styled.div`
   justify-content: center;
   display: flex;
   min-height: calc(100vh - 90px);
+  margin-bottom: 40px;
 `;

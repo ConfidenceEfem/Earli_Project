@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { FiPlus } from "react-icons/fi";
-import { BsFillBarChartFill, BsBarChartFill } from "react-icons/bs";
-import { GrFormNext } from "react-icons/gr";
-import { FaPiggyBank } from "react-icons/fa";
-import avatar from "../images/avatar.png";
-import { FaWallet } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
-import { EarliIcon } from "../AllIcons";
-import axios from "axios";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import { HiOutlineDotsVertical } from 'react-icons/hi';
+import { FiPlus } from 'react-icons/fi';
+import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
+import { GrFormNext } from 'react-icons/gr';
+import { FaPiggyBank } from 'react-icons/fa';
+import avatar from '../images/avatar.png';
+import earli from '../images/eali.png';
+import freedom from '../images/freedom.png';
+import kolo from '../images/kolo.png';
+import { FaWallet } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
+import { EarliIcon } from '../AllIcons';
+import axios from 'axios';
 
 const SavingsPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
@@ -18,8 +21,8 @@ const SavingsPage = ({ parentid, childid }) => {
   const [savingsData, setSavingsData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/onechild/${childid}`);
     console.log(res?.data?.data);
@@ -43,6 +46,8 @@ const SavingsPage = ({ parentid, childid }) => {
               <SavingsCardWrapper>
                 <IconAndDetails>
                   {/* <EarliIcon /> */}
+                  <IconImage src={earli} />
+
                   <DetailsCont>
                     <DetailsTitle>Earli</DetailsTitle>
                     <MainDetails>
@@ -60,7 +65,7 @@ const SavingsPage = ({ parentid, childid }) => {
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
-                  <IconImage />
+                  <IconImage src={freedom} />
                   <DetailsCont>
                     <DetailsTitle>Freedom</DetailsTitle>
                     <MainDetails>
@@ -78,7 +83,7 @@ const SavingsPage = ({ parentid, childid }) => {
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
-                  <IconImage />
+                  <IconImage src={kolo} />
                   <DetailsCont>
                     <DetailsTitle>Kolo</DetailsTitle>
                     <MainDetails>
@@ -104,7 +109,13 @@ const SavingsPage = ({ parentid, childid }) => {
                     <CurrentCardWrapper>
                       <CurrentPlan>
                         <CurrentIconCircle>
-                          <CurrentIcon />
+                          {props?.plan === 'Earli' ? (
+                            <CurrentIcon src={earli} />
+                          ) : props?.plan === 'Kolo' ? (
+                            <CurrentIcon src={kolo} />
+                          ) : props?.plan === 'Freedom' ? (
+                            <CurrentIcon src={freedom} />
+                          ) : null}
                         </CurrentIconCircle>
                         <CurrentMainPlan>
                           <PlanHead>Plan</PlanHead>
@@ -167,7 +178,8 @@ const CurrentIconCircle = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: red;
+  /* opacity: 0.6; */
+  background: ${({ bg }) => bg};
   margin-right: 20px;
 `;
 const CurrentDuration = styled.div``;
@@ -177,7 +189,11 @@ const CurrentPlan = styled.div`
   display: flex;
 `;
 
-const CurrentIcon = styled.img``;
+const CurrentIcon = styled.img`
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+`;
 
 const CurrentCardWrapper = styled.div`
   width: 90%;
@@ -221,10 +237,12 @@ const DetailsCont = styled.div`
   flex-direction: column;
 `;
 
-const IconImage = styled.div`
-  width: 70px;
-  height: 70px;
+const IconImage = styled.img`
+  width: 40px;
+  height: 40px;
   margin-right: 20px;
+  object-fit: contain;
+  /* background: red; */
 `;
 
 const NextIcon1 = styled(GrFormNext)`
@@ -239,6 +257,7 @@ const NextIcon = styled(GrFormNext)`
 const IconAndDetails = styled.div`
   display: flex;
   width: 80%;
+  align-items: center;
 `;
 
 const SavingsCardWrapper = styled.div`

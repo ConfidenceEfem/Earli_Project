@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
+import AddEarliOverviewComp from './AddEarliOverviewComp';
 import DashBoardHeader from '../DashBoardHeader';
 import DashNav from '../DashNavs';
-import Step2Comp from './Step2Comp';
 
-const AddEarliStep2 = () => {
+const AddEarliOverview = () => {
   return (
     <Container>
       <Wrapper>
@@ -12,7 +12,7 @@ const AddEarliStep2 = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <Step2Comp />
+            <AddEarliOverviewComp />
           </Wrap>
         </Cont>
       </Wrapper>
@@ -20,7 +20,7 @@ const AddEarliStep2 = () => {
   );
 };
 
-export default AddEarliStep2;
+export default AddEarliOverview;
 
 const Wrap = styled.div`
   display: flex;
@@ -51,6 +51,6 @@ const Container = styled.div`
   background-color: #fafcff;
   font-family: work sans;
   @media screen and (max-width: 500px) {
-    background: white;
+    background-color: white;
   }
 `;

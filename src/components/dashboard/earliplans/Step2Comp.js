@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import img from '../../images/avatar.png';
+import earli from '../../images/eali.png';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -60,7 +60,7 @@ const Step2Comp = () => {
 
     localStorage.setItem('plan_details', JSON.stringify(data));
 
-    navigate(`/thirdearliplan/${parentid}/${childid}/${plan}`);
+    navigate(`/earlioverview/${parentid}/${childid}/${plan}`);
   });
   return (
     <Container>
@@ -78,11 +78,16 @@ const Step2Comp = () => {
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/firstearliplan/${parentid}/${childid}/${plan}`}>
+              <IconAndBack
+                to={`/firstearliplan/${parentid}/${childid}/${plan}`}
+              >
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
-              <CreateText>Create An Earli Saving Plan</CreateText>
+              <CreateAndIcon>
+                <CreateIcon src={earli} />
+                <CreateText>Create An Earli Saving Plan</CreateText>
+              </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
@@ -135,6 +140,24 @@ const Step2Comp = () => {
 
 export default Step2Comp;
 
+const CreateIcon = styled.img`
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  margin-right: 10px;
+  @media screen and (max-width: 370px) {
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+  }
+`;
+const CreateAndIcon = styled.div`
+  display: flex;
+  align-items: center;
+  display: flex;
+  flex: 2;
+`;
+
 const AccountName = styled.div`
   font-weight: 600;
   font-size: 18px;
@@ -161,6 +184,11 @@ const ChildAccountCard = styled.div`
   display: flex;
   align-items: center;
   margin-bottom: 20px;
+  /* background: green; */
+  @media screen and (max-width: 620px) {
+    width: 90%;
+    /* box-shadow:none; */
+  }
 `;
 
 const Button = styled.button`
@@ -282,14 +310,19 @@ const Icon = styled(AiOutlineLeft)`
 `;
 const MiddleComp = styled.div`
   width: 340px;
+  @media screen and (max-width: 420px) {
+    width: 100%;
+  }
   /* height: 500px; */
 `;
 
 const CreateText = styled.div`
   display: flex;
-  flex: 2;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 600;
+  @media screen and (max-width: 395px) {
+    font-size: 13px;
+  }
 `;
 const IconAndBack = styled(Link)`
   display: flex;
@@ -300,6 +333,14 @@ const IconAndBack = styled(Link)`
   color: black;
   text-decoration: none;
   cursor: pointer;
+  @media screen and (max-width: 500px) {
+    flex: 0;
+    margin-right: 25px;
+  }
+  @media screen and (max-width: 400px) {
+    font-size: 11px;
+    margin-right: 29px;
+  }
 `;
 const CreateHeader = styled.div`
   width: 100%;
@@ -323,6 +364,14 @@ const AddChildCard = styled.div`
   justify-content: center;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
+  @media screen and (max-width: 620px) {
+    width: 90%;
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
+    box-shadow: none;
+    border-radius: 0px;
+  }
 `;
 
 const Wrapper = styled.div`
@@ -333,6 +382,9 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-top: 80px;
   margin-bottom: 30px;
+  @media screen and (max-width: 620px) {
+    width: 100%;
+  }
 `;
 
 const Container = styled.div`

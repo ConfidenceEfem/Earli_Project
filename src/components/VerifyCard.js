@@ -15,10 +15,10 @@ const VerifyCard = () => {
   const navigate = useNavigate();
 
   // console.log(state.loading);
-  const firstname = useSelector((state) => state.reducer.firstname);
-  const lastname = useSelector((state) => state.reducer.lastname);
-  const email = useSelector((state) => state.reducer.email);
-  const password = useSelector((state) => state.reducer.password);
+  const firstname = useSelector((state) => state?.persistedReducer?.firstname);
+  const lastname = useSelector((state) => state?.persistedReducer.lastname);
+  const email = useSelector((state) => state?.persistedReducer.email);
+  const password = useSelector((state) => state?.persistedReducer.password);
 
   const [num, setNum] = useState('');
   const [num1, setNum1] = useState('');

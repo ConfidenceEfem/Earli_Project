@@ -7,11 +7,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
-import earli from '../../images/eali.png';
+import treasury from '../../images/treasury.png';
 import Swal from 'sweetalert2';
 
-const Step1Comp = () => {
-  const { parentid, childid , plan} = useParams();
+const TreasuryStep1 = () => {
+  const { parentid, childid, invest } = useParams();
 
   const navigate = useNavigate();
 
@@ -42,7 +42,7 @@ const Step1Comp = () => {
     ChildData();
   }, []);
 
-  const [paymentMethod, setPaymentMethod] = useState('Daily');
+  const [paymentMethod, setPaymentMethod] = useState('30 Days');
 
   const submitPayment = () => {
     if (paymentMethod === '') {
@@ -54,8 +54,8 @@ const Step1Comp = () => {
         timer: 2500,
       });
     } else {
-      localStorage.setItem('frequency', paymentMethod.toLowerCase());
-      navigate(`/secondearliplan/${parentid}/${childid}/${plan}`);
+      localStorage.setItem('invest_frequency', paymentMethod);
+      navigate(`/${parentid}/${childid}/${invest}/amount`);
     }
   };
 
@@ -80,13 +80,13 @@ const Step1Comp = () => {
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
-                <CreateIcon src={earli} />
-                <CreateText>Create An Earli Saving Plan</CreateText>
+                <CreateIcon src={treasury} />
+                <CreateText>Invest In {invest}</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>
               <ProgressContianer>
-                <ProgressText>Step 1 of 3</ProgressText>
+                <ProgressText>Step 1 of 3 </ProgressText>
                 <LineCont>
                   <Line></Line>
                 </LineCont>
@@ -96,51 +96,51 @@ const Step1Comp = () => {
                   <InputHead>
                     <MainInputHead>
                       {' '}
-                      At what Frequency will you like to save?
+                      How Long Will You Like to Invest
                     </MainInputHead>
                     <SubInputText>
-                      Savings account of this child will be credited at this
-                      frequency
+                      You can invest in treasury bills within a selected period
+                      of time.
                     </SubInputText>
                   </InputHead>
                   <InputLabel>
                     <Input
                       type="radio"
-                      id="Daily"
-                      label="Daily"
-                      value="Daily"
-                      checked={paymentMethod === 'Daily'}
+                      id="30 Days"
+                      label="30 Days"
+                      value="30 Days"
+                      checked={paymentMethod === '30 Days'}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}
                     />
-                    <Label>Daily</Label>
+                    <Label>30 Days</Label>
                   </InputLabel>
                   <InputLabel>
                     <Input
                       type="radio"
-                      id="Weekly"
-                      value="Weekly"
-                      label="Weekly"
-                      checked={paymentMethod === 'Weekly'}
+                      id="60 Days"
+                      value="60 Days"
+                      label="60 Days"
+                      checked={paymentMethod === '60 Days'}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}
                     />
-                    <Label>Weekly</Label>
+                    <Label>60 Days</Label>
                   </InputLabel>
                   <InputLabel>
                     <Input
                       type="radio"
-                      id="Monthly"
-                      label="Monthly"
-                      value="Monthly"
-                      checked={paymentMethod === 'Monthly'}
+                      id="90 Days"
+                      label="90 Days"
+                      value="90 Days"
+                      checked={paymentMethod === '90 Days'}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}
                     />
-                    <Label>Monthly</Label>
+                    <Label>90 Days</Label>
                   </InputLabel>
 
                   <Button
@@ -160,7 +160,7 @@ const Step1Comp = () => {
   );
 };
 
-export default Step1Comp;
+export default TreasuryStep1;
 
 const CreateIcon = styled.img`
   width: 22px;
@@ -311,6 +311,7 @@ const InputContainer = styled.div`
   border-radius: 10px;
   justify-content: center;
   margin-bottom: 20px;
+  background: white;
 `;
 const Line = styled.div`
   width: 33.4%;
@@ -412,6 +413,11 @@ const AddChildCard = styled.div`
   }
   @media screen and (max-width: 500px) {
     width: 90%;
+    box-shadow: none;
+    background: #fafcff;
+  }
+  @media screen and (max-width: 420px) {
+    width: 100%;
     /* box-shadow:none; */
   }
 `;

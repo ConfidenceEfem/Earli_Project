@@ -5,15 +5,16 @@ import { FiPlus } from 'react-icons/fi';
 import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank } from 'react-icons/fa';
 import avatar from '../images/avatar.png';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthState/AuthProvider';
 import axios from 'axios';
-import { PowerInputSharp } from '@mui/icons-material';
 import { NoIcon } from '../AllIcons';
 import moment from 'moment';
 
 const DashAccountPage = () => {
   const { parentid } = useParams();
+
+  const navigate = useNavigate();
 
   const { currentUser } = useContext(AuthContext);
 
@@ -139,7 +140,11 @@ const DashAccountPage = () => {
                 <ChildrenCardHolder>
                   {childrenData?.map((props, i) =>
                     i <= 1 ? (
-                      <ChildrenCard>
+                      <ChildrenCard
+                        onClick={() => {
+                          navigate(`/dashaccount/${parentid}/${props?._id}`);
+                        }}
+                      >
                         <ChildrenCardWrapper>
                           <ChildrenDetails>
                             <ChildrenProfile>
@@ -532,6 +537,10 @@ const ChildrenDetails = styled.div`
   height: 53%;
   border-bottom: 1px solid lightgray;
   margin-bottom: 10px;
+  transition: all 550ms;
+  :hover {
+    transform: scale(1.01);
+  }
 `;
 
 const ChildrenCardWrapper = styled.div`
@@ -545,6 +554,7 @@ const ChildrenCard = styled.div`
   width: 260px;
   height: 260px;
   background: white;
+  cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
   justify-content: center;
