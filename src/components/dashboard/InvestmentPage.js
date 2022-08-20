@@ -189,6 +189,7 @@ const CurrentCardHold = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
+
 `;
 const MainDetails = styled.div`
   font-size: 11px;
@@ -203,6 +204,9 @@ const DetailsTitle = styled.div`
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 10px;
+  @media screen and (max-width: 500px){
+    margin-bottom: 5px;
+  }
 `;
 
 const DetailsCont = styled.div`
@@ -230,6 +234,9 @@ const IconAndDetails = styled.div`
   display: flex;
   width: 80%;
   align-items: center;
+  @media screen and (max-width: 600px){
+    width: 90%;
+  }
 `;
 
 const SavingsCardWrapper = styled.div`
@@ -248,6 +255,9 @@ const SavingsCard = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   cursor: pointer;
+  @media screen and (max-width: 500px){
+    height: 110px;
+  }
 `;
 
 const SavingsCardHolder = styled.div`
@@ -275,8 +285,35 @@ const CreateSavingsPlan = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   border-radius: 10px;
-  height: 100%;
+  height: 530px;
   justify-content: center;
+  @media screen and (max-width: 1000px){
+    width: 410px;
+    // background-color: red;
+  }
+  @media screen and (max-width: 980px){
+    width: 395px;
+   
+  }
+  @media screen and (max-width: 970px){
+    width: 385px;
+  }
+  @media screen and (max-width: 950px){
+    // width: 380px;
+    width: 90%;
+    margin: 15px 0;
+  }
+  @media screen and (max-width: 910px){
+    // width: 380px;
+  
+    // background-color: red;
+  }
+  @media screen and (max-width: 600px){
+    width: 96%;
+  }
+  @media screen and (max-width: 500px){
+    height: 570px;
+  }
 `;
 // const Navs = styled.div`
 //   font-size: 15px;
@@ -288,9 +325,13 @@ const CreateSavingsPlan = styled.div`
 //   border-bottom: 5px solid #7b69dd;
 // `;
 const LastCard = styled.div`
-  width: 100%;
-  min-height: 530px;
-  height: 100%;
-  justify-content: space-between;
-  display: flex;
+width: 100%;
+height:auto;
+justify-content: space-between;
+display: flex;
+flex-wrap: wrap;
+  @media screen and (max-width: 950px){
+    justify-content: center;
+  
+  }
 `;

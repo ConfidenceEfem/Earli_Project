@@ -104,11 +104,11 @@ const TreasuryStep2 = () => {
                     <Error>{errors?.amount?.message}</Error>
                   </InputLabel>
 
-                  <InputLabel>
+                  {/* <InputLabel>
                     <Label>Start Date</Label>
                     <Input type="date" {...register('start')} />
                     <Error>{errors?.start?.message}</Error>
-                  </InputLabel>
+                  </InputLabel> */}
 
                   <Button>Next</Button>
                 </InputContWrapper>

@@ -559,14 +559,17 @@ const ChildrenCard = styled.div`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   display: flex;
   justify-content: center;
+  margin-right: 20px;
+
 `;
 
 const ChildrenCardHolder = styled.div`
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   /* flex-wrap: wrap; */
+  overflow-x:scroll;
 `;
 
 const ChildrenHeading = styled.div`

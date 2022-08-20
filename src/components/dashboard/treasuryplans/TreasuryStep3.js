@@ -166,12 +166,7 @@ const TreasuryStep3 = () => {
                       <ItemName>How Much?</ItemName>
                       <ItemValue>{treasury_details?.amount}</ItemValue>
                     </DetailItem>
-                    <DetailItem>
-                      <ItemName>Start Date</ItemName>
-                      <ItemValue>
-                        {moment(treasury_details?.start).format("DD MM yy")}
-                      </ItemValue>
-                    </DetailItem>
+                   
                     <DetailItem>
                       <ItemName>Expected Return</ItemName>
                       <ItemValue>N600,500</ItemValue>
@@ -184,7 +179,7 @@ const TreasuryStep3 = () => {
                       navigateToPayment();
                     }}
                   >
-                    Create Investment
+                    Start Invstment            
                   </Button>
                   ) : (
                     <ProgressBar />

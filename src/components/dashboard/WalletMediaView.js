@@ -114,6 +114,7 @@ display:none;
 display:flex;
 // background-color: red;
 flex-wrap: wrap;
+justify-content:center;
 }
 
 `

@@ -55,19 +55,8 @@ const UserAccountDash = () => {
             <AccoutNoAndName>
               <AccoutNo>Account 1</AccoutNo>
               <NameAndIcon>
-                {/* <AccountName>Adebimpe Adesanya</AccountName> */}
-                {/* <Select name={childData?.firstname} id={childData?._id}>
-                  {data.map((props) => (
-                    <Options
-                      key={props._id}
-                      to={`/dashaccount/${parentid}/${childid}`}
-                    >
-                      {props.firstname} {props.lastname}
-                    </Options>
-                  ))}
-                </Select> */}
+               
                 <SelectChildCard parentid={parentid} childid={childid} />
-                {/* <CaretIcon/> */}
               </NameAndIcon>
             </AccoutNoAndName>
           </HeadingDetail>
@@ -179,6 +168,9 @@ const Nav = styled.div`
   margin-right: 50px;
   cursor: pointer;
   transition: all 350ms;
+  @media screen and (max-width: 500px){
+    margin-right: 30px;
+  }
 `;
 const Navs = styled.div`
   font-size: 15px;
@@ -188,18 +180,25 @@ const Navs = styled.div`
   cursor: pointer;
   transition: all 350ms;
   border-bottom: 5px solid #7b69dd;
+  @media screen and (max-width: 500px){
+    margin-right: 30px;
+  }
 `;
 const CardNavigations = styled.div`
   display: flex;
   width: 100%;
   border-bottom: 1px solid silver;
   margin: 40px 0;
+  @media screen and (max-width: 500px){
+    justify-content: center;
+    }
 `;
 const AccountMaincardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 95%;
-  height: 90%;
+  // height: 90%;
+  margin: 15px 0;
   align-items: center;
   // @media screen and (max-width: 900px){
   //   height: 95%;
@@ -211,9 +210,9 @@ const UserAccountMainCardHolder = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  // min-height: 110vh;
-  // height:auto;
   background-color: white;
+ 
+  height: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 `;
 const CaretIcon = styled(FiChevronDown)`
@@ -250,6 +249,7 @@ const AccoutNoAndName = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  flex-wrap: wrap;
 `;
 
 const HeadingButton = styled.div`
@@ -263,6 +263,10 @@ const HeadingButton = styled.div`
   :hover {
     transform: scale(1.02);
   }
+  @media screen and (max-width: 600px){
+    margin-top: 30px;
+    margin-left: 30px;
+  }
 `;
 
 const HeadingDetail = styled.div`
@@ -275,6 +279,8 @@ const Heading = styled.div`
   align-items: center;
   width: 100%;
   margin-bottom: 40px;
+  flex-wrap: wrap;
+  
 `;
 const Wrapper = styled.div`
   width: 93%;
