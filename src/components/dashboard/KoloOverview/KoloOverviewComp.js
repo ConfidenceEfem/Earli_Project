@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 // import * as yup from 'yup';
-import { AiOutlineInfoCircle, AiOutlineLeft } from 'react-icons/ai';
-import { FaPiggyBank } from 'react-icons/fa';
-import { BsDashCircle } from 'react-icons/bs';
-import { IoIosCloseCircleOutline } from 'react-icons/io';
-import img from '../../images/avatar.png';
+import { AiOutlineInfoCircle, AiOutlineLeft } from "react-icons/ai";
+import { FaPiggyBank } from "react-icons/fa";
+import { BsDashCircle } from "react-icons/bs";
+import { IoIosCloseCircleOutline } from "react-icons/io";
+import img from "../../images/avatar.png";
+import { useNavigate } from "react-router-dom";
 
-const KoloOverviewComp = () => {
+const KoloOverviewComp = ({ savings }) => {
+  console.log(savings);
   return (
     <Container>
       <Wrapper>
@@ -27,30 +29,30 @@ const KoloOverviewComp = () => {
                       <IconCircle>
                         <KoloIcon />
                       </IconCircle>
-                      <KoloText>Kolo</KoloText>
+                      <KoloText>{savings?.plan}</KoloText>
                     </IconAndKoloText>
                     <InfoIcon />
                   </SavingsHeader>
                   <SavingsAmounts>
                     <LabelAndAmount>
                       <Label>Saved</Label>
-                      <Amount>N290,000.00</Amount>
+                      <Amount>N{savings?.balance}</Amount>
                     </LabelAndAmount>
                     <LabelAndAmount>
                       <Label>Interest</Label>
-                      <Amount style={{ fontSize: '13px' }}>9% p.a</Amount>
+                      <Amount style={{ fontSize: "13px" }}>9% p.a</Amount>
                     </LabelAndAmount>
                   </SavingsAmounts>
                   <SavingsButton>
-                    <ButtonComp style={{ marginRight: '10px' }}>
+                    <ButtonComp style={{ marginRight: "10px" }}>
                       <BsDashCircle size="15px" />
                       <ButtonText>Withdraw Savings</ButtonText>
                     </ButtonComp>
                     <ButtonComp
                       style={{
-                        width: '130px',
-                        backgroundColor: 'rgba(255,105,180,0.15)',
-                        color: 'red',
+                        width: "130px",
+                        backgroundColor: "rgba(255,105,180,0.15)",
+                        color: "red",
                       }}
                     >
                       <IoIosCloseCircleOutline size="15px" />
@@ -62,7 +64,7 @@ const KoloOverviewComp = () => {
               <SavedCard1>
                 <SavingsCardWrapper>
                   <SavingsHeader>
-                    <KoloText style={{ marginLeft: '0px' }}>Details</KoloText>
+                    <KoloText style={{ marginLeft: "0px" }}>Details</KoloText>
                   </SavingsHeader>
                   <DetailAccountCard>
                     <DetailData>
@@ -74,20 +76,20 @@ const KoloOverviewComp = () => {
                     </DetailData>
                     <DurationMonth>
                       <GrayAcc>Duration</GrayAcc>
-                      <Month>6 Months</Month>
+                      <Month>{savings?.duration}</Month>
                     </DurationMonth>
                   </DetailAccountCard>
                   <LabelAndDate>
                     <DateLabel>Start date</DateLabel>
-                    <TheDate>09/12/2021</TheDate>
+                    <TheDate>{savings?.startDate}</TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
                     <DateLabel>End date</DateLabel>
-                    <TheDate>09/16/2021</TheDate>
+                    <TheDate>{savings?.endDate}</TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
-                    <DateLabel>Next Payment</DateLabel>
-                    <TheDate>20/16/2021</TheDate>
+                    <DateLabel>Status</DateLabel>
+                    <TheDate>{savings?.status}</TheDate>
                   </LabelAndDate>
                 </SavingsCardWrapper>
               </SavedCard1>
@@ -99,21 +101,27 @@ const KoloOverviewComp = () => {
                     <TransHeading>Transaction History</TransHeading>
                   </TransactionHeading>
                   <TransactionBody>
-                    <TransactionCard>
-                      <TransactionDetails>
-                        {/* <TransactionImage src={avatar} /> */}
-                        <TransactionNameDetail>
-                          <TransactionName>Money Added</TransactionName>
-                          <TranDetail>
-                            **** **** **** 3456 was debited
-                          </TranDetail>
-                        </TransactionNameDetail>
-                      </TransactionDetails>
-                      <AmountDate>
-                        <TransAmount>+N40,999.00</TransAmount>
-                        <TransDate>Jun 12</TransDate>
-                      </AmountDate>
-                    </TransactionCard>
+                    {savings.savingsTransaction.length > 0
+                      ? savings.savingsTransaction.map((el) => {
+                          return (
+                            <TransactionCard>
+                              <TransactionDetails>
+                                {/* <TransactionImage src={avatar} /> */}
+                                <TransactionNameDetail>
+                                  <TransactionName>Money Added</TransactionName>
+                                  <TranDetail>
+                                    {`**** **** **** ${savings?.card?.last4} was debited`}
+                                  </TranDetail>
+                                </TransactionNameDetail>
+                              </TransactionDetails>
+                              <AmountDate>
+                                <TransAmount>{`+N${el?.amount}`}</TransAmount>
+                                <TransDate>{el?.createdAt}</TransDate>
+                              </AmountDate>
+                            </TransactionCard>
+                          );
+                        })
+                      : null}
                   </TransactionBody>
                 </TransactionWrapper>
               </TransactionHolder>

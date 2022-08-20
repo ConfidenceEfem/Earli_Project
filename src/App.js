@@ -61,7 +61,7 @@ const App = () => {
             path="/thirdearliplan/:parentid/:childid/:plan"
             element={<AddEarliStep3 />}
           />
-          <Route exact path="/kolooverview" element={<KoloOverviewPage />} />
+          <Route exact path="/kolooverview/:parentid/:savingsid" element={<KoloOverviewPage />} />
           <Route
             exact
             path="/:parentid/:childid/:invest"

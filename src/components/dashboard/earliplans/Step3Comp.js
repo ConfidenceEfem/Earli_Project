@@ -30,8 +30,9 @@ const Step3Comp = () => {
   const [cardsData, setCardsData] = useState([]);
 
   const [selectCard, setSelectCard] = useState();
+
   const [config, setConfig] = useState({
-    publicKey: 'pk_test_e4cc9f3c174db31657087b8c9eb9102ba63cd1fc',
+    publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
   });
 
   const initializePayment = usePaystackPayment(config);
@@ -157,9 +158,9 @@ const Step3Comp = () => {
         .then((res) => {
           fetchCardsData();
           Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: `${res.message}`,
+            position: "center",
+            icon: "success",
+            title: `Card added successfully`,
             showConfirmButton: false,
             timer: 2500,
           });
@@ -230,7 +231,8 @@ const Step3Comp = () => {
 
                   {cardsData?.map((props, i) => (
                     <PaymentCard
-                      bg={i % 2 === 0 ? '#f2f0fc' : '#f9f9f9'}
+                      bg={i % 2 === 0 ? "#f2f0fc" : "#f9f9f9"}
+                      bd={i === selectCard ? " 0.5px solid #A594F9" : "none"}
                       key={props._id}
                       onClick={() => {
                         setSelectCard(i);
@@ -245,7 +247,7 @@ const Step3Comp = () => {
                           <PayImage
                             src={props?.card_type === 'master' ? master : visa}
                           />
-                          <PayExpire>{props?.exp_month}</PayExpire>
+                          <PayExpire>EXP:{props?.exp_month}/2026</PayExpire>
                         </PayNoAndName>
                       </PaymentCardWrapper>
                     </PaymentCard>
@@ -263,14 +265,17 @@ const Step3Comp = () => {
                       Add New Payment Method
                     </AddPay>
                   </PlusIconAndText>
-
-                  <Button
-                    onClick={() => {
-                      createPlan();
-                    }}
-                  >
-                    Next
-                  </Button>
+                  {!state.loading ? (
+                    <Button
+                      onClick={() => {
+                        createPlan();
+                      }}
+                    >
+                      Next
+                    </Button>
+                  ) : (
+                    <ProgressBar />
+                  )}
                 </InputContWrapper>
               </InputContainer>
             </MiddleComp>
@@ -360,6 +365,7 @@ const PaymentCard = styled.div`
   border-radius: 5px;
   margin-bottom: 15px;
   background-color: ${({ bg }) => bg};
+  border: ${({ bd }) => bd};
 `;
 const AccountName = styled.div`
   font-weight: 600;
