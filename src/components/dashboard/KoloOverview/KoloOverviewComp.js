@@ -29,14 +29,14 @@ const KoloOverviewComp = ({ savings }) => {
                       <IconCircle>
                         <KoloIcon />
                       </IconCircle>
-                      <KoloText>{savings.plan}</KoloText>
+                      <KoloText>{savings?.plan}</KoloText>
                     </IconAndKoloText>
                     <InfoIcon />
                   </SavingsHeader>
                   <SavingsAmounts>
                     <LabelAndAmount>
                       <Label>Saved</Label>
-                      <Amount>N{savings.balance}</Amount>
+                      <Amount>N{savings?.balance}</Amount>
                     </LabelAndAmount>
                     <LabelAndAmount>
                       <Label>Interest</Label>
@@ -76,20 +76,20 @@ const KoloOverviewComp = ({ savings }) => {
                     </DetailData>
                     <DurationMonth>
                       <GrayAcc>Duration</GrayAcc>
-                      <Month>{savings.duration}</Month>
+                      <Month>{savings?.duration}</Month>
                     </DurationMonth>
                   </DetailAccountCard>
                   <LabelAndDate>
                     <DateLabel>Start date</DateLabel>
-                    <TheDate>{savings.startDate}</TheDate>
+                    <TheDate>{savings?.startDate}</TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
                     <DateLabel>End date</DateLabel>
-                    <TheDate>{savings.endDate}</TheDate>
+                    <TheDate>{savings?.endDate}</TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
                     <DateLabel>Status</DateLabel>
-                    <TheDate>{savings.status}</TheDate>
+                    <TheDate>{savings?.status}</TheDate>
                   </LabelAndDate>
                 </SavingsCardWrapper>
               </SavedCard1>
@@ -110,13 +110,13 @@ const KoloOverviewComp = ({ savings }) => {
                                 <TransactionNameDetail>
                                   <TransactionName>Money Added</TransactionName>
                                   <TranDetail>
-                                    {`**** **** **** ${savings.card.last4} was debited`}
+                                    {`**** **** **** ${savings?.card?.last4} was debited`}
                                   </TranDetail>
                                 </TransactionNameDetail>
                               </TransactionDetails>
                               <AmountDate>
-                                <TransAmount>{`+N${el.amount}`}</TransAmount>
-                                <TransDate>{el.createdAt}</TransDate>
+                                <TransAmount>{`+N${el?.amount}`}</TransAmount>
+                                <TransDate>{el?.createdAt}</TransDate>
                               </AmountDate>
                             </TransactionCard>
                           );

@@ -9,6 +9,8 @@ import { AuthContext } from '../AuthState/AuthProvider';
 
 const WalletPage = () => {
   const { currentUser } = useContext(AuthContext);
+
+  
   return (
     <FirstCard>
       <FirstCardWrapper>
