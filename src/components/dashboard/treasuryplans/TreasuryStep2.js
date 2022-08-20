@@ -42,7 +42,7 @@ const TreasuryStep2 = () => {
   }, []);
 
   const schema = yup.object().shape({
-    amount: yup.number().required('This field is reequired'),
+    amount: yup.number().required('This field is required'),
     start: yup.date().required('This field is required'),
   });
 
