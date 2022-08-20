@@ -89,7 +89,7 @@ const KoloOverviewComp = () => {
                       <GrayAcc>Account</GrayAcc>
                       <ImageandName>
                         <ChildImage src={img} />
-                        <ChildName>Adebimpe Adesanya</ChildName>
+                        <ChildName>{`${savings?.childId?.lastname} ${savings?.childId?.firstname}`}</ChildName>
                       </ImageandName>
                     </DetailData>
                     <DurationMonth>
@@ -142,13 +142,11 @@ const KoloOverviewComp = () => {
                       : (
                         <TransactionHolder>
                         <TransactionWrapper>
-                          <ChildrenHeading>Transaction History</ChildrenHeading>
                           <MiddleBody>
                             <NoIcon />
-                            <NoHeadText>No History Made Yet</NoHeadText>
+                            <NoHeadText>No Charge Made Yet</NoHeadText>
                             <SubTextHold>
-                              You have not made any transaction yet. Carry out
-                              transactions to get started
+                              We have not made any transaction yet.
                             </SubTextHold>
                           </MiddleBody>
                         </TransactionWrapper>

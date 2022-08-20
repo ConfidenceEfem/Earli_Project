@@ -104,7 +104,7 @@ const SavingsPage = ({ parentid, childid }) => {
                         <CurrentIconCircle>
                           {props?.plan === 'Earli' ? (
                             <CurrentIcon src={earli} />
-                          ) : props?.plan === 'Kolo' ? (
+                          ) : props?.plan === 'Kolo'||'kolo' ? (
                             <CurrentIcon src={kolo} />
                           ) : props?.plan === 'Freedom' ? (
                             <CurrentIcon src={freedom} />
