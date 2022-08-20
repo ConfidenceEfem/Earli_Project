@@ -6,6 +6,7 @@ import { FaPiggyBank } from 'react-icons/fa';
 import { BsDashCircle } from 'react-icons/bs';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import img from '../../images/avatar.png';
+import {CopyToClipboard} from "react-copy-to-clipboard"
 
 const KoloOverviewComp = () => {
   return (
@@ -44,7 +45,10 @@ const KoloOverviewComp = () => {
                   <SavingsButton>
                     <ButtonComp style={{ marginRight: '10px' }}>
                       <BsDashCircle size="15px" />
-                      <ButtonText>Withdraw Savings</ButtonText>
+                      {/* <CopyToClipboard text={document.getElementById("hey")}> */}
+                         <ButtonText id="hey">Withdraw Savings </ButtonText>
+                      {/* </CopyToClipboard> */}
+                     
                     </ButtonComp>
                     <ButtonComp
                       style={{
@@ -415,6 +419,7 @@ const LeftCardComp = styled.div`
   flex-direction: column;
   width: 56%;
   align-items: center;
+  flex-wrap: wrap;
   /* background: red; */
 `;
 const CardCompWrapper = styled.div`
@@ -423,6 +428,7 @@ const CardCompWrapper = styled.div`
   height: 90%;
   /* background: purple; */
   justify-content: space-between;
+  flex-wrap: wrap;
 `;
 const IconText = styled.div`
   font-size: 16px;

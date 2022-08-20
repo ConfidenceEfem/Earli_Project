@@ -34,7 +34,7 @@ const WalletPage = ({ childid }) => {
             <Icon />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}Confidence 's Wallet</WalletName>
+            <WalletName>{childData?.firstname}'s Wallet</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
@@ -43,7 +43,7 @@ const WalletPage = ({ childid }) => {
             <Icon2 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}Confidence 
+            <WalletName>{childData?.firstname} 
             's Savings</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
@@ -53,7 +53,7 @@ const WalletPage = ({ childid }) => {
             <Icon3 />
           </IconCircle>
           <WalletNameAndAmount>
-            <WalletName>{childData?.firstname}Confidence 's Investments</WalletName>
+            <WalletName>{childData?.firstname}'s Investments</WalletName>
             <WalletAmount>N0.00</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>

@@ -20,6 +20,8 @@ import TreasuryPlan1 from './components/dashboard/treasuryplans/TreasuryPlan1';
 import TreasuryPlan2 from './components/dashboard/treasuryplans/TreasuryPlan2';
 import AddEarliOverview from './components/dashboard/earliplans/AddEarliOverview';
 import TreasuryPlan3 from './components/dashboard/treasuryplans/TreasuryPlan3';
+import EducationOverview from './components/dashboard/education/EducationOverview';
+import EducationViewPage from './components/dashboard/education/educationview/EducationViewPage';
 
 const App = () => {
   return (
@@ -76,6 +78,16 @@ const App = () => {
             exact
             path="/:parentid/:childid/:invest/overview"
             element={<TreasuryPlan3 />}
+          />
+          <Route
+            exact
+            path="/education"
+            element={<EducationOverview />}
+          />
+          <Route
+            exact
+            path="/education/view"
+            element={<EducationViewPage />}
           />
         </Routes>
       </Router>

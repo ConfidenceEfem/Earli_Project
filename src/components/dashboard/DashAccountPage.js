@@ -28,6 +28,7 @@ const DashAccountPage = () => {
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
 
     setChildrenData(res?.data?.data?.children);
+    console.log(childrenData)
     // setChildrenData(res.data.data.children);
   };
 

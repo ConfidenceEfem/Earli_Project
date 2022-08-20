@@ -1,8 +1,27 @@
-import React from "react"
+import React,{useContext} from "react"
 import styled from "styled-components"
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank, FaWallet } from 'react-icons/fa';
-const WalletMediaView = () => {
+import { AuthContext } from '../AuthState/AuthProvider';
+import axios from 'axios';
+
+const WalletMediaView = ({childid}) => {
+    const { currentUser } = useContext(AuthContext);
+
+    const [childData, setChildData] = React.useState([]);
+  
+    const ChildData = async () => {
+      const mainLink = 'https://earli.herokuapp.com';
+      const mainLink1 = 'http://localhost:2004';
+  
+      const res = await axios.get(`${mainLink}/child/${childid}`);
+      setChildData(res?.data?.data);
+      console.log(childData);
+    };
+  
+    React.useEffect(() => {
+      ChildData();
+    }, []);
     return (
         <Container>
             <Card>
@@ -11,7 +30,7 @@ const WalletMediaView = () => {
                             <FaWallet/>
                         </IconCircle>
                         <NameAndAmount>
-                            <Name>Confidence's Wallet</Name>
+                            <Name>{childData?.firstname}'s Wallet</Name>
                             <Amount>N0.00</Amount>
                         </NameAndAmount>
                 </CardWrapper>
@@ -22,7 +41,7 @@ const WalletMediaView = () => {
                             <FaPiggyBank/>
                         </IconCircle>
                         <NameAndAmount>
-                            <Name>Confidence's Wallet</Name>
+                            <Name>{childData?.firstname}'s  Savings</Name>
                             <Amount>N0.00</Amount>
                         </NameAndAmount>
                 </CardWrapper>
@@ -33,7 +52,7 @@ const WalletMediaView = () => {
                             <BsFillBarChartFill/>
                         </IconCircle>
                         <NameAndAmount>
-                            <Name>Confidence's Wallet</Name>
+                            <Name>{childData?.firstname}'s Investment</Name>
                             <Amount>N0.00</Amount>
                         </NameAndAmount>
                 </CardWrapper>

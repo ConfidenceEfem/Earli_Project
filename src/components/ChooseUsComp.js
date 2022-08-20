@@ -1,6 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import {FcUnlock} from "react-icons/fc"
+import img from "./images/chooseicon.png"
+import img1 from "./images/chooseicon1.png"
+import img2 from "./images/chooseicon2.png"
+import img3 from "./images/chooseicon3.png"
 
 const ChooseUsComp = () => {
 
@@ -9,22 +13,22 @@ const ChooseUsComp = () => {
             id: 1,
             topic: "Early Financial Freedom",
             desc: "Creating an account is as easy as you can think,no stress, hassle free and you can start saving for your child.",
-            image: "",
-            cl: "#ececfc"
+            image:img1,
+            cl: "rgba(123, 105, 221, 0.1)"
         },
         {
             id: 2,
             topic: "Security",
             desc: "Creating an account is as easy as you can think,no stress, hassle free and you can start saving for your child.",
-            image: "",
-            cl: "#faf1e5"
+            image: img,
+            cl: "rgba(255, 156, 0, 0.1)"
         },
         {
             id: 2,
             topic: "24/7 Support",
             desc: "Creating an account is as easy as you can think,no stress, hassle free and you can start saving for your child.",
-            image: "",
-            cl: "rgba(246,229,235,255)"
+            image: img2,
+            cl: "rgba(219, 36, 56, 0.1)"
         },
     ])
     return (
@@ -44,7 +48,7 @@ const ChooseUsComp = () => {
                             <Card>
                             <CardWrapper>
                             <Circle bg={props.cl}>
-                                <Image/>
+                                <Image src={props?.image}/>
                             </Circle>
                             <Topic>{props.topic}</Topic>
                             <Desc>
@@ -63,8 +67,8 @@ const ChooseUsComp = () => {
 export default ChooseUsComp
 
 const Image = styled.img`
-width: 30px;
-height: 30px;
+width: 17px;
+height: 17px;
 object-fit: contain;
 `
 
@@ -183,7 +187,7 @@ align-items: center;
 `
 const Wrapper = styled.div`
 width: 100%;
-background-color: #fafcff;
+background-color: #F9FBFF;
 min-height: 73vh;
 height: 100%;
 display: flex;

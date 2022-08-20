@@ -17,9 +17,9 @@ const FeedbackComp = () => {
 }
 
 
-useEffect(()=>{
-ChangeFunction()
-},[])
+// useEffect(()=>{
+// ChangeFunction()
+// },[])
     return (
         <Container>
             <Wrapper>

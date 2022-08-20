@@ -18,11 +18,11 @@ const LandingHeader  = ()=>{
         <LeftNavs>
         <Logo src={logo}/>
         <Navigations>
-        <Navs to="/">Home</Navs>
-        <Navs to="/">About Earli</Navs>
-        <Navs to="/">Company</Navs>
-        <Navs to="/">Features</Navs>
-        <Navs to="/">Help</Navs>
+        <Navs to="/" cl=" #011B33">Home</Navs>
+        <Navs to="/" cl=" #011B33">About Earli</Navs>
+        <Navs to="/" cl=" #011B33">Company</Navs>
+        <Navs to="/" cl=" #011B33">Features</Navs>
+        <Navs to="/" cl=" #011B33">Help</Navs>
         </Navigations>
         </LeftNavs>
         <RightNavs>
