@@ -26,6 +26,8 @@ const WalletPage = ({ childid }) => {
     ChildData();
   }, []);
 
+
+  
   return (
     <FirstCard>
       <FirstCardWrapper>

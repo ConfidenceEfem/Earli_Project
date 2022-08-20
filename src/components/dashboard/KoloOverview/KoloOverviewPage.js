@@ -1,10 +1,24 @@
-import React from 'react';
-import styled from 'styled-components';
-import DashBoardHeader from '../DashBoardHeader';
-import DashNav from '../DashNavs';
-import KoloOverviewComp from './KoloOverviewComp';
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+import DashBoardHeader from "../DashBoardHeader";
+import DashNav from "../DashNavs";
+import KoloOverviewComp from "./KoloOverviewComp";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const KoloOverviewPage = () => {
+  const { savingsid } = useParams();
+  console.log(savingsid);
+  const [savings, setSavings] = useState();
+
+  useEffect(() => {
+    const mainLink = "https://earli.herokuapp.com";
+
+    const res = axios.get(`${mainLink}/savings/${savingsid}`);
+    setSavings(res?.data?.data);
+    console.log(res);
+  }, []);
+
   return (
     <Container>
       <Wrapper>
@@ -12,7 +26,7 @@ const KoloOverviewPage = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            <KoloOverviewComp />
+            <KoloOverviewComp savings={savings} />
           </Wrap>
         </Cont>
       </Wrapper>

@@ -10,13 +10,14 @@ import earli from '../images/eali.png';
 import freedom from '../images/freedom.png';
 import kolo from '../images/kolo.png';
 import { FaWallet } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { EarliIcon } from '../AllIcons';
 import axios from 'axios';
 
 const SavingsPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
 
+  const navigate = useNavigate();
   const [savingsData, setSavingsData] = useState([]);
 
   const fetchData = async () => {
@@ -129,7 +130,12 @@ const SavingsPage = ({ parentid, childid }) => {
                         <PlanHead>Durations</PlanHead>
                         <PlanAmount>{props.duration}</PlanAmount>
                       </CurrentDuration>
-                      <NextIcon1 color="#7b69dd" />
+                      <NextIcon1
+                        color="#7b69dd"
+                        onClick={() => {
+                          navigate(`/kolooverview/${parentid}/${props._id}`);
+                        }}
+                      />
                     </CurrentCardWrapper>
                   </CurrentCard>
                 ) : null
