@@ -3,7 +3,7 @@ import styled from "styled-components"
 import {AiOutlineLeft} from "react-icons/ai"
 import img from "../../../images/register.png"
 import pig from "../../../images/piggyimage.png"
-import video from "../../../images/test.mp4"
+import video from "../../../images/wealth-color-earli.mp4"
 import { useNavigate } from 'react-router-dom'
 import ReactPlayer from 'react-player/lazy'
 

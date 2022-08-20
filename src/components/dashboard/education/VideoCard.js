@@ -8,13 +8,13 @@ import { useNavigate } from 'react-router-dom'
 const VideoCard = () => {
   const navigate = useNavigate()
   return (
-    <Container >
-        <Image src={pig} onClick={()=>{
-          navigate("/education/view")
-        }} />
-        <Title>Introduction to Financial Freedom</Title>
+    <Container onClick={()=>{
+      navigate("/education/view")
+    }} >
+        <Image src={pig} />
+        <Title>Financial Freedom Formula</Title>
         <ProfileAndName>
-          <Profile src={img1}/>
+          <Profile src={img1} />
           <Name>Joshua Erute</Name>
         </ProfileAndName>
         <DateAndViews>

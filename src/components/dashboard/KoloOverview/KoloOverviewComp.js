@@ -105,8 +105,8 @@ const KoloOverviewComp = ({ savings }) => {
                     <TransHeading>Transaction History</TransHeading>
                   </TransactionHeading>
                   <TransactionBody>
-                    {savings.savingsTransaction.length > 0
-                      ? savings.savingsTransaction.map((el) => {
+                    {savings?.savingsTransaction?.length > 0
+                      ? savings?.savingsTransaction.map((el) => {
                           return (
                             <TransactionCard>
                               <TransactionDetails>

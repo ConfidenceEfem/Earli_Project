@@ -15,10 +15,14 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import SelectChildCard from './SelectChildCard';
 import WalletMediaView from './WalletMediaView';
+import { MdSignalCellularNull } from 'react-icons/md';
+import FundWalletPage from './FundWalletPage';
 
 const UserAccountDash = () => {
   const { parentid, childid } = useParams();
-  const [toggle, setToggle] = React.useState(false);
+  const [toggle, setToggle] = React.useState(true);
+  const [investmentToggle, setinvestmentToggle] = React.useState(false);
+  const [walletToggle, setwalletToggle] = React.useState(false);
   const [data, setData] = useState([]);
   const [childData, setChildData] = useState([]);
 
@@ -82,45 +86,72 @@ const UserAccountDash = () => {
             <WalletMediaView/>
 
             <CardNavigations>
-              {toggle === false ? (
+              {toggle ? (
                 <Navs
-                  onClick={() => {
-                    setToggle(!toggle);
-                  }}
+               
                 >
                   Savings
                 </Navs>
               ) : (
                 <Nav
                   onClick={() => {
-                    setToggle(!toggle);
+                    setToggle(true);
+                    setinvestmentToggle(false);
+                    setwalletToggle(false);
                   }}
                 >
                   Savings
                 </Nav>
               )}
-              {toggle === true ? (
+              {investmentToggle ? (
                 <Navs
-                  onClick={() => {
-                    setToggle(!toggle);
-                  }}
+             
                 >
                   Investment
                 </Navs>
               ) : (
                 <Nav
                   onClick={() => {
-                    setToggle(!toggle);
+                    setToggle(false);
+                    setinvestmentToggle(true);
+                    setwalletToggle(false);
                   }}
                 >
                   Investment
                 </Nav>
-              )}
+              )
+            }
+            {
+              walletToggle?   
+              <Navs
+               >Fund Wallet</Navs> 
+              : 
+             
+               <Nav
+                onClick={() => {
+                    setToggle(false);
+                    setinvestmentToggle(false);
+                    setwalletToggle(true);
+                  }}
+              >Fund Wallet</Nav>
+            }
+          
             </CardNavigations>
-            {toggle === false ? (
+            {toggle? (
               <SavingsPage parentid={parentid} childid={childid} />
             ) : (
+             null
+            )}
+            {investmentToggle? (
               <InvestmentPage parentid={parentid} childid={childid} />
+            ) : (
+             null
+            )}
+
+            {walletToggle? (
+              <FundWalletPage parentid={parentid} childid={childid} />
+            ) : (
+             null
             )}
           </AccountMaincardWrapper>
         </UserAccountMainCardHolder>
