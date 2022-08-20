@@ -1,9 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import img from '../images/avatar.png';
 import logo from '../images/earli1.png';
-import NotIcon from './NotIcon';
-import { AiOutlineMenu, AiOutlineClose } from 'react-icons/ai';
+import { AiOutlineMenu } from 'react-icons/ai';
 
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';

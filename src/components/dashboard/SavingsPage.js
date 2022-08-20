@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { FiPlus } from 'react-icons/fi';
-import { BsFillBarChartFill, BsBarChartFill } from 'react-icons/bs';
 import { GrFormNext } from 'react-icons/gr';
-import { FaPiggyBank } from 'react-icons/fa';
-import avatar from '../images/avatar.png';
 import earli from '../images/eali.png';
 import freedom from '../images/freedom.png';
 import kolo from '../images/kolo.png';
-import { FaWallet } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { EarliIcon } from '../AllIcons';
 import axios from 'axios';
 
 const SavingsPage = ({ parentid, childid }) => {

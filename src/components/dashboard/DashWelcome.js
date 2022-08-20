@@ -1,9 +1,6 @@
-import React from 'react';
 import styled from 'styled-components';
-import AddChildAccount from './AddChildAccount';
 import DashAccountPage from './DashAccountPage';
 import DashBoardHeader from './DashBoardHeader';
-import UserAccountDash from './UserAccountDash';
 
 const DashWelcome = () => {
   return (

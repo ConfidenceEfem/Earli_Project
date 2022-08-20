@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 // import * as yup from 'yup';
 import { AiOutlineInfoCircle, AiOutlineLeft } from "react-icons/ai";
@@ -6,7 +5,6 @@ import { FaPiggyBank } from "react-icons/fa";
 import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
-import { useNavigate } from "react-router-dom";
 
 const KoloOverviewComp = ({ savings }) => {
   console.log(savings);
@@ -101,8 +99,8 @@ const KoloOverviewComp = ({ savings }) => {
                     <TransHeading>Transaction History</TransHeading>
                   </TransactionHeading>
                   <TransactionBody>
-                    {savings.savingsTransaction.length > 0
-                      ? savings.savingsTransaction.map((el) => {
+                    {savings?.savingsTransaction.length > 0
+                      ? savings?.savingsTransaction.map((el) => {
                           return (
                             <TransactionCard>
                               <TransactionDetails>

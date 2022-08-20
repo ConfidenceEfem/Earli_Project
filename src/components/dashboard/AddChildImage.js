@@ -1,14 +1,9 @@
-import React, { useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 import avatar from '../images/avatar.png';
-import * as yup from 'yup';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { AiOutlineLeft, AiOutlineCamera } from 'react-icons/ai';
 import { useDispatch } from 'react-redux';
-import { addChildLink, addchildimage } from '../Redux/EarliReducers';
 import { AuthContext } from '../AuthState/AuthProvider';
 import Swal from 'sweetalert2';
 

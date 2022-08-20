@@ -1,13 +1,9 @@
-import React from 'react';
 import styled from 'styled-components';
-import avatar from '../images/avatar.png';
 import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
-import ProgressBar from './ProgressBar';
 
 const AddChildAccount = () => {
   const { parentid } = useParams();
