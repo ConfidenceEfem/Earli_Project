@@ -72,7 +72,7 @@ const SavingsPage = ({ parentid, childid }) => {
             </SavingsCard>
             <SavingsCard
               bg="#d7eeff"
-              to={`/firstearliplan/${parentid}/${childid}/kolo`}
+              to={`/firstearliplan/${parentid}/${childid}/Kolo`}
             >
               <SavingsCardWrapper>
                 <IconAndDetails>
