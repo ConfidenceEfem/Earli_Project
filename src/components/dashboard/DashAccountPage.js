@@ -108,7 +108,7 @@ const DashAccountPage = () => {
                 <DotIcon color={'white'} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">N{walletTotal?.totalSavings}</Amount>
+              <Amount cl="white">{`N${walletTotal?.totalSavings}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -120,7 +120,7 @@ const DashAccountPage = () => {
                 <DotIcon color={'black'} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">N{walletTotal?.totalInvestment}</Amount>
+              <Amount cl="black">{`N${walletTotal?.totalInvestment}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">

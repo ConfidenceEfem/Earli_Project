@@ -28,7 +28,7 @@ const FundWalletPage = ({ parentid, childid }) => {
         setConfig((prev) => ({
           ...prev,
           ...payData,
-          amount,
+          amount: amount,
         }));
       })
       .catch((error) => {
@@ -106,8 +106,7 @@ const FundWalletPage = ({ parentid, childid }) => {
               icon: "success",
               title: `Copy fund link`,
               text: `https://earli.herokuapp.com/fund/${childid}`,
-              showConfirmButton: false,
-              timer: 2500,
+              showConfirmButton: true,
             });
           }}>Generate Payment Link</Button>
         </SavingsPlanWrapper>

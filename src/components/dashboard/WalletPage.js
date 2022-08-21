@@ -39,7 +39,7 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Wallet</WalletName>
-            <WalletAmount>N{walletData?.walletBalance}</WalletAmount>
+            <WalletAmount>{`N${walletData?.walletBalance}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard br="1px solid silver" bl="1px solid silver">
@@ -49,7 +49,7 @@ const WalletPage = ({ childid }) => {
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname} 
             's Savings</WalletName>
-            <WalletAmount>N{walletData?.totalSavings}</WalletAmount>
+            <WalletAmount>{`N${walletData?.totalSavings}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard>
@@ -58,7 +58,7 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Investments</WalletName>
-            <WalletAmount>N{walletData?.totalInvestment}</WalletAmount>
+            <WalletAmount>{`N${walletData?.totalInvestment}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
       </FirstCardWrapper>
