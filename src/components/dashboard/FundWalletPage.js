@@ -6,13 +6,14 @@ import { usePaystackPayment } from "react-paystack";
 
 const FundWalletPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
+  const [amount, setAmount] = useState(100);
 
   const [config, setConfig] = useState({
     publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
+    amount: amount,
   });
 
 
-  const [amount, setAmount] = useState(0);
 
   const initializePayment = usePaystackPayment(config);
 
@@ -24,11 +25,10 @@ const FundWalletPage = ({ parentid, childid }) => {
       .get(`${mainLink}/getfund/${childid}`)
       .then((res) => {
         const payData = res?.data;
-
+        
         setConfig((prev) => ({
           ...prev,
           ...payData,
-          amount: amount,
         }));
       })
       .catch((error) => {
@@ -91,6 +91,7 @@ const FundWalletPage = ({ parentid, childid }) => {
             min={100}
             onChange={(e) => {
               setAmount(e.target.value * 100);
+              console.log(amount);
             }}
           />
           <Button
