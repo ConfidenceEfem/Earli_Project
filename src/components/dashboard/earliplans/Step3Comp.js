@@ -58,7 +58,7 @@ const Step3Comp = () => {
       console.log(res?.data?.data?.cards);
     }
   };
-  const fetchCofigData = async () => {
+  const fetchConfigData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const fetchPayData = await axios.get(`${mainLink}/cardlink/${parentid}`);
@@ -82,7 +82,7 @@ const Step3Comp = () => {
   useEffect(() => {
     fetchCardsData();
     ChildData();
-    fetchCofigData();
+    fetchConfigData();
   }, []);
 
   const plan_details = localStorage.getItem('plan_details')
@@ -144,7 +144,7 @@ const Step3Comp = () => {
   };
 
   const addCard = async () => {
-    const mainLink = 'https://earli.herokuapp.com/paystack/callback';
+    const mainLink = 'https://earli.herokuapp.com/savecard';
     const mainLink1 = 'http://localhost:2004';
     const onSuccess = (reference) => {
       console.log(reference);
@@ -256,7 +256,6 @@ const Step3Comp = () => {
                       // this is to trigger the add card page
                       onClick={() => {
                         addCard();
-                        console.log('add card');
                       }}
                     >
                       Add New Payment Method

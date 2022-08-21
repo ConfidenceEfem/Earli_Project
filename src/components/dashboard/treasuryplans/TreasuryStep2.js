@@ -134,6 +134,7 @@ const CreateIcon = styled.img`
     height: 20px;
   }
 `;
+
 const CreateAndIcon = styled.div`
   display: flex;
   align-items: center;
