@@ -29,14 +29,12 @@ const DashAccountPage = () => {
 
     setChildrenData(res?.data?.data?.children);
     console.log(childrenData)
-    // setChildrenData(res.data.data.children);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  // console.log(childrenData);
 
   const [Transaction, setTransation] = React.useState([
     {

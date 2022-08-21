@@ -1,6 +1,7 @@
 import React, { useEffect } from "react"
 import styled from "styled-components"
 import data from "./data.json"
+import img from "./images/avatar.png"
 
 const FeedbackComp = () => {
 
@@ -17,9 +18,9 @@ const FeedbackComp = () => {
 }
 
 
-// useEffect(()=>{
+useEffect(()=>{
 // ChangeFunction()
-// },[])
+},[])
     return (
         <Container>
             <Wrapper>
@@ -34,28 +35,29 @@ const FeedbackComp = () => {
                         </TextSub>
                     </Headings>
                     <CardHolder>
-                    {hold?.map((props)=>(
-                        <Card key={props.id}>
-                        <CardWrapper>
-                            <Desc>
-                              Earli hass got to be one of the best
-                              saving and investment platform i have 
-                              used and i am glad this is a way for me 
-                              to create wealth for my children all at once 
-                              without and hassle. Creating an account is 
-                              as easy as you can think,no stress, 
-                                hassle free and you can start
-                                saving for your child  
-                            </Desc>
-                            <Profile>
-                                <Image/>
-                                <NameAndPosition>
-                                    <Name>Abiodun Olaoluwa</Name>
-                                    <Position>{props.name}</Position>
-                                </NameAndPosition>
-                            </Profile>
-                        </CardWrapper>
-                    </Card>
+                    {data?.map((props, i)=>(
+                       i<=1? 
+                       <Card key={props.id}>
+                       <CardWrapper>
+                           <Desc>
+                             Earli hass got to be one of the best
+                             saving and investment platform i have 
+                             used and i am glad this is a way for me 
+                             to create wealth for my children all at once 
+                             without and hassle. Creating an account is 
+                             as easy as you can think,no stress, 
+                               hassle free and you can start
+                               saving for your child  
+                           </Desc>
+                           <Profile>
+                               <Image src={img}/>
+                               <NameAndPosition>
+                                   <Name>Abiodun Olaoluwa</Name>
+                                   <Position>{props.name}</Position>
+                               </NameAndPosition>
+                           </Profile>
+                       </CardWrapper>
+                   </Card>:null
                     ))}
                     <Card1>
                         <CardWrapper>
@@ -70,7 +72,7 @@ const FeedbackComp = () => {
                                 saving for your child  
                             </Desc>
                             <Profile>
-                                <Image/>
+                                <Image  src={img}/>
                                 <NameAndPosition>
                                     <Name>Abiodun Olaoluwa</Name>
                                     <Position>CEO, Annie's wears</Position>

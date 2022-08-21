@@ -8,7 +8,6 @@ import { useParams } from 'react-router';
 import axios from 'axios';
 import SelectChildCard from './SelectChildCard';
 import WalletMediaView from './WalletMediaView';
-import { MdSignalCellularNull } from 'react-icons/md';
 import FundWalletPage from './FundWalletPage';
 
 const UserAccountDash = () => {
@@ -244,6 +243,11 @@ const ProfileImage = styled.img`
   height: 50px;
   border-radius: 50%;
   margin-right: 15px;
+  @media screen and (max-width: 400px){
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+  }
 `;
 const AccoutNoAndName = styled.div`
   display: flex;
