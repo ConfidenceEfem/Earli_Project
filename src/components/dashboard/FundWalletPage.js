@@ -96,6 +96,7 @@ const FundWalletPage = ({ parentid, childid }) => {
           />
           <Button
             onClick={() => {
+              console.log(amount);
               setConfig((prev) => ({
                 ...prev,
                 amount,
