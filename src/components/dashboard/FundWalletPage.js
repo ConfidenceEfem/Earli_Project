@@ -97,6 +97,10 @@ const FundWalletPage = ({ parentid, childid }) => {
             onChange={(e) => {
               setAmount(e.target.value * 100);
               console.log(amount);
+              setConfig((prev) => ({
+                ...prev,
+                amount: amount,
+              }));
             }}
           />
           <Button
