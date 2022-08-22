@@ -95,7 +95,7 @@ const FundWalletPage = ({ parentid, childid }) => {
               const { name, value } = e.target;
               setConfig((prevState) => ({
                 ...prevState,
-                [name]: value,
+                [name]: value*100,
               }));
             }}
           />
