@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import DashBoardHeader from '../../DashBoardHeader';
 import DashNav from '../../DashNavs';
 import EducationViewComp from './EducationViewComp';
-// import KoloOverviewComp from './KoloOverviewComp';
 
 const EducationViewPage = () => {
   return (
@@ -14,8 +13,7 @@ const EducationViewPage = () => {
           <Wrap>
             <DashBoardHeader />
             <EducationViewComp/>
-            {/* <KoloOverviewComp /> */}
-            {/* <EducationComp/> */}
+           
           </Wrap>
         </Cont>
       </Wrapper>

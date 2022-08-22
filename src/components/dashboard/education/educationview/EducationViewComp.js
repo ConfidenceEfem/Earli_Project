@@ -119,6 +119,9 @@ const MoreVideoComp = styled.div`
 width: 25%;
 display:flex;
 flex-direction:column;
+@media screen and (max-width: 1000px){
+    display:none;
+}
 `
 const Video = styled.video`
 width: 100%;
@@ -130,6 +133,18 @@ width: 72%;
 height: 100%;
 display:flex;
 justify-content: center;
+@media screen and (max-width: 1000px){
+   width: 100%;
+}
+@media screen and (max-width: 600px){
+height: 400px;
+}
+@media screen and (max-width: 500px){
+height: 300px;
+}
+@media screen and (max-width: 400px){
+height: 250px;
+}
 `
 const VideoScreenWrapper = styled.div`
 width:94%;

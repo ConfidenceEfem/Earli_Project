@@ -277,7 +277,6 @@ const SavingsPlanWrapper = styled.div`
   margin-top: 20px;
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
 `;
 const CreateSavingsPlan = styled.div`
   display: flex;
@@ -289,7 +288,6 @@ const CreateSavingsPlan = styled.div`
   justify-content: center;
   @media screen and (max-width: 1000px){
     width: 410px;
-    // background-color: red;
   }
   @media screen and (max-width: 980px){
     width: 395px;
@@ -297,16 +295,10 @@ const CreateSavingsPlan = styled.div`
   }
   @media screen and (max-width: 970px){
     width: 385px;
-  }
+  
   @media screen and (max-width: 950px){
-    // width: 380px;
     width: 90%;
     margin: 15px 0;
-  }
-  @media screen and (max-width: 910px){
-    // width: 380px;
-  
-    // background-color: red;
   }
   @media screen and (max-width: 600px){
     width: 96%;
@@ -315,15 +307,7 @@ const CreateSavingsPlan = styled.div`
     height: 570px;
   }
 `;
-// const Navs = styled.div`
-//   font-size: 15px;
-//   font-weight: 700;
-//   padding-bottom: 10px;
-//   margin-right: 50px;
-//   cursor: pointer;
-//   transition: all 350ms;
-//   border-bottom: 5px solid #7b69dd;
-// `;
+
 const LastCard = styled.div`
 width: 100%;
 height:auto;
