@@ -42,6 +42,10 @@ const FundWalletPage = ({ parentid, childid }) => {
     
     const fundWallet = async () => {
     console.log(amount);
+    setConfig((prev) => ({
+      ...prev,
+      amount: amount,
+    }));
     const mainLink = "https://earli.herokuapp.com/fundachild";
     const onSuccess = (reference) => {
       console.log(reference);
@@ -93,10 +97,6 @@ const FundWalletPage = ({ parentid, childid }) => {
             onChange={(e) => {
               setAmount(e.target.value * 100);
               console.log(amount);
-              setConfig((prev) => ({
-                ...prev,
-                amount: amount,
-              }));
             }}
           />
           <Button
