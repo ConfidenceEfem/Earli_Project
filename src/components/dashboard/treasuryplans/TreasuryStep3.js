@@ -32,7 +32,7 @@ const TreasuryStep3 = () => {
     console.log(data);
   };
 
-  const childData = async () => {
+  const fetchChildData = async () => {
     const mainLink = "https://earli.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
@@ -108,7 +108,7 @@ const TreasuryStep3 = () => {
 
   useEffect(() => {
     fetchData();
-    childData();
+    fetchChildData();
   }, []);
 
   return (
