@@ -66,7 +66,7 @@ const FundWalletPage = ({ parentid, childid }) => {
           Swal.fire({
             position: "center",
             icon: "error",
-            title: `Child not found`,
+            title: `Wallet Funding failed`,
             showConfirmButton: false,
             timer: 2500,
           });
