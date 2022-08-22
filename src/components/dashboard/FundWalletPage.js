@@ -34,13 +34,14 @@ const FundWalletPage = ({ parentid, childid }) => {
       .catch((error) => {
         console.log(error);
       });
-  };
-
-  useEffect(() => {
-    fetchConfigData();
-  }, []);
-
-  const fundWallet = async () => {
+    };
+    
+    useEffect(() => {
+      fetchConfigData();
+    }, []);
+    
+    const fundWallet = async () => {
+    console.log(amount);
     const mainLink = "https://earli.herokuapp.com/fundachild";
     const onSuccess = (reference) => {
       console.log(reference);
@@ -92,15 +93,14 @@ const FundWalletPage = ({ parentid, childid }) => {
             onChange={(e) => {
               setAmount(e.target.value * 100);
               console.log(amount);
+              setConfig((prev) => ({
+                ...prev,
+                amount: amount,
+              }));
             }}
           />
           <Button
             onClick={() => {
-              console.log(amount);
-              setConfig((prev) => ({
-                ...prev,
-                amount,
-              }));
               fundWallet();
             }}
           >
