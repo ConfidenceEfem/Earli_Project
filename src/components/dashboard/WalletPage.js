@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank, FaWallet } from 'react-icons/fa';
@@ -8,15 +8,20 @@ import axios from 'axios';
 const WalletPage = ({ childid }) => {
   const { currentUser } = useContext(AuthContext);
 
-  const [childData, setChildData] = React.useState([]);
+  const [childData, setChildData] = useState([]);
+  const [walletData, setWalletData] = useState({});
 
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
+    const resData = await axios.get(`${mainLink}/childsum/${childid}`);
+
     setChildData(res?.data?.data);
-    console.log(childData);
+    setWalletData(resData?.data?.data);
+
+    console.log(childData, walletData);
   };
 
   React.useEffect(() => {
@@ -34,7 +39,7 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Wallet</WalletName>
-            <WalletAmount>N0.00</WalletAmount>
+            <WalletAmount>{`N${walletData?.walletBalance}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard br="1px solid silver" bl="1px solid silver">
@@ -44,7 +49,7 @@ const WalletPage = ({ childid }) => {
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname} 
             's Savings</WalletName>
-            <WalletAmount>N0.00</WalletAmount>
+            <WalletAmount>{`N${walletData?.totalSavings}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard>
@@ -53,7 +58,7 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Investments</WalletName>
-            <WalletAmount>N0.00</WalletAmount>
+            <WalletAmount>{`N${walletData?.totalInvestment}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
       </FirstCardWrapper>

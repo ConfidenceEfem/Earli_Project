@@ -19,6 +19,7 @@ const DashAccountPage = () => {
   const { currentUser } = useContext(AuthContext);
 
   const [childrenData, setChildrenData] = useState([]);
+  const [walletTotal, setWalletTotal] = useState({});
 
   console.log(parentid);
 
@@ -26,9 +27,12 @@ const DashAccountPage = () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
+    const resData = await axios.get(`${mainLink}/parentsum/${parentid}`);
 
     setChildrenData(res?.data?.data?.children);
-    console.log(childrenData)
+    setWalletTotal(resData?.data?.data);
+    console.log(childrenData,walletTotal)
+    // setChildrenData(res.data.data.children);
   };
 
   useEffect(() => {
@@ -103,7 +107,7 @@ const DashAccountPage = () => {
                 <DotIcon color={'white'} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">N0.00</Amount>
+              <Amount cl="white">{`N${walletTotal?.totalSavings}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -115,7 +119,7 @@ const DashAccountPage = () => {
                 <DotIcon color={'black'} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">N0.00</Amount>
+              <Amount cl="black">{`N${walletTotal?.totalInvestment}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">

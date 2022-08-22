@@ -43,7 +43,7 @@ const TreasuryStep2 = () => {
 
   const schema = yup.object().shape({
     amount: yup.number().required('This field is required'),
-    start: yup.date().required('This field is required'),
+    // start: yup.date().required('This field is required'),
   });
 
   const {
@@ -55,7 +55,7 @@ const TreasuryStep2 = () => {
 
   const submit = handleSubmit(async (data) => {
     // console.log(data);
-    const { amount, duration, start } = data;
+    const { amount, duration } = data;
     localStorage.setItem('treasury_details', JSON.stringify(data));
     // console.log('Hello World');
 
@@ -134,6 +134,7 @@ const CreateIcon = styled.img`
     height: 20px;
   }
 `;
+
 const CreateAndIcon = styled.div`
   display: flex;
   align-items: center;
