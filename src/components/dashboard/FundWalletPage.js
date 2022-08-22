@@ -9,10 +9,11 @@ const FundWalletPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
 
   const navigate = useNavigate();
-  const [amount, setAmount] = useState();
+  // const [amount, setAmount] = useState();
 
   const [config, setConfig] = useState({
     publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
+    amount: 0
   });
 
   const initializePayment = usePaystackPayment(config);
@@ -34,18 +35,13 @@ const FundWalletPage = ({ parentid, childid }) => {
       .catch((error) => {
         console.log(error);
       });
-    };
-    
-    useEffect(() => {
-      fetchConfigData();
-    }, []);
-    
-    const fundWallet = async () => {
-    console.log(amount);
-    setConfig((prev) => ({
-      ...prev,
-      amount: amount,
-    }));
+  };
+
+  useEffect(() => {
+    fetchConfigData();
+  }, []);
+
+  const fundWallet = async () => {
     const mainLink = "https://earli.herokuapp.com/fundachild";
     const onSuccess = (reference) => {
       console.log(reference);
@@ -92,14 +88,14 @@ const FundWalletPage = ({ parentid, childid }) => {
           <InputHead>Amount</InputHead>
           <Input
             type="number"
+            name="amount"
             placeholder="Input Amount"
             min={100}
             onChange={(e) => {
-              setAmount(e.target.value * 100);
-              console.log(amount);
-              setConfig((prev) => ({
-                ...prev,
-                amount: amount,
+              const { name, value } = e.target;
+              setConfig((prevState) => ({
+                ...prevState,
+                [name]: value,
               }));
             }}
           />
