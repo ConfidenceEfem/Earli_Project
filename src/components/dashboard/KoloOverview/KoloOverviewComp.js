@@ -126,7 +126,7 @@ const KoloOverviewComp = () => {
 
                     {savings?.savingsTransaction?.length > 0
 
-                      ? savings?.savingsTransaction.map((el) => {
+                      ? savings?.savingsTransaction?.map((el) => {
                           return (
                             <TransactionCard>
                               <TransactionDetails>
@@ -146,8 +146,6 @@ const KoloOverviewComp = () => {
                           );
                         })
                       : (
-                        <TransactionHolder>
-                        <TransactionWrapper>
                           <MiddleBody>
                             <NoIcon />
                             <NoHeadText>No Charge Made Yet</NoHeadText>
@@ -155,8 +153,6 @@ const KoloOverviewComp = () => {
                               We have not made any transaction yet.
                             </SubTextHold>
                           </MiddleBody>
-                        </TransactionWrapper>
-                      </TransactionHolder>
                       )}
                   </TransactionBody>
                 </TransactionWrapper>
@@ -305,7 +301,7 @@ const TransactionCard = styled.div`
 `;
 
 const TransactionBody = styled.div`
-  /* padding: 20px 0; */
+  // padding: 20px 0; 
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -322,7 +318,7 @@ const TransactionHeading = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 15%;
+  height: 10%;
   border-bottom: 1px solid lightgray;
 `;
 
@@ -335,12 +331,29 @@ const TransactionWrapper = styled.div`
 
 const TransactionHolder = styled.div`
   height: 100%;
-  width: 100%;
+  width: 460px;
+  // background-color: green;
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
+  @media screen and (max-width:1396px){
+    width: 420px;
+  }
+  @media screen and (max-width:1281px){
+    width: 390px;
+  }
+  @media screen and (max-width:1118px){
+    width: 360px;
+  }
+  @media screen and (max-width:1064px){
+    height: 550px;
+    margin-bottom: 30px;
+  }
+  @media screen and (max-width:600px){
+   width: 100%;
+  }
 `;
 
 const ButtonText = styled.div`
@@ -361,6 +374,12 @@ const ButtonComp = styled.div`
   border-radius: 4px;
   :hover {
     transform: scale(1.02);
+  }
+  @media screen and (max-width:1196px){
+    width: 150px;
+  }
+  @media screen and (max-width:600px){
+    width: 170px;
   }
 `;
 const Amount = styled.div`
@@ -427,8 +446,8 @@ flex-direction:column;
 align-items: center;
 `;
 const SavedCard1 = styled.div`
-  width: 100%;
-  display: flex;
+width: 510px;
+display: flex;
   height: 290px;
   background: white;
   justify-content: center;
@@ -436,9 +455,24 @@ const SavedCard1 = styled.div`
   border-radius: 10px;
   margin: 15px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  @media screen and (max-width:1444px){
+    width: 480px;
+  }
+  @media screen and (max-width:1239px){
+    width: 450px;
+  }
+  @media screen and (max-width:1196px){
+    width: 430px;
+  }
+  @media screen and (max-width:1155px){
+    width: 400px;
+  }
+  @media screen and (max-width:600px){
+    width: 100%;
+  }
 `;
 const SavedCard = styled.div`
-  width: 100%;
+  width: 510px;
   display: flex;
   height: 250px;
   background: white;
@@ -447,28 +481,48 @@ const SavedCard = styled.div`
   border-radius: 10px;
   margin: 15px 0;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  @media screen and (max-width:1444px){
+    width: 480px;
+  }
+  @media screen and (max-width:1239px){
+    width: 450px;
+  }
+  @media screen and (max-width:1196px){
+    width: 430px;
+  }
+  @media screen and (max-width:1155px){
+    width: 400px;
+  }
+  @media screen and (max-width:600px){
+    width: 100%;
+  }
 `;
 const RightCardComp = styled.div`
   display: flex;
-  width: 41%;
   align-items: center;
-  /* background: blue; */
+  @media screen and (max-width:600px){
+    width: 100%;
+   }
 `;
 const LeftCardComp = styled.div`
   display: flex;
   flex-direction: column;
-  width: 56%;
   align-items: center;
   flex-wrap: wrap;
-  /* background: red; */
+   @media screen and (max-width:600px){
+    width: 100%;
+  }
 `;
 const CardCompWrapper = styled.div`
   display: flex;
   width: 90%;
-  height: 90%;
-  /* background: purple; */
+
   justify-content: space-between;
   flex-wrap: wrap;
+  @media screen and (max-width: 1337px){
+    width: 94%;
+  }
+
 `;
 const IconText = styled.div`
   font-size: 16px;
@@ -490,6 +544,10 @@ const CardComp = styled.div`
   border-radius: 10px;
   align-items: center;
   height: 740px;
+  @media screen and (max-width: 1050px){
+    height: auto;
+   
+  }
 `;
 const BackComp = styled.div`
   width: 100%;
@@ -497,23 +555,21 @@ const BackComp = styled.div`
   justify-content: flex-start;
   align-items: center;
   margin-bottom: 30px;
+  margin-top: 50px;
 `;
 const Wrapper = styled.div`
   width: 93%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* align-items: center; */
-  margin-top: 50px;
-  margin-bottom: 30px;
+
 `;
 
 const Container = styled.div`
   width: 100%;
-  /* background: red; */
   justify-content: center;
   display: flex;
-  min-height: calc(100vh - 90px);
+  height: auto;
 `;
 
 const SubTextHold = styled.div`
@@ -523,6 +579,7 @@ const SubTextHold = styled.div`
   margin-bottom: 40px;
   flex-wrap: wrap;
   line-height: 24px;
+
   @media screen and (max-width: 375px) {
     width: 90%;
     text-align: center;
@@ -533,11 +590,11 @@ const NoHeadText = styled.div`
   font-size: 18px;
   margin: 15px 0;
 `;const MiddleBody = styled.div`
-width: 100%;
+// width: 100%;
 display: flex;
 flex-direction: column;
 align-items: center;
-height: 70%;
+margin-top: 80px;
 justify-content: center;
 `;
 const ChildrenHeading = styled.div`

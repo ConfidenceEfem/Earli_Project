@@ -103,5 +103,7 @@ margin: 8px;
 :hover{
   transform: scale(1.02);
 }
-
+@media screen and (max-width: 500px){
+  width: 80%;
+}
 `

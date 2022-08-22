@@ -13,9 +13,7 @@ const AddChildImage = () => {
   const { currentUser, value } = useContext(AuthContext);
 
   const { state, dispatch: ctxDispatch } = value;
-  // console.log(state);
 
-  // console.log(currentUser?.token);
 
   const dispatch = useDispatch();
 

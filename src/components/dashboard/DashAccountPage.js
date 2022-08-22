@@ -39,7 +39,6 @@ const DashAccountPage = () => {
     fetchData();
   }, []);
 
-  // console.log(childrenData);
 
   const [Transaction, setTransation] = React.useState([
     {

@@ -41,6 +41,8 @@ function getStyles(name, personName, theme) {
 }
 
 export default function SelectChildCard({ parentid, childid }) {
+
+ 
   const navigate = useNavigate();
   console.log(parentid);
   const theme = useTheme();
@@ -81,9 +83,12 @@ export default function SelectChildCard({ parentid, childid }) {
     );
   };
 
+  
+
   return (
+  
     <div>
-      <FormControl sx={{ width: 300, mt: 1 }}>
+      <FormControl sx={{ width: 280, mt: 1 }} >
         <Select
           multiple
           displayEmpty

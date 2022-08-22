@@ -27,6 +27,12 @@ height: auto;
 display:flex;
 flex-wrap:wrap;
 margin-top: 60px;
+@media screen and (max-width: 800px){
+  margin-top: 30px;
+}
+@media screen and (max-width: 500px){
+  justify-content: center;
+}
 `
 const Wrapper = styled.div`
 width: 95%;

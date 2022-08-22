@@ -1,12 +1,16 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
+import {useNavigate } from 'react-router-dom';
 import Swal from "sweetalert2";
 import { usePaystackPayment } from "react-paystack";
 
 const FundWalletPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
+
+  const navigate = useNavigate();
   const [amount, setAmount] = useState(100);
+
 
   const [config, setConfig] = useState({
     publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
