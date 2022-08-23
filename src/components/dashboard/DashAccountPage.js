@@ -1,15 +1,15 @@
-import React, { useContext, useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { HiOutlineDotsVertical } from 'react-icons/hi';
-import { FiPlus } from 'react-icons/fi';
-import { BsBarChartFill } from 'react-icons/bs';
-import { FaPiggyBank } from 'react-icons/fa';
-import avatar from '../images/avatar.png';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../AuthState/AuthProvider';
-import axios from 'axios';
-import { NoIcon } from '../AllIcons';
-import moment from 'moment';
+import React, { useContext, useEffect, useState } from "react";
+import styled from "styled-components";
+import { HiOutlineDotsVertical } from "react-icons/hi";
+import { FiPlus } from "react-icons/fi";
+import { BsBarChartFill } from "react-icons/bs";
+import { FaPiggyBank } from "react-icons/fa";
+import avatar from "../images/avatar.png";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../AuthState/AuthProvider";
+import axios from "axios";
+import { NoIcon } from "../AllIcons";
+import moment from "moment";
 
 const DashAccountPage = () => {
   const { parentid } = useParams();
@@ -24,14 +24,14 @@ const DashAccountPage = () => {
   console.log(parentid);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     const resData = await axios.get(`${mainLink}/parentsum/${parentid}`);
 
     setChildrenData(res?.data?.data?.children);
     setWalletTotal(resData?.data?.data);
-    console.log(childrenData,walletTotal)
+    console.log(childrenData, walletTotal);
     // setChildrenData(res.data.data.children);
   };
 
@@ -39,55 +39,54 @@ const DashAccountPage = () => {
     fetchData();
   }, []);
 
-
-  const [Transaction, setTransation] = React.useState([
-    {
-      id: 1,
-      name: 'James Badejo',
-      details: "Sent money to Adebimpe's wallet via payment link",
-      amount: '30,000.00',
-      cl: '#7b69dd',
-    },
-    {
-      id: 2,
-      name: "Adebimpe's Kolo Savings Plan",
-      details: '**** **** **** 2468 was debited',
-      amount: '30,000.00',
-      cl: '#7b69dd',
-    },
-    {
-      id: 3,
-      name: 'Withdrawal',
-      details: "Money withdrawal from Kelvin's wallet",
-      amount: '30,000',
-      cl: 'red',
-    },
-    {
-      id: 4,
-      name: 'Withdrawal',
-      details: "Money withdrawal from Adebola's wallet",
-      amount: '6,000',
-      cl: 'red',
-    },
-    {
-      id: 5,
-      name: 'Danielle Olamide',
-      details: "Sent money to Adebimpe's wallet via payment link",
-      amount: '30,000.00',
-      cl: '#7b69dd',
-    },
-  ]);
+  // const [Transaction, setTransation] = React.useState([
+  //   {
+  //     id: 1,
+  //     name: "James Badejo",
+  //     details: "Sent money to Adebimpe's wallet via payment link",
+  //     amount: "30,000.00",
+  //     cl: "#7b69dd",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Adebimpe's Kolo Savings Plan",
+  //     details: "**** **** **** 2468 was debited",
+  //     amount: "30,000.00",
+  //     cl: "#7b69dd",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Withdrawal",
+  //     details: "Money withdrawal from Kelvin's wallet",
+  //     amount: "30,000",
+  //     cl: "red",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Withdrawal",
+  //     details: "Money withdrawal from Adebola's wallet",
+  //     amount: "6,000",
+  //     cl: "red",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Danielle Olamide",
+  //     details: "Sent money to Adebimpe's wallet via payment link",
+  //     amount: "30,000.00",
+  //     cl: "#7b69dd",
+  //   },
+  // ]);
 
   return (
     <Container>
       <Wrapper>
         <FirstPart>
           <NameAndSubHolder>
-            {' '}
+            {" "}
             <WelcomeName>
-              Welcome {currentUser?.data?.firstname}{' '}
+              Welcome {currentUser?.data?.firstname}{" "}
               {currentUser?.data?.lastname}!
-            </WelcomeName>{' '}
+            </WelcomeName>{" "}
             <InvestText>Your Investments and Savings are booming</InvestText>
           </NameAndSubHolder>
 
@@ -104,10 +103,12 @@ const DashAccountPage = () => {
                 <Circle bg="#B0A5EB">
                   <CircleIcon />
                 </Circle>
-                <DotIcon color={'white'} />
+                <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">{`N${walletTotal?.totalSavings}`}</Amount>
+              <Amount cl="white">{`N${(walletTotal?.totalSavings / 100).toFixed(
+                2
+              )}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -116,17 +117,19 @@ const DashAccountPage = () => {
                 <Circle bg="#edf5f2">
                   <CircleIcon1 />
                 </Circle>
-                <DotIcon color={'black'} />
+                <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${walletTotal?.totalInvestment}`}</Amount>
+              <Amount cl="black">{`N${(
+                walletTotal?.totalInvestment / 100
+              ).toFixed(2)}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
             <CardWrapper>
               <CardHeading>
                 <Circle bg="#f2f0fc">0%</Circle>
-                <DotIcon color={'black'} />
+                <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Growth (Interests + Profits)</Headings>
               <Amount cl="black">N0.00</Amount>
@@ -157,19 +160,35 @@ const DashAccountPage = () => {
                               {props?.firstname} {props?.lastname}
                             </ChildrenName>
                             <ChildrenAge>
-                              {moment().diff(props?.dob, 'years', false)} years
+                              {moment().diff(props?.dob, "years", false)} years
                             </ChildrenAge>
-                          </ChildrenDetails>{' '}
+                          </ChildrenDetails>{" "}
                           <ChildrenSavingAndAmountHolder>
                             <ChildrenSavingAndAmount>
                               <ChildrenSaving>Savings</ChildrenSaving>
-                              <ChildrenAmount>N0.00</ChildrenAmount>
+                              <ChildrenAmount>
+                                N0.00
+                                {/* {walletTotal?.childTotals[i]?.totalSavings
+                                  ? (
+                                      walletTotal?.childTotals[i]
+                                        ?.totalSavings / 100
+                                    ).toFixed(2)
+                                  : "0.00"} */}
+                              </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                             <ChildrenSavingAndAmount
-                              style={{ alignItems: 'flex-end' }}
+                              style={{ alignItems: "flex-end" }}
                             >
                               <ChildrenSaving>Investment</ChildrenSaving>
-                              <ChildrenAmount>N0.00</ChildrenAmount>
+                              <ChildrenAmount>
+                                N0.00
+                                {/* {walletTotal?.childTotals[i]?.totalInvestment
+                                  ? (
+                                      walletTotal?.childTotals[i]
+                                        ?.totalInvestment / 100
+                                    ).toFixed(2)
+                                  : "0.00"} */}
+                              </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                           </ChildrenSavingAndAmountHolder>
                           <ChildrenButton>View Account</ChildrenButton>
@@ -217,21 +236,31 @@ const DashAccountPage = () => {
                   <SeeAll>See all</SeeAll>
                 </TransactionHeading>
                 <TransactionBody>
-                  {Transaction.map((props) => (
-                    <TransactionCard>
-                      <TransactionDetails>
-                        <TransactionImage src={avatar} />
-                        <TransactionNameDetail>
-                          <TransactionName>{props.name}</TransactionName>
-                          <TranDetail>{props.details}</TranDetail>
-                        </TransactionNameDetail>
-                      </TransactionDetails>
-                      <AmountDate>
-                        <TransAmount>+N{props.amount}</TransAmount>
-                        <TransDate>Jun 12</TransDate>
-                      </AmountDate>
-                    </TransactionCard>
-                  ))}
+                  {childrenData?.map((props) => {
+                    let imgSrc = props?.image;
+                    return props?.transactions?.map((props, i) => {
+                      return i === 0 ? (
+                        <TransactionCard>
+                          <TransactionDetails>
+                            <TransactionImage src={imgSrc} />
+                            <TransactionNameDetail>
+                              <TransactionName>
+                                Wallet Funded {props?.status}
+                              </TransactionName>
+                              <TranDetail>
+                                Wallet Funded with {props?.email} and
+                                transaction ID of {props?.transactionId}
+                              </TranDetail>
+                            </TransactionNameDetail>
+                          </TransactionDetails>
+                          <AmountDate>
+                            <TransAmount>+N{props?.amount}</TransAmount>
+                            <TransDate>Jun 12</TransDate>
+                          </AmountDate>
+                        </TransactionCard>
+                      ) : null;
+                    });
+                  })}
                 </TransactionBody>
               </TransactionWrapper>
             </TransactionHolder>
@@ -562,7 +591,6 @@ const ChildrenCard = styled.div`
   display: flex;
   justify-content: center;
   margin-right: 20px;
-
 `;
 
 const ChildrenCardHolder = styled.div`
@@ -571,7 +599,7 @@ const ChildrenCardHolder = styled.div`
   justify-content: center;
   align-items: center;
   /* flex-wrap: wrap; */
-  overflow-x:scroll;
+  overflow-x: scroll;
 `;
 
 const ChildrenHeading = styled.div`

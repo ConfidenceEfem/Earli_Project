@@ -1,12 +1,28 @@
-import React from 'react';
-import styled from 'styled-components';
-import { MdNavigateNext } from 'react-icons/md';
-import treasury from '../images/treasury.png';
-import stocks from '../images/stocks.png';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import { MdNavigateNext } from "react-icons/md";
+import treasury from "../images/treasury.png";
+import stocks from "../images/stocks.png";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const InvestmentPage = ({ parentid, childid }) => {
+  console.log(parentid, childid);
+
   const navigate = useNavigate();
+  const [investmentsData, setInvestmentsData] = useState([]);
+
+  const fetchData = async () => {
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
+
+    const res = await axios.get(`${mainLink}/onechild/${childid}`);
+    setInvestmentsData(res?.data?.data?.investments);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <LastCard>
       <CreateSavingsPlan>
@@ -95,33 +111,49 @@ const InvestmentPage = ({ parentid, childid }) => {
         <SavingsPlanWrapper>
           <SavingsHeading>Current Investment Plans</SavingsHeading>
           <CurrentCardHold>
-            <CurrentCard>
-              <CurrentCardWrapper>
-                <CurrentPlan>
-                  <CurrentIconCircle>
-                    <CurrentIcon src={treasury} />
-                  </CurrentIconCircle>
-                  <CurrentMainPlan>
-                    <PlanHead>Plan</PlanHead>
-                    <PlanAmount>Treasury Bills</PlanAmount>
-                  </CurrentMainPlan>
-                </CurrentPlan>
-                <CurrentSaved>
-                  <PlanHead>Total Investment</PlanHead>
-                  <PlanAmount>N239,000</PlanAmount>
-                </CurrentSaved>
-                <CurrentDuration>
-                  <PlanHead>Return</PlanHead>
-                  <PlanAmount>
-                    10% -{' '}
-                    <span style={{ fontSize: '11px', color: 'lightgray' }}>
-                      91 Days
-                    </span>
-                  </PlanAmount>
-                </CurrentDuration>
-                <NextIcon1 color="#7b69dd" />
-              </CurrentCardWrapper>
-            </CurrentCard>
+            {investmentsData.length > 1 ? (
+              investmentsData?.map((props, i) =>
+                i <= 3 ? (
+                  <CurrentCard>
+                    <CurrentCardWrapper>
+                      <CurrentPlan>
+                        <CurrentIconCircle>
+                          {props?.investmentType === "Treasury Bills" ||
+                          props?.investmentType === "Real Estate" ? (
+                            <CurrentIcon src={treasury} />
+                          ) : props?.investmentType === "Stocks" ||
+                            props?.investmentType === "Shares" ? (
+                            <CurrentIcon src={stocks} />
+                          ) : null}
+                        </CurrentIconCircle>
+                        <CurrentMainPlan>
+                          <PlanHead>Plan</PlanHead>
+                          <PlanAmount>{props?.investmentType}</PlanAmount>
+                        </CurrentMainPlan>
+                      </CurrentPlan>
+                      <CurrentSaved>
+                        <PlanHead>Total Investment</PlanHead>
+                        <PlanAmount>N{props?.amount}</PlanAmount>
+                      </CurrentSaved>
+                      <CurrentDuration>
+                        <PlanHead>Return</PlanHead>
+                        <PlanAmount>
+                          10% -{" "}
+                          <span
+                            style={{ fontSize: "11px", color: "lightgray" }}
+                          >
+                            91 Days
+                          </span>
+                        </PlanAmount>
+                      </CurrentDuration>
+                      <NextIcon1 color="#7b69dd" />
+                    </CurrentCardWrapper>
+                  </CurrentCard>
+                ) : null
+              )
+            ) : (
+              <NoPlan>You do not have any savings plan</NoPlan>
+            )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
       </CreateSavingsPlan>
@@ -139,6 +171,12 @@ const PlanAmount = styled.div`
 const PlanHead = styled.div`
   font-size: 11px;
   color: lightgray;
+`;
+
+const NoPlan = styled.div`
+  font-size: 13px;
+  color: lightgray;
+  text-align: center;
 `;
 
 const CurrentMainPlan = styled.div`
@@ -189,7 +227,6 @@ const CurrentCardHold = styled.div`
   flex-direction: column;
   width: 100%;
   align-items: center;
-
 `;
 const MainDetails = styled.div`
   font-size: 11px;
@@ -204,7 +241,7 @@ const DetailsTitle = styled.div`
   font-size: 17px;
   font-weight: 600;
   margin-bottom: 10px;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 500px) {
     margin-bottom: 5px;
   }
 `;
@@ -234,7 +271,7 @@ const IconAndDetails = styled.div`
   display: flex;
   width: 80%;
   align-items: center;
-  @media screen and (max-width: 600px){
+  @media screen and (max-width: 600px) {
     width: 90%;
   }
 `;
@@ -255,7 +292,7 @@ const SavingsCard = styled.div`
   margin: 10px 0;
   border-radius: 5px;
   cursor: pointer;
-  @media screen and (max-width: 500px){
+  @media screen and (max-width: 500px) {
     height: 110px;
   }
 `;
@@ -309,13 +346,12 @@ const CreateSavingsPlan = styled.div`
 `;
 
 const LastCard = styled.div`
-width: 100%;
-height:auto;
-justify-content: space-between;
-display: flex;
-flex-wrap: wrap;
-  @media screen and (max-width: 950px){
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+  @media screen and (max-width: 950px) {
     justify-content: center;
-  
   }
 `;
