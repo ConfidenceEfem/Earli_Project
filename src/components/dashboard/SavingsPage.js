@@ -134,7 +134,7 @@ const SavingsPage = ({ parentid, childid }) => {
                 ) : null
               )
             ) : (
-              <NoPlan>You do have any savings plan</NoPlan>
+              <NoPlan>You do not have any savings plan</NoPlan>
             )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
