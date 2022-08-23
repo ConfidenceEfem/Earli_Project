@@ -167,13 +167,13 @@ const DashAccountPage = () => {
                             <ChildrenSavingAndAmount>
                               <ChildrenSaving>Savings</ChildrenSaving>
                               <ChildrenAmount>
-                                N
-                                {walletTotal?.childTotals[i]?.totalSavings
+                                N0.00
+                                {/* {walletTotal?.childTotals[i]?.totalSavings
                                   ? (
                                       walletTotal?.childTotals[i]
                                         ?.totalSavings / 100
                                     ).toFixed(2)
-                                  : "0.00"}
+                                  : "0.00"} */}
                               </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                             <ChildrenSavingAndAmount
@@ -181,13 +181,13 @@ const DashAccountPage = () => {
                             >
                               <ChildrenSaving>Investment</ChildrenSaving>
                               <ChildrenAmount>
-                                N
-                                {walletTotal?.childTotals[i]?.totalInvestment
+                                N0.00
+                                {/* {walletTotal?.childTotals[i]?.totalInvestment
                                   ? (
                                       walletTotal?.childTotals[i]
                                         ?.totalInvestment / 100
                                     ).toFixed(2)
-                                  : "0.00"}
+                                  : "0.00"} */}
                               </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                           </ChildrenSavingAndAmountHolder>
