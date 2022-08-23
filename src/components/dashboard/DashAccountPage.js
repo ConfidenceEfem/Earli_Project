@@ -106,7 +106,9 @@ const DashAccountPage = () => {
                 <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">{`N${(walletTotal?.totalSavings / 100).toFixed(2)}`}</Amount>
+              <Amount cl="white">{`N${(walletTotal?.totalSavings / 100).toFixed(
+                2
+              )}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -118,7 +120,9 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${(walletTotal?.totalInvestment / 100).toFixed(2)}`}</Amount>
+              <Amount cl="black">{`N${(
+                walletTotal?.totalInvestment / 100
+              ).toFixed(2)}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -163,7 +167,13 @@ const DashAccountPage = () => {
                             <ChildrenSavingAndAmount>
                               <ChildrenSaving>Savings</ChildrenSaving>
                               <ChildrenAmount>
-                                N{(walletTotal?.childTotals[i]?.totalSavings / 100).toFixed(2)}
+                                N
+                                {walletTotal?.childTotals[i]?.totalSavings
+                                  ? (
+                                      walletTotal?.childTotals[i]
+                                        ?.totalSavings / 100
+                                    ).toFixed(2)
+                                  : "0.00"}
                               </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                             <ChildrenSavingAndAmount
@@ -171,7 +181,13 @@ const DashAccountPage = () => {
                             >
                               <ChildrenSaving>Investment</ChildrenSaving>
                               <ChildrenAmount>
-                                N{(walletTotal?.childTotals[i]?.totalInvestment / 100).toFixed(2)}
+                                N
+                                {walletTotal?.childTotals[i]?.totalInvestment
+                                  ? (
+                                      walletTotal?.childTotals[i]
+                                        ?.totalInvestment / 100
+                                    ).toFixed(2)
+                                  : "0.00"}
                               </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                           </ChildrenSavingAndAmountHolder>
