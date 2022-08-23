@@ -129,11 +129,11 @@ export default function SelectChildCard({ parentid, childid }) {
                 style={{
                   width: '40px',
                   height: '40px',
-                  backgroundColor: 'red',
                   borderRadius: '50%',
                   marginRight: '10px',
                 }}
                 src={props?.image}
+                alt="image"
               />
               {props?.firstname} {props?.lastname}
             </MenuItem>

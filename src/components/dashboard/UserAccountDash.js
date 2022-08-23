@@ -64,7 +64,7 @@ const UserAccountDash = () => {
         <UserAccountMainCardHolder>
           <AccountMaincardWrapper>
             <WalletPage childid={childid} />
-            <WalletMediaView/>
+            <WalletMediaView childid={childid}/>
 
             <CardNavigations>
               {toggle ? (
@@ -190,6 +190,7 @@ const CardNavigations = styled.div`
   margin: 40px 0;
   @media screen and (max-width: 500px){
     justify-content: center;
+    margin-bottom: 20px;
     }
 `;
 const AccountMaincardWrapper = styled.div`
@@ -199,9 +200,9 @@ const AccountMaincardWrapper = styled.div`
   // height: 90%;
   margin: 15px 0;
   align-items: center;
-  // @media screen and (max-width: 900px){
-  //   height: 95%;
-  // }
+  @media screen and (max-width: 500px){
+    width: 100%;
+  }
 `;
 const UserAccountMainCardHolder = styled.div`
   width: 100%;

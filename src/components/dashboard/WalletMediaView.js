@@ -1,4 +1,4 @@
-import React,{useContext} from "react"
+import React,{useContext, useState} from "react"
 import styled from "styled-components"
 import { BsFillBarChartFill } from 'react-icons/bs';
 import { FaPiggyBank, FaWallet } from 'react-icons/fa';
@@ -8,15 +8,20 @@ import axios from 'axios';
 const WalletMediaView = ({childid}) => {
     const { currentUser } = useContext(AuthContext);
 
-    const [childData, setChildData] = React.useState([]);
+    const [childData, setChildData] = useState([]);
+    const [walletData, setWalletData] = useState({});
   
     const ChildData = async () => {
       const mainLink = 'https://earli.herokuapp.com';
       const mainLink1 = 'http://localhost:2004';
   
       const res = await axios.get(`${mainLink}/child/${childid}`);
+      const resData = await axios.get(`${mainLink}/childsum/${childid}`);
+  
       setChildData(res?.data?.data);
-      console.log(childData);
+      setWalletData(resData?.data?.data);
+  
+      console.log(childData, "This is the wallet ",walletData);
     };
   
     React.useEffect(() => {
@@ -31,7 +36,7 @@ const WalletMediaView = ({childid}) => {
                         </IconCircle>
                         <NameAndAmount>
                             <Name>{childData?.firstname}'s Wallet</Name>
-                            <Amount>N0.00</Amount>
+                            <Amount>N{walletData?.walletBalance?.toFixed(2)}</Amount>
                         </NameAndAmount>
                 </CardWrapper>
             </Card>
@@ -42,7 +47,7 @@ const WalletMediaView = ({childid}) => {
                         </IconCircle>
                         <NameAndAmount>
                             <Name>{childData?.firstname}'s  Savings</Name>
-                            <Amount>N0.00</Amount>
+                            <Amount>N{walletData?.totalSavings?.toFixed(2)}</Amount>
                         </NameAndAmount>
                 </CardWrapper>
             </Card>
@@ -53,7 +58,7 @@ const WalletMediaView = ({childid}) => {
                         </IconCircle>
                         <NameAndAmount>
                             <Name>{childData?.firstname}'s Investment</Name>
-                            <Amount>N0.00</Amount>
+                            <Amount>N{walletData?.totalInvestment?.toFixed(2)}</Amount>
                         </NameAndAmount>
                 </CardWrapper>
             </Card>

@@ -46,8 +46,7 @@ const Wrapper = styled.div`
 `;
 const Container = styled.div`
   width: 100%;
-  /* min-height: 100vh; */
-  height: 100%;
+  height: auto;
   display: flex;
   background-color: #fafcff;
   font-family: work sans;

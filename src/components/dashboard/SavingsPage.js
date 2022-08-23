@@ -91,14 +91,20 @@ const SavingsPage = ({ parentid, childid }) => {
           </SavingsCardHolder>
         </SavingsPlanWrapper>
       </CreateSavingsPlan>
-      <CreateSavingsPlan>
+      <CreateSavingsPlan
+      style=
+      {{
+        boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+        width: "90%"
+      }}
+      >
         <SavingsPlanWrapper>
           <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
             {savingsData.length > 1 ? (
               savingsData?.map((props, i) =>
                 i <= 3 ? (
-                  <CurrentCard>
+                  <CurrentCard key={props?._id}>
                     <CurrentCardWrapper>
                       <CurrentPlan>
                         <CurrentIconCircle>
@@ -138,7 +144,7 @@ const SavingsPage = ({ parentid, childid }) => {
             )}
           </CurrentCardHold>
         </SavingsPlanWrapper>
-      </CreateSavingsPlan>
+      </CreateSavingsPlan >
     </LastCard>
   );
 };
@@ -270,6 +276,9 @@ const SavingsCard = styled(Link)`
   background-color: ${({ bg }) => bg};
   margin: 10px 0;
   border-radius: 5px;
+  @media screen and (max-width: 500px){
+    height: 110px;
+  }
 `;
 
 const SavingsCardHolder = styled.div`
@@ -322,10 +331,13 @@ const CreateSavingsPlan = styled.div`
   }
   @media screen and (max-width: 600px){
     width: 90%;
-    // background-color: red;
-    
-    
   }
+  @media screen and (max-width: 500px){
+    width: 100%;
+    box-shadow: none;
+    height: auto;
+  }
+
 `;
 const Navs = styled.div`
   font-size: 15px;

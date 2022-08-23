@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import img from '../images/avatar.png';
 import logo from '../images/earli1.png';
@@ -8,14 +8,19 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../AuthState/AuthProvider';
+import MobileDashNav from './MobileDashNav';
 
 const DashBoardHeader = () => {
   const { parentid } = useParams();
   const { currentUser } = useContext(AuthContext);
+  const [toggle, setToggle] = React.useState(false)
   console.log(parentid);
 
   return (
-    <Container>
+    <MainContainer>
+      {toggle? <MobileDashNav toggle={toggle} /> : null}
+    
+      <Container>
       <Wrapper>
         <Logo src={logo} />
         <ItemsHolder>
@@ -27,11 +32,18 @@ const DashBoardHeader = () => {
           </Name>
           <ArrowIcon />
         </ItemsHolder>
-        <HamIcon>
+
+        <HamIcon 
+        onClick={()=>{
+          setToggle(!toggle)
+        }}
+        >
           <AiOutlineMenu />
         </HamIcon>
       </Wrapper>
     </Container>
+    </MainContainer>
+    
   );
 };
 
@@ -127,3 +139,9 @@ const Container = styled.div`
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
 `;
+
+const MainContainer = styled.div`
+display:flex;
+position: relative;
+width: 100%;
+`

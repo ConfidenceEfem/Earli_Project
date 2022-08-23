@@ -190,8 +190,7 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 18%;
   display: flex;
-  /* min-height: 100vh; */
-  height: 100%;
+  height: auto;
   background-color: #fafcff;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   align-items: flex-end;
