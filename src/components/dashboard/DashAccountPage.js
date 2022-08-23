@@ -106,7 +106,7 @@ const DashAccountPage = () => {
                 <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">{`N${walletTotal?.totalSavings}`}</Amount>
+              <Amount cl="white">{`N${(walletTotal?.totalSavings / 100).toFixed(2)}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -118,7 +118,7 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${walletTotal?.totalInvestment}`}</Amount>
+              <Amount cl="black">{`N${(walletTotal?.totalInvestment / 100).toFixed(2)}`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -162,13 +162,17 @@ const DashAccountPage = () => {
                           <ChildrenSavingAndAmountHolder>
                             <ChildrenSavingAndAmount>
                               <ChildrenSaving>Savings</ChildrenSaving>
-                              <ChildrenAmount>N0.00</ChildrenAmount>
+                              <ChildrenAmount>
+                                N{(walletTotal?.childTotals[i]?.totalSavings / 100).toFixed(2)}
+                              </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                             <ChildrenSavingAndAmount
                               style={{ alignItems: "flex-end" }}
                             >
                               <ChildrenSaving>Investment</ChildrenSaving>
-                              <ChildrenAmount>N0.00</ChildrenAmount>
+                              <ChildrenAmount>
+                                N{(walletTotal?.childTotals[i]?.totalInvestment / 100).toFixed(2)}
+                              </ChildrenAmount>
                             </ChildrenSavingAndAmount>
                           </ChildrenSavingAndAmountHolder>
                           <ChildrenButton>View Account</ChildrenButton>
