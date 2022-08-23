@@ -220,9 +220,9 @@ const DashAccountPage = () => {
                   <SeeAll>See all</SeeAll>
                 </TransactionHeading>
                 <TransactionBody>
-                  {childrenData.map((props) => {
+                  {childrenData?.map((props) => {
                     let imgSrc = props?.image;
-                    return props?.transactions.map((props, i) => {
+                    return props?.transactions?.map((props, i) => {
                       return i === 0 ? (
                         <TransactionCard>
                           <TransactionDetails>
