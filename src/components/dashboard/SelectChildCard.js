@@ -18,19 +18,6 @@ const MenuProps = {
   },
 };
 
-const names = [
-  'Oliver Hansen',
-  'Van Henry',
-  'April Tucker',
-  'Ralph Hubbard',
-  'Omar Alexander',
-  'Carlos Abbott',
-  'Miriam Wagner',
-  'Bradley Wilkerson',
-  'Virginia Andrews',
-  'Kelly Snyder',
-];
-
 function getStyles(name, personName, theme) {
   return {
     fontWeight:
@@ -122,7 +109,7 @@ export default function SelectChildCard({ parentid, childid }) {
               style={getStyles(props?._id, personName, theme)}
               onClick={() => {
                 navigate(`/dashaccount/${parentid}/${props?._id}`);
-                window.location.reload();
+                // window.location.reload();
               }}
             >
               <img

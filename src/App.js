@@ -79,12 +79,12 @@ const App = () => {
           />
           <Route
             exact
-            path="/education"
+            path="/:parentid/education"
             element={<EducationOverview />}
           />
           <Route
             exact
-            path="/education/view"
+            path="/:parentid/education/view"
             element={<EducationViewPage />}
           />
         </Routes>

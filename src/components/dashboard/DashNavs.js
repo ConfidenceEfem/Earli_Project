@@ -50,7 +50,7 @@ const DashNav = () => {
               <Icon3 />
               <Navs>Analytics</Navs>
             </NavsAndIcon>
-            <NavsAndIcon to="/education">
+            <NavsAndIcon to={`/${parentid}/education`}>
               <Icon3 />
               <Navs>Financial Education</Navs>
             </NavsAndIcon>

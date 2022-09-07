@@ -4,17 +4,19 @@ import {AiOutlineLeft} from "react-icons/ai"
 import img from "../../../images/register.png"
 import pig from "../../../images/piggyimage.png"
 import video from "../../../images/wealth-color-earli.mp4"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player/lazy'
 
 const EducationViewComp = () => {
+    const {parentid} = useParams()
     const navigate = useNavigate()
+
   return (
     <Container>
 <Wrapper>
 <IconAndBack>
 <Hold onClick={()=>{
-    navigate("/education")
+    navigate(`/${parentid}/education`)
 }}>
 <AiOutlineLeft/>
     <Back>Back</Back>

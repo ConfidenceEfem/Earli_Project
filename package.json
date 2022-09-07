@@ -33,6 +33,7 @@
     "react-scripts": "4.0.3",
     "react-scroll": "^1.8.4",
     "react-scroll-parallax": "^2.4.0",
+    "react-spinners": "^0.13.4",
     "react-spring": "^9.4.1",
     "react-toastify": "^9.0.5",
     "react-transition-group": "^4.4.2",

@@ -2,14 +2,17 @@ import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { AuthContext } from './AuthState/AuthProvider';
 import Swal from 'sweetalert2';
 import { ErrorFunction } from './Error';
 import ProgressBar from './dashboard/ProgressBar';
+import { addCurrentUser } from './Redux/EarliReducers';
 
 const VerifyLoginCard = () => {
   const { value } = useContext(AuthContext);
+
+  const dispatchUser = useDispatch()
 
   const { state, dispatch: ctxDispatch } = value;
   const navigate = useNavigate();
@@ -37,6 +40,7 @@ const VerifyLoginCard = () => {
       });
       if (res) {
         ctxDispatch({ type: 'LoadingSuccess' });
+        dispatchUser(addCurrentUser(res.data.data))
         localStorage.setItem('currentUser', JSON.stringify(res.data.data));
         Swal.fire({
           position: 'center',

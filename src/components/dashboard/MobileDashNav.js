@@ -46,7 +46,7 @@ const MobileDashNav = () => {
                         <FaMoneyBill/>
                         <Navs>Payment</Navs>
                     </NavsAndIcon>
-                    <NavsAndIcon to="/education">
+                    <NavsAndIcon to={`/${parentid}/education`}>
                         <BiLineChart/>
                         <Navs>Financial Education</Navs>
                     </NavsAndIcon>

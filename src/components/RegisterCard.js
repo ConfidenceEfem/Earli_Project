@@ -181,7 +181,16 @@ const RegisterCard = () => {
                 Create an Account
               </Button>
             ) : (
-              <ProgressBar />
+              <div
+              style={{
+                width: "100%",
+                display:"flex",
+                justifyContent: "center"
+              }}
+              >
+                   <ProgressBar />
+              </div>
+           
             )}
           </div>
         ) : (
