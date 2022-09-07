@@ -76,6 +76,12 @@ const DashAccountPage = () => {
   //     cl: "#7b69dd",
   //   },
   // ]);
+  
+   console.log(
+    (walletTotal?.totalSavings / 100).toFixed(2) === null
+      ? "0.00"
+      : (walletTotal?.totalSavings / 100).toFixed(2)
+  );
 
   return (
     <Container>
