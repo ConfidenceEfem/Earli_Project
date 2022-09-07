@@ -106,9 +106,11 @@ const DashAccountPage = () => {
                 <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              <Amount cl="white">{`N${(walletTotal?.totalSavings / 100).toFixed(
-                2
-              )}`}</Amount>
+              <Amount cl="white">{`N${
+                (walletTotal?.totalSavings / 100).toFixed(2) === null
+                  ? 0.0
+                  : (walletTotal?.totalSavings / 100).toFixed(2)
+              }`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -120,9 +122,11 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${(
-                walletTotal?.totalInvestment / 100
-              ).toFixed(2)}`}</Amount>
+              <Amount cl="black">{`N${
+                (walletTotal?.totalInvestment / 100).toFixed(2) === null
+                  ? 0.0
+                  : (walletTotal?.totalInvestment / 100).toFixed(2)
+              }`}</Amount>
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
