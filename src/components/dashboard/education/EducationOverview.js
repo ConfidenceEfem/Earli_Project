@@ -13,7 +13,6 @@ const EducationOverview = () => {
         <Cont>
           <Wrap>
             <DashBoardHeader />
-            {/* <KoloOverviewComp /> */}
             <EducationComp/>
           </Wrap>
         </Cont>

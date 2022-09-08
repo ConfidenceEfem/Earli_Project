@@ -94,8 +94,13 @@ const SavingsPage = ({ parentid, childid }) => {
       <CreateSavingsPlan
       style=
       {{
-        boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
-        width: "90%"
+        '@media (max-width: 450px)': {
+          display:"flex",
+          height: "500px",
+          boxShadow: "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
+        },
+       
+       
       }}
       >
         <SavingsPlanWrapper>
@@ -336,6 +341,7 @@ const CreateSavingsPlan = styled.div`
     width: 100%;
     box-shadow: none;
     height: auto;
+    padding: 20px 0;
   }
 
 `;

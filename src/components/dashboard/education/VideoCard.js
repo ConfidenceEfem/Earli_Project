@@ -3,13 +3,14 @@ import styled from "styled-components"
 import img from "../../images/register.png"
 import img1 from "../../images/avatar.png"
 import pig from "../../images/piggyimage.png"
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 const VideoCard = () => {
+    const {parentid} = useParams()
   const navigate = useNavigate()
   return (
     <Container onClick={()=>{
-      navigate("/education/view")
+      navigate(`/${parentid}/education/view`)
     }} >
         <Image src={pig} />
         <Title>Financial Freedom Formula</Title>

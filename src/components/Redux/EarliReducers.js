@@ -7,6 +7,8 @@ const initialState = {
   password: '',
   childimageLink: [],
   childimage: '',
+  currentUser:null,
+
 };
 
 const EarliReducers = createSlice({
@@ -31,6 +33,12 @@ const EarliReducers = createSlice({
     addchildimage: (state, { payload }) => {
       state.childimage = payload;
     },
+    addCurrentUser: (state, {payload})=>{
+      state.currentUser = payload
+    },
+    logout: (state, {payload})=> {
+      state.currentUser = null
+    }
   },
 });
 
@@ -41,6 +49,8 @@ export const {
   addPassword,
   addChildLink,
   addchildimage,
+  addCurrentUser,
+  logout
 } = EarliReducers.actions;
 
 export default EarliReducers.reducer;

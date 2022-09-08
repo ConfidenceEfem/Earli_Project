@@ -10,6 +10,8 @@ import { AuthContext } from "../AuthState/AuthProvider";
 import axios from "axios";
 import { NoIcon } from "../AllIcons";
 import moment from "moment";
+import ChildrenCardComp from "./ChildrenCardComp";
+import {useSelector, useDispatch} from "react-redux"
 
 const DashAccountPage = () => {
   const { parentid } = useParams();
@@ -39,43 +41,7 @@ const DashAccountPage = () => {
     fetchData();
   }, []);
 
-  // const [Transaction, setTransation] = React.useState([
-  //   {
-  //     id: 1,
-  //     name: "James Badejo",
-  //     details: "Sent money to Adebimpe's wallet via payment link",
-  //     amount: "30,000.00",
-  //     cl: "#7b69dd",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Adebimpe's Kolo Savings Plan",
-  //     details: "**** **** **** 2468 was debited",
-  //     amount: "30,000.00",
-  //     cl: "#7b69dd",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Withdrawal",
-  //     details: "Money withdrawal from Kelvin's wallet",
-  //     amount: "30,000",
-  //     cl: "red",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Withdrawal",
-  //     details: "Money withdrawal from Adebola's wallet",
-  //     amount: "6,000",
-  //     cl: "red",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Danielle Olamide",
-  //     details: "Sent money to Adebimpe's wallet via payment link",
-  //     amount: "30,000.00",
-  //     cl: "#7b69dd",
-  //   },
-  // ]);
+  
 
 
   return (
@@ -112,6 +78,15 @@ const DashAccountPage = () => {
                   ? "0.00"
                   : (walletTotal?.totalSavings / 100).toFixed(2)
               }`}</Amount>
+
+              //{walletTotal.totalSaving === 0 || walletTotal === [] || !walletTotal ?
+              //  <Amount cl="white">N0</Amount>
+              //:
+              //<Amount cl="white">{`N${(walletTotal?.totalSavings / 100)?.toFixed(
+              //  2
+              //)}`}</Amount>
+           // }
+
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -123,11 +98,17 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
+
               <Amount cl="black">{`N${
                 (walletTotal?.totalInvestment).toFixed(2) === "NaN"
                   ? "0.00"
                   : (walletTotal?.totalInvestment).toFixed(2)
               }`}</Amount>
+
+             // <Amount cl="black">{`N${(
+             //   walletTotal?.totalInvestment / 100
+             // )?.toFixed(2)}`}</Amount>
+
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -151,54 +132,7 @@ const DashAccountPage = () => {
                 <ChildrenCardHolder>
                   {childrenData?.map((props, i) =>
                     i <= 1 ? (
-                      <ChildrenCard
-                        onClick={() => {
-                          navigate(`/dashaccount/${parentid}/${props?._id}`);
-                        }}
-                      >
-                        <ChildrenCardWrapper>
-                          <ChildrenDetails>
-                            <ChildrenProfile>
-                              <ChildrenImage src={props?.image} />
-                            </ChildrenProfile>
-                            <ChildrenName>
-                              {props?.firstname} {props?.lastname}
-                            </ChildrenName>
-                            <ChildrenAge>
-                              {moment().diff(props?.dob, "years", false)} years
-                            </ChildrenAge>
-                          </ChildrenDetails>{" "}
-                          <ChildrenSavingAndAmountHolder>
-                            <ChildrenSavingAndAmount>
-                              <ChildrenSaving>Savings</ChildrenSaving>
-                              <ChildrenAmount>
-                                N0.00
-                                {/* {walletTotal?.childTotals[i]?.totalSavings
-                                  ? (
-                                      walletTotal?.childTotals[i]
-                                        ?.totalSavings / 100
-                                    ).toFixed(2)
-                                  : "0.00"} */}
-                              </ChildrenAmount>
-                            </ChildrenSavingAndAmount>
-                            <ChildrenSavingAndAmount
-                              style={{ alignItems: "flex-end" }}
-                            >
-                              <ChildrenSaving>Investment</ChildrenSaving>
-                              <ChildrenAmount>
-                                N0.00
-                                {/* {walletTotal?.childTotals[i]?.totalInvestment
-                                  ? (
-                                      walletTotal?.childTotals[i]
-                                        ?.totalInvestment / 100
-                                    ).toFixed(2)
-                                  : "0.00"} */}
-                              </ChildrenAmount>
-                            </ChildrenSavingAndAmount>
-                          </ChildrenSavingAndAmountHolder>
-                          <ChildrenButton>View Account</ChildrenButton>
-                        </ChildrenCardWrapper>
-                      </ChildrenCard>
+                      <ChildrenCardComp childid={props?._id} parentid={parentid}/>
                     ) : null
                   )}
                 </ChildrenCardHolder>
@@ -408,7 +342,6 @@ const TransactionDetails = styled.div`
 
 const TransactionCard = styled.div`
   padding: 15px 0;
-  /* border-top: 1px solid lightgray; */
   border-bottom: 1px solid lightgray;
   width: 100%;
   display: flex;
@@ -417,7 +350,6 @@ const TransactionCard = styled.div`
 `;
 
 const TransactionBody = styled.div`
-  /* padding: 20px 0; */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -700,7 +632,6 @@ const CardWrapper = styled.div`
   height: 85%;
   display: flex;
   flex-direction: column;
-  /* background: green; */
 `;
 const ChartCard = styled.div`
   border-radius: 10px;
@@ -713,7 +644,6 @@ const ChartCard = styled.div`
   margin-bottom: 15px;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   @media screen and (max-width: 550px) {
-    /* width: 82%; */
     margin-bottom: 15px;
   }
 `;
@@ -725,7 +655,6 @@ const ChartCardHolder = styled.div`
   margin: 45px 0;
   width: 100%;
   @media screen and (max-width: 550px) {
-    /* justify-content: center; */
   }
 `;
 const AddAccountButton = styled(Link)`
@@ -733,7 +662,6 @@ const AddAccountButton = styled(Link)`
   width: 150px;
   background-color: #7b69dd;
   color: white;
-  /* color: purple; */
   font-weight: 600;
   height: 40px;
   display: flex;
@@ -749,7 +677,6 @@ const InvestText = styled.div`
 `;
 const InvestTextAndButton = styled.div`
   display: flex;
-  /* align-items: center; */
   align-items: flex-end;
   height: 100%;
   @media screen and (max-width: 550px) {
@@ -767,9 +694,7 @@ const FirstPart = styled.div`
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  @media screen and (max-width: 630px) {
-    /* background: red; */
-  }
+ 
 `;
 const Wrapper = styled.div`
   width: 93%;
@@ -777,15 +702,12 @@ const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 40px;
-  /* flex-wrap: wrap; */
 `;
 const Container = styled.div`
   width: 100%;
-  /* background: red; */
   justify-content: center;
   display: flex;
   min-height: calc(100vh - 90px);
   margin-bottom: 30px;
-  /* height: 100%auto; */
-  /* overflow-y: scroll; */
+
 `;
