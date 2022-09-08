@@ -20,6 +20,7 @@ import AddEarliOverview from './components/dashboard/earliplans/AddEarliOverview
 import TreasuryPlan3 from './components/dashboard/treasuryplans/TreasuryPlan3';
 import EducationOverview from './components/dashboard/education/EducationOverview';
 import EducationViewPage from './components/dashboard/education/educationview/EducationViewPage';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 
 const App = () => {
   return (
@@ -79,12 +80,12 @@ const App = () => {
           />
           <Route
             exact
-            path="/:parentid/education"
+            path="/:parentid/:childid/education"
             element={<EducationOverview />}
           />
           <Route
             exact
-            path="/:parentid/education/view"
+            path="/:parentid/:childid/education/view"
             element={<EducationViewPage />}
           />
         </Routes>

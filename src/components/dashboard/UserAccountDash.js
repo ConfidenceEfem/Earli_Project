@@ -15,17 +15,17 @@ const UserAccountDash = () => {
   const [toggle, setToggle] = React.useState(true);
   const [investmentToggle, setinvestmentToggle] = React.useState(false);
   const [walletToggle, setwalletToggle] = React.useState(false);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
   const [childData, setChildData] = useState([]);
 
-  const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+  // const fetchData = async () => {
+  //   const mainLink = 'https://earli.herokuapp.com';
+  //   const mainLink1 = 'http://localhost:2004';
 
-    const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
-    setData(res?.data?.data?.children);
-    console.log(data);
-  };
+  //   const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
+  //   setData(res?.data?.data?.children);
+  //   console.log(data);
+  // };
 
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
@@ -37,13 +37,11 @@ const UserAccountDash = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
     ChildData();
   }, []);
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+
 
   return (
     <Container>

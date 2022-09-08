@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player/lazy'
 
 const EducationViewComp = () => {
-    const {parentid} = useParams()
+    const {parentid,childid} = useParams()
     const navigate = useNavigate()
 
   return (
@@ -16,11 +16,11 @@ const EducationViewComp = () => {
 <Wrapper>
 <IconAndBack>
 <Hold onClick={()=>{
-    navigate(`/${parentid}/education`)
+    navigate(`/${parentid}/${childid}/education`)
 }}>
 <AiOutlineLeft/>
     <Back>Back</Back>
-</Hold>
+</Hold>-
 </IconAndBack>
 <VideoScreen>
     <VideoScreenWrapper>

@@ -2,11 +2,11 @@ import React from "react"
 import { Navigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 
-const PrivateRoute = () => {
+const PrivateRoute = ({children}) => {
 
-    // const currentUser = useSelector()
+    const userDetail = useSelector((state)=>state?.persistedReducer?.currentUser)
 
-    return <div>Hey</div>
+    return userDetail? children : Navigate("/login")
 }
 
 export default PrivateRoute

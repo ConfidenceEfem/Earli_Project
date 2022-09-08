@@ -18,6 +18,8 @@ const DashAccountPage = () => {
 
   const navigate = useNavigate();
 
+  const userDetail = useSelector((state)=>state?.persistedReducer?.currentUser?.data)
+
   const { currentUser } = useContext(AuthContext);
 
   const [childrenData, setChildrenData] = useState([]);
@@ -33,7 +35,7 @@ const DashAccountPage = () => {
 
     setChildrenData(res?.data?.data?.children);
     setWalletTotal(resData?.data?.data);
-    console.log(childrenData, walletTotal);
+    console.log("hey",childrenData, walletTotal);
     // setChildrenData(res.data.data.children);
   };
 
@@ -48,10 +50,9 @@ const DashAccountPage = () => {
       <Wrapper>
         <FirstPart>
           <NameAndSubHolder>
-            {" "}
             <WelcomeName>
-              Welcome {currentUser?.data?.firstname}{" "}
-              {currentUser?.data?.lastname}!
+              Welcome
+            {" "}{userDetail?.firstname}{" "}{userDetail?.lastname}!
             </WelcomeName>{" "}
             <InvestText>Your Investments and Savings are booming</InvestText>
           </NameAndSubHolder>
@@ -72,8 +73,8 @@ const DashAccountPage = () => {
                 <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              {walletTotal.totalSaving === 0 || walletTotal === [] || !walletTotal ?
-                <Amount cl="white">N0</Amount>
+              {walletTotal == null || {}?
+                <Amount cl="white">N0.00</Amount>
               :
               <Amount cl="white">{`N${(walletTotal?.totalSavings / 100)?.toFixed(
                 2
@@ -90,9 +91,19 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${(
-                walletTotal?.totalInvestment / 100
-              )?.toFixed(2)}`}</Amount>
+              {
+                walletTotal == null || {}?
+                <Amount cl="black">
+                  N0.00
+                </Amount>
+                : 
+                <Amount cl="black">
+                  {`N${(
+                  walletTotal?.totalInvestment / 100
+                )?.toFixed(2)}`}
+                </Amount>
+              }
+             
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
