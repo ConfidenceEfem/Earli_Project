@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { usePaystackPayment } from "react-paystack";
 
 const FundWalletPage = ({ parentid, childid }) => {
   console.log(parentid, childid);
 
+
   const navigate = useNavigate();
-  // const [amount, setAmount] = useState();
+//   const location = useLocation();
+//   console.log(location);
 
   const [config, setConfig] = useState({
     publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
@@ -57,6 +59,7 @@ const FundWalletPage = ({ parentid, childid }) => {
             showConfirmButton: false,
             timer: 2500,
           });
+        window.location.reload();
         })
         .catch((err) => {
           Swal.fire({

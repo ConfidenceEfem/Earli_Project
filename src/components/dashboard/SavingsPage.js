@@ -106,7 +106,7 @@ const SavingsPage = ({ parentid, childid }) => {
         <SavingsPlanWrapper>
           <SavingsHeading>Current Savings Plan</SavingsHeading>
           <CurrentCardHold>
-            {savingsData.length > 1 ? (
+            {savingsData.length > 0 ? (
               savingsData?.map((props, i) =>
                 i <= 3 ? (
                   <CurrentCard key={props?._id}>

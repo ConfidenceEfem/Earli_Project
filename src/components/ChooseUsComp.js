@@ -46,7 +46,7 @@ const ChooseUsComp = () => {
                     </Headings>
                     <CardHolder>
                     {data.map((props)=>(
-                            <Card>
+                            <Card key={props.id}>
                             <CardWrapper>
                             <Circle bg={props.cl}>
                                 <Image src={props?.image}/>

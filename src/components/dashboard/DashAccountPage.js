@@ -43,6 +43,7 @@ const DashAccountPage = () => {
 
   
 
+
   return (
     <Container>
       <Wrapper>
@@ -72,13 +73,20 @@ const DashAccountPage = () => {
                 <DotIcon color={"white"} />
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
-              {walletTotal.totalSaving === 0 || walletTotal === [] || !walletTotal ?
-                <Amount cl="white">N0</Amount>
+              <Amount cl="white">{`N${
+                (walletTotal?.totalSavings / 100)?.toFixed(2) === "NaN" 
+                  ? "0.00"
+                  : (walletTotal?.totalSavings / 100)?.toFixed(2)
+              }`}</Amount>
+
+             {/* {walletTotal.totalSaving === 0 || walletTotal === [] || !walletTotal ||walletTotal.totalSaving === "NaN" ||walletTotal.totalSaving === "Undefinded" ?
+                <Amount cl="white">N0.00</Amount>
               :
               <Amount cl="white">{`N${(walletTotal?.totalSavings / 100)?.toFixed(
                 2
               )}`}</Amount>
-            }
+           } */}
+
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
@@ -90,9 +98,17 @@ const DashAccountPage = () => {
                 <DotIcon color={"black"} />
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
-              <Amount cl="black">{`N${(
-                walletTotal?.totalInvestment / 100
-              )?.toFixed(2)}`}</Amount>
+
+              <Amount cl="black">{`N${
+                (walletTotal?.totalInvestment)?.toFixed(2) === undefined
+                  ? "0.00"
+                  : (walletTotal?.totalInvestment)?.toFixed(2)
+              }`}</Amount>
+{/* reference */}
+             {/* <Amount cl="black">{`N${(
+               walletTotal?.totalInvestment
+              )?.toFixed(2)}`}</Amount> */}
+
             </CardWrapper>
           </ChartCard>
           <ChartCard bg="#ffffff">
