@@ -3,13 +3,9 @@ import styled from 'styled-components';
 import earli from '../../images/eali.png';
 import freedom from '../../images/freedom.png';
 import kolo from '../../images/kolo.png';
-import * as yup from 'yup';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
-import ProgressBar from '../ProgressBar';
 import moment from 'moment';
 
 const AddEarliOverviewComp = () => {
@@ -115,7 +111,7 @@ const AddEarliOverviewComp = () => {
                       <ItemName>Account</ItemName>
                       <ItemValue>
                         {' '}
-                        {childData?.firstname}
+                        {childData?.firstname}{' '}
                         {childData?.lastname}
                       </ItemValue>
                     </DetailItem>
@@ -139,7 +135,7 @@ const AddEarliOverviewComp = () => {
                     </DetailItem>
                     <DetailItem>
                       <ItemName>Expected Return</ItemName>
-                      <ItemValue>N600,500</ItemValue>
+                      <ItemValue>N{plan_details?.amount * 30 * parseInt(plan_details?.duration.charAt(0))}</ItemValue>
                     </DetailItem>
                   </DetailsCont>
 
