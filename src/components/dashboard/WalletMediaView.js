@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { BsFillBarChartFill } from "react-icons/bs";
 import { FaPiggyBank, FaWallet } from "react-icons/fa";
@@ -24,7 +24,7 @@ const WalletMediaView = ({ childid }) => {
     console.log(childData, "This is the wallet ", walletData);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     ChildData();
   }, []);
   return (
