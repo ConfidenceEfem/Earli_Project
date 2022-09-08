@@ -104,7 +104,7 @@ const DashAccountPage = () => {
                   ? "0.00"
                   : (walletTotal?.totalInvestment)?.toFixed(2)
               }`}</Amount>
-
+{/* reference */}
              {/* <Amount cl="black">{`N${(
                walletTotal?.totalInvestment
               )?.toFixed(2)}`}</Amount> */}
