@@ -76,12 +76,7 @@ const DashAccountPage = () => {
   //     cl: "#7b69dd",
   //   },
   // ]);
-  
-   console.log(
-    (walletTotal?.totalSavings / 100).toFixed(2) === null
-      ? "0.00"
-      : (walletTotal?.totalSavings / 100).toFixed(2)
-  );
+
 
   return (
     <Container>
@@ -113,8 +108,8 @@ const DashAccountPage = () => {
               </CardHeading>
               <Headings cl="white">Total Savings</Headings>
               <Amount cl="white">{`N${
-                (walletTotal?.totalSavings / 100).toFixed(2) === null
-                  ? 0.0
+                (walletTotal?.totalSavings / 100).toFixed(2) === "NaN"
+                  ? "0.00"
                   : (walletTotal?.totalSavings / 100).toFixed(2)
               }`}</Amount>
             </CardWrapper>
@@ -129,9 +124,9 @@ const DashAccountPage = () => {
               </CardHeading>
               <Headings cl="black">Total Investment</Headings>
               <Amount cl="black">{`N${
-                (walletTotal?.totalInvestment / 100).toFixed(2) === null
-                  ? 0.0
-                  : (walletTotal?.totalInvestment / 100).toFixed(2)
+                (walletTotal?.totalInvestment).toFixed(2) === "NaN"
+                  ? "0.00"
+                  : (walletTotal?.totalInvestment).toFixed(2)
               }`}</Amount>
             </CardWrapper>
           </ChartCard>

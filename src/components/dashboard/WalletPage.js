@@ -39,7 +39,9 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Wallet</WalletName>
-            <WalletAmount>{`N${(walletData?.walletBalance / 100).toFixed(2)}`}</WalletAmount>
+            <WalletAmount>{`N${(walletData?.walletBalance / 100).toFixed(2) === "NaN" ?
+             "0.00" : 
+             (walletData?.walletBalance / 100).toFixed(2)}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard br="1px solid silver" bl="1px solid silver">
@@ -49,7 +51,9 @@ const WalletPage = ({ childid }) => {
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname} 
             's Savings</WalletName>
-            <WalletAmount>{`N${(walletData?.totalSavings / 100).toFixed(2)}`}</WalletAmount>
+            <WalletAmount>{`N${(walletData?.totalSavings / 100).toFixed(2) === "NaN" ?
+             "0.00" : 
+             (walletData?.totalSavings/ 100).toFixed(2)}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
         <FirstMainCard>
@@ -58,7 +62,9 @@ const WalletPage = ({ childid }) => {
           </IconCircle>
           <WalletNameAndAmount>
             <WalletName>{childData?.firstname}'s Investments</WalletName>
-            <WalletAmount>{`N${(walletData?.totalInvestment / 100).toFixed(2)}`}</WalletAmount>
+            <WalletAmount>{`N${(walletData?.totalInvestment).toFixed(2)=== "NaN" ?
+             "0.00" : 
+             (walletData?.totalInvestment).toFixed(2)}`}</WalletAmount>
           </WalletNameAndAmount>
         </FirstMainCard>
       </FirstCardWrapper>

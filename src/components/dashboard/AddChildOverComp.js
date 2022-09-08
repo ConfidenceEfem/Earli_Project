@@ -79,8 +79,6 @@ const AddChildOverComp = () => {
     }
   };
 
-  useEffect(() => {}, []);
-
   return (
     <Container>
       <Wrapper>

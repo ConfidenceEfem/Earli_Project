@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import styled from "styled-components";
 import earli from "../../images/treasury.png";
-import * as yup from "yup";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import moment from "moment";
 import axios from "axios";
 import { AiOutlineLeft } from "react-icons/ai";
 import ProgressBar from "../ProgressBar";
@@ -13,7 +11,7 @@ import { ErrorFunction } from './../../Error';
 
 const TreasuryStep3 = () => {
   const { parentid, childid, invest } = useParams();
-  const { currentUser, value } = useContext(AuthContext);
+  const { value } = useContext(AuthContext);
 
   const { state, dispatch: ctxDispatch } = value;
 
@@ -25,7 +23,7 @@ const TreasuryStep3 = () => {
 
   const fetchData = async () => {
     const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
+    // const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
