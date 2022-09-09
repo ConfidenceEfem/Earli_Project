@@ -184,7 +184,7 @@ const TreasuryStep3 = () => {
                         navigateToPayment();
                       }}
                     >
-                      Start Invstment
+                      Start Investment
                     </Button>
                   ) : (
                     <ProgressBar />
