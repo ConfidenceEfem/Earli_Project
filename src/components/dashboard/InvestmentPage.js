@@ -111,7 +111,7 @@ const InvestmentPage = ({ parentid, childid }) => {
         <SavingsPlanWrapper>
           <SavingsHeading>Current Investment Plans</SavingsHeading>
           <CurrentCardHold>
-            {investmentsData.length > 1 ? (
+            {investmentsData.length > 0 ? (
               investmentsData?.map((props, i) =>
                 i <= 3 ? (
                   <CurrentCard key={props?._id}>
