@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import earli from '../../images/treasury.png';
-import * as yup from 'yup';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import axios from 'axios';
-import { AiOutlineLeft } from 'react-icons/ai';
-import ProgressBar from '../ProgressBar';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
+import earli from "../../images/treasury.png";
+import * as yup from "yup";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import { AiOutlineLeft } from "react-icons/ai";
+import ProgressBar from "../ProgressBar";
 
 const TreasuryStep2 = () => {
   const { parentid, childid, invest } = useParams();
@@ -19,8 +19,8 @@ const TreasuryStep2 = () => {
   const [childData, setChildData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
@@ -28,8 +28,8 @@ const TreasuryStep2 = () => {
   };
 
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
     setChildData(res?.data?.data);
@@ -42,7 +42,7 @@ const TreasuryStep2 = () => {
   }, []);
 
   const schema = yup.object().shape({
-    amount: yup.number().required('This field is required'),
+    amount: yup.number().required("This field is required"),
     // start: yup.date().required('This field is required'),
   });
 
@@ -56,7 +56,7 @@ const TreasuryStep2 = () => {
   const submit = handleSubmit(async (data) => {
     // console.log(data);
     const { amount, duration } = data;
-    localStorage.setItem('treasury_details', JSON.stringify(data));
+    localStorage.setItem("treasury_details", JSON.stringify(data));
     // console.log('Hello World');
 
     navigate(`/${parentid}/${childid}/${invest}/overview`);
@@ -68,7 +68,10 @@ const TreasuryStep2 = () => {
           <ChildImage src={childData?.image} />
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
-            <AccountName>Confidence Efem</AccountName>
+            <AccountName>
+              {" "}
+              {childData?.firstname} {childData?.lastname}
+            </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
         <AddChildCard>
@@ -99,7 +102,7 @@ const TreasuryStep2 = () => {
                     <Input
                       type="number"
                       placeholder="Input Amount"
-                      {...register('amount')}
+                      {...register("amount")}
                     />
                     <Error>{errors?.amount?.message}</Error>
                   </InputLabel>
