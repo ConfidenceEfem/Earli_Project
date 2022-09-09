@@ -9,12 +9,16 @@ import { MdNotifications } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
 import { AuthContext } from '../AuthState/AuthProvider';
 import MobileDashNav from './MobileDashNav';
+import { useSelector } from 'react-redux';
 
 const DashBoardHeader = () => {
   const { parentid } = useParams();
   const { currentUser } = useContext(AuthContext);
   const [toggle, setToggle] = React.useState(false)
   console.log(parentid);
+
+  const userDetail = useSelector((state)=>state?.persistedReducer?.currentUser?.data)
+
 
   return (
     <MainContainer>
@@ -28,7 +32,9 @@ const DashBoardHeader = () => {
           <NotificationIcon />
           <Image src={img} />
           <Name>
-            {currentUser?.data?.firstname} {currentUser?.data?.lastname}
+            {userDetail?.firstname}
+            {" "}
+             {userDetail?.lastname}
           </Name>
           <ArrowIcon />
         </ItemsHolder>

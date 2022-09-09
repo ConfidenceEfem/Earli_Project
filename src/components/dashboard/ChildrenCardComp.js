@@ -154,7 +154,7 @@ const ChildrenCardWrapper = styled.div`
 `;
 
 const ChildrenCard = styled.div`
-  width: 260px;
+  min-width: 260px;
   height: 260px;
   background: white;
   cursor: pointer;

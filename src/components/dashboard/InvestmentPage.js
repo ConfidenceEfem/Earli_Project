@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const InvestmentPage = ({ parentid, childid }) => {
-  console.log(parentid, childid);
 
   const navigate = useNavigate();
   const [investmentsData, setInvestmentsData] = useState([]);
@@ -17,6 +16,7 @@ const InvestmentPage = ({ parentid, childid }) => {
     const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/onechild/${childid}`);
+    
     setInvestmentsData(res?.data?.data?.investments);
   };
 
@@ -114,7 +114,7 @@ const InvestmentPage = ({ parentid, childid }) => {
             {investmentsData.length > 1 ? (
               investmentsData?.map((props, i) =>
                 i <= 3 ? (
-                  <CurrentCard>
+                  <CurrentCard key={props?._id}>
                     <CurrentCardWrapper>
                       <CurrentPlan>
                         <CurrentIconCircle>

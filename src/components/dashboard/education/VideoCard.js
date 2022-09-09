@@ -6,11 +6,11 @@ import pig from "../../images/piggyimage.png"
 import { useNavigate, useParams } from 'react-router-dom'
 
 const VideoCard = () => {
-    const {parentid} = useParams()
+    const {parentid,childid} = useParams()
   const navigate = useNavigate()
   return (
     <Container onClick={()=>{
-      navigate(`/${parentid}/education/view`)
+      navigate(`/${parentid}/${childid}/education/view`)
     }} >
         <Image src={pig} />
         <Title>Financial Freedom Formula</Title>

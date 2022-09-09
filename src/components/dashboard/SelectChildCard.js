@@ -31,7 +31,6 @@ export default function SelectChildCard({ parentid, childid }) {
 
  
   const navigate = useNavigate();
-  console.log(parentid);
   const theme = useTheme();
   const [personName, setPersonName] = React.useState([]);
   const [data, setData] = React.useState([]);
@@ -43,7 +42,6 @@ export default function SelectChildCard({ parentid, childid }) {
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
-    console.log(data);
   };
 
   const ChildData = async () => {
@@ -52,7 +50,6 @@ export default function SelectChildCard({ parentid, childid }) {
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
     setChildData(res?.data?.data);
-    console.log(childData);
   };
 
   React.useEffect(() => {
@@ -75,7 +72,7 @@ export default function SelectChildCard({ parentid, childid }) {
   return (
   
     <div>
-      <FormControl sx={{ width: 280, mt: 1 }} >
+      <FormControl sx={{ minWidth: 270, mt: 1 }} >
         <Select
           multiple
           displayEmpty

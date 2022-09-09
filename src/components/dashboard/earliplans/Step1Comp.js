@@ -8,6 +8,8 @@ import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
 import earli from '../../images/eali.png';
+import freedom from "../../images/freedom.png"
+import kolo from "../../images/kolo.png"
 import Swal from 'sweetalert2';
 
 const Step1Comp = () => {
@@ -80,8 +82,17 @@ const Step1Comp = () => {
                 <span>Back</span>
               </IconAndBack>
               <CreateAndIcon>
-                <CreateIcon src={earli} />
-                <CreateText>Create An Earli Saving Plan</CreateText>
+                {
+                  plan === "Earli"? 
+                   <CreateIcon src={earli}/>
+                   :  plan === "Freedom"? 
+                   <CreateIcon src={freedom}/>
+                   : plan === "Kolo"? 
+                   <CreateIcon src={kolo}/>
+                   : null
+                }
+               
+                <CreateText>Create An {plan} Saving Plan</CreateText>
               </CreateAndIcon>
             </CreateHeader>
             <MiddleComp>

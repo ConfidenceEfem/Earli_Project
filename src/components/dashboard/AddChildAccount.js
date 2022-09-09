@@ -4,11 +4,19 @@ import { Link, useParams, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { AiOutlineLeft } from 'react-icons/ai';
+import Swal from 'sweetalert2';
+// import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+
 
 const AddChildAccount = () => {
   const { parentid } = useParams();
 
   const navigate = useNavigate();
+
+  const currentDate = Date.now()
+  
 
   const schema = yup.object().shape({
     firstname: yup.string().required('This field is reequired'),
@@ -25,14 +33,24 @@ const AddChildAccount = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const submit = handleSubmit(async (data) => {
-    console.log(data);
     const { firstname, lastname, relationship, dob } = data;
+    // console.log(data)
+   
+
+    if(currentDate < dob){
+      Swal.fire({
+        title: "Input a Valid Date of Birth",
+        position: "center",    
+        showConfirmButton: false,
+        timer: 4000,
+        icon: "error"
+      })
+    }else{
     localStorage.setItem('childdetail', JSON.stringify(data));
-
-    // const mainLink = "http://localhost:2004"
-    // const res = await axios.post(`${mainLink}/child/${id}`)
-
     navigate(`/addchildimage/${parentid}`);
+    }
+
+ 
   });
   return (
     <Container>
@@ -74,11 +92,24 @@ const AddChildAccount = () => {
                   </InputLabel>
                   <InputLabel>
                     <Label>Relationship</Label>
-                    <Select {...register('relationship')}>
+                    {/* <FormControl
+                      sx={{width: "100%"}}
+                      // value={{...register("relationship")}}
+                    > */}
+                       <Select 
+                      // value={{...register("relationship")}}
+                      {...register("relationship")}
+                   
+                    // defaultValue={"Mum"}
+                    // value={"mum"}
+                    //  value={...register("relationship")}
+                     >
                       <option>Dad</option>
                       <option>Mom</option>
                       <option>Guardian</option>
                     </Select>
+                    {/* </FormControl> */}
+                   
                     <Error>{errors?.relationship?.message}</Error>
                   </InputLabel>
                   <InputLabel>
