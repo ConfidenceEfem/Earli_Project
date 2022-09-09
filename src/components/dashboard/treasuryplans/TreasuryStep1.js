@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { AiOutlineLeft } from 'react-icons/ai';
-import treasury from '../../images/treasury.png';
-import Swal from 'sweetalert2';
+import { useState, useEffect } from "react";
+import styled from "styled-components";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AiOutlineLeft } from "react-icons/ai";
+import treasury from "../../images/treasury.png";
+import Swal from "sweetalert2";
 
 const TreasuryStep1 = () => {
   const { parentid, childid, invest } = useParams();
@@ -16,8 +16,8 @@ const TreasuryStep1 = () => {
   const [childData, setChildData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
@@ -25,8 +25,8 @@ const TreasuryStep1 = () => {
   };
 
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
     setChildData(res?.data?.data);
@@ -38,19 +38,19 @@ const TreasuryStep1 = () => {
     ChildData();
   }, []);
 
-  const [paymentMethod, setPaymentMethod] = useState('30 Days');
+  const [paymentMethod, setPaymentMethod] = useState("30 Days");
 
   const submitPayment = () => {
-    if (paymentMethod === '') {
+    if (paymentMethod === "") {
       Swal.fire({
-        position: 'center',
-        icon: 'error',
+        position: "center",
+        icon: "error",
         title: `Please Choose A Duration`,
         showConfirmButton: false,
         timer: 2500,
       });
     } else {
-      localStorage.setItem('invest_frequency', paymentMethod);
+      localStorage.setItem("invest_frequency", paymentMethod);
       navigate(`/${parentid}/${childid}/${invest}/amount`);
     }
   };
@@ -63,8 +63,7 @@ const TreasuryStep1 = () => {
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
             <AccountName>
-              {childData?.firstname}
-              {childData?.lastname}
+              {childData?.firstname} {childData?.lastname}
             </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
@@ -91,7 +90,7 @@ const TreasuryStep1 = () => {
                 <InputContWrapper>
                   <InputHead>
                     <MainInputHead>
-                      {' '}
+                      {" "}
                       How Long Will You Like to Invest
                     </MainInputHead>
                     <SubInputText>
@@ -105,7 +104,7 @@ const TreasuryStep1 = () => {
                       id="30 Days"
                       label="30 Days"
                       value="30 Days"
-                      checked={paymentMethod === '30 Days'}
+                      checked={paymentMethod === "30 Days"}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}
@@ -118,7 +117,7 @@ const TreasuryStep1 = () => {
                       id="60 Days"
                       value="60 Days"
                       label="60 Days"
-                      checked={paymentMethod === '60 Days'}
+                      checked={paymentMethod === "60 Days"}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}
@@ -131,7 +130,7 @@ const TreasuryStep1 = () => {
                       id="90 Days"
                       label="90 Days"
                       value="90 Days"
-                      checked={paymentMethod === '90 Days'}
+                      checked={paymentMethod === "90 Days"}
                       onChange={(e) => {
                         setPaymentMethod(e.target.value);
                       }}

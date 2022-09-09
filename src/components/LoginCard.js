@@ -12,8 +12,8 @@ import { AuthContext } from './AuthState/AuthProvider';
 import Swal from 'sweetalert2';
 import { ErrorFunction } from './Error';
 import ProgressBar from './dashboard/ProgressBar';
-import {FadeLoader} from "react-spinners"
-import { borderRadius } from '@mui/system';
+// import {FadeLoader} from "react-spinners"
+// import { borderRadius } from '@mui/system';
 
 const Login = () => {
   const { currentUser, value } = useContext(AuthContext);

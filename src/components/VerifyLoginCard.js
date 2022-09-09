@@ -1,18 +1,18 @@
-import React, { useContext, useState } from 'react';
-import styled from 'styled-components';
-import { useNavigate, Link } from 'react-router-dom';
-import axios from 'axios';
-import { useSelector,useDispatch } from 'react-redux';
-import { AuthContext } from './AuthState/AuthProvider';
-import Swal from 'sweetalert2';
-import { ErrorFunction } from './Error';
-import ProgressBar from './dashboard/ProgressBar';
-import { addCurrentUser } from './Redux/EarliReducers';
+import React, { useContext, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { AuthContext } from "./AuthState/AuthProvider";
+import Swal from "sweetalert2";
+import { ErrorFunction } from "./Error";
+import ProgressBar from "./dashboard/ProgressBar";
+import { addCurrentUser } from "./Redux/EarliReducers";
 
 const VerifyLoginCard = () => {
   const { value } = useContext(AuthContext);
 
-  const dispatchUser = useDispatch()
+  const dispatchUser = useDispatch();
 
   const { state, dispatch: ctxDispatch } = value;
   const navigate = useNavigate();
@@ -20,18 +20,18 @@ const VerifyLoginCard = () => {
   const email = useSelector((state) => state?.persistedReducer?.email);
   const password = useSelector((state) => state?.persistedReducer?.password);
 
-  const [num, setNum] = useState('');
-  const [num1, setNum1] = useState('');
-  const [num2, setNum2] = useState('');
-  const [num3, setNum3] = useState('');
-  const [num4, setNum4] = useState('');
-  const [num5, setNum5] = useState('');
+  const [num, setNum] = useState("");
+  const [num1, setNum1] = useState("");
+  const [num2, setNum2] = useState("");
+  const [num3, setNum3] = useState("");
+  const [num4, setNum4] = useState("");
+  const [num5, setNum5] = useState("");
   const [counter, setCounter] = useState(300);
 
   const verifyEmailAndLogin = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
-    const mainLink1 = 'http://localhost:2004';
-    ctxDispatch({ type: 'LoadingRequest' });
+    const mainLink = "https://earli.herokuapp.com";
+    const mainLink1 = "http://localhost:2004";
+    ctxDispatch({ type: "LoadingRequest" });
     try {
       const res = await axios.post(`${mainLink}/verifylogin`, {
         email,
@@ -39,12 +39,12 @@ const VerifyLoginCard = () => {
         otp: num + num1 + num2 + num3 + num4 + num5,
       });
       if (res) {
-        ctxDispatch({ type: 'LoadingSuccess' });
-        dispatchUser(addCurrentUser(res.data.data))
-        localStorage.setItem('currentUser', JSON.stringify(res.data.data));
+        ctxDispatch({ type: "LoadingSuccess" });
+        dispatchUser(addCurrentUser(res.data.data));
+        localStorage.setItem("currentUser", JSON.stringify(res.data.data));
         Swal.fire({
-          position: 'center',
-          icon: 'success',
+          position: "center",
+          icon: "success",
           title: `Verification Completed`,
           showConfirmButton: false,
           timer: 2500,
@@ -53,16 +53,24 @@ const VerifyLoginCard = () => {
         });
       }
     } catch (error) {
-      ctxDispatch({ type: 'LoadingFailed' });
+      ctxDispatch({ type: "LoadingFailed" });
       Swal.fire({
-        position: 'center',
-        icon: 'error',
+        position: "center",
+        icon: "error",
         title: `${ErrorFunction(error)}`,
         showConfirmButton: false,
         timer: 2500,
       });
     }
   };
+
+  //Next box logic
+  const inputRef = useRef(null);
+  const [activeBox, setActiveBox] = useState(1);
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [activeBox]);
 
   React.useEffect(() => {
     setInterval(() => {
@@ -86,43 +94,115 @@ const VerifyLoginCard = () => {
               value={num}
               onChange={(e) => {
                 setNum(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(2);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(2);
+                }
               }}
               maxLength="1"
+              ref={activeBox === 1 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(1);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(2);
+                }
+              }}
             />
             <Inputs
               value={num1}
               onChange={(e) => {
                 setNum1(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(3);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(2);
+                }
               }}
               maxLength="1"
+              ref={activeBox === 2 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(1);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(3);
+                }
+              }}
             />
             <Inputs
               value={num2}
               onChange={(e) => {
                 setNum2(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(4);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(3);
+                }
               }}
               maxLength="1"
+              ref={activeBox === 3 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(2);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(4);
+                }
+              }}
             />
             <Inputs
               value={num3}
               onChange={(e) => {
                 setNum3(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(5);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(4);
+                }
               }}
               maxLength="1"
+              ref={activeBox === 4 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(3);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(5);
+                }
+              }}
             />
             <Inputs
               value={num4}
               onChange={(e) => {
                 setNum4(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(6);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(5);
+                }
               }}
               maxLength="1"
+              ref={activeBox === 5 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(4);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(6);
+                }
+              }}
             />
             <Inputs
               value={num5}
               onChange={(e) => {
                 setNum5(e.target.value);
+                setActiveBox(6);
               }}
               maxLength="1"
+              ref={activeBox === 6 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(5);
+                }
+              }}
             />
           </InputHolder>
           {counter === 0 || counter < 0 ? (
@@ -135,7 +215,7 @@ const VerifyLoginCard = () => {
           {counter === 0 || counter < 0 ? (
             <Button bg="lightgray">Continue</Button>
           ) : (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: "100%" }}>
               {!state.loading ? (
                 <Button
                   tr
@@ -213,6 +293,7 @@ const InputHolder = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  text-align: center;
   /* background-color: red; */
 `;
 const VerifyChange = styled(Link)`
