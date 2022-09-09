@@ -141,6 +141,7 @@ const Image = styled.img`
   width: 70px;
   height: 70px;
   border-radius: 50%;
+  object-fit: cover;
 `;
 const ImageAndLabel = styled.div`
   margin: 30px 0;

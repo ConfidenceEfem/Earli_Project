@@ -195,7 +195,7 @@ const Image = styled.img`
   width: 60px;
   background: red;
   height: 60px;
-  object-fit: center;
+  object-fit: cover;
   border-radius: 50%;
 `;
 const ImageAndLabel = styled.div`

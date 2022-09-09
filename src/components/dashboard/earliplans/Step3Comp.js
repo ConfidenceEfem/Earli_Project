@@ -201,7 +201,7 @@ const Step3Comp = () => {
         <AddChildCard>
           <AddChildWrapper>
             <CreateHeader>
-              <IconAndBack to={`/thirdearliplan/${parentid}/${childid}`}>
+              <IconAndBack to={`/earlioverview/${parentid}/${childid}/${plan}`}>
                 <Icon />
                 <span>Back</span>
               </IconAndBack>
