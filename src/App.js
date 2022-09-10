@@ -42,7 +42,7 @@ const App = () => {
           <Route
             path="/addchildimage/:parentid"
             element={<AddChildImagePage />}
-          />
+          />` `
           <Route
             path="/childoverview/:parentid"
             element={<AddChildOverview />}
