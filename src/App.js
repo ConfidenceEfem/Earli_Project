@@ -21,13 +21,14 @@ import TreasuryPlan3 from './components/dashboard/treasuryplans/TreasuryPlan3';
 import EducationOverview from './components/dashboard/education/EducationOverview';
 import EducationViewPage from './components/dashboard/education/educationview/EducationViewPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Home from './components/landingpage/Home';
 
 const App = () => {
   return (
     <div>
       <Router>
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/" element={<Home />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verify />} />
@@ -41,7 +42,7 @@ const App = () => {
           <Route
             path="/addchildimage/:parentid"
             element={<AddChildImagePage />}
-          />
+          />` `
           <Route
             path="/childoverview/:parentid"
             element={<AddChildOverview />}
