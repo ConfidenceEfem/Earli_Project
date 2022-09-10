@@ -128,7 +128,7 @@ const SavingsPage = ({ parentid, childid }) => {
                       </CurrentPlan>
                       <CurrentSaved>
                         <PlanHead>Saved</PlanHead>
-                        <PlanAmount>N{props.balance}</PlanAmount>
+                        <PlanAmount>N{(props.balance/100).toFixed(2)}</PlanAmount>
                       </CurrentSaved>
                       <CurrentDuration>
                         <PlanHead>Durations</PlanHead>
