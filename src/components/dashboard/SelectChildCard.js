@@ -43,7 +43,6 @@ export default function SelectChildCard({ parentid, childid }) {
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
   };
-
   const ChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
