@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
-import img from "./landingpageimages/avatar.png"
 
 
 const Feedback = () => {
@@ -54,7 +53,7 @@ const Feedback = () => {
                                saving for your child  
                            </Desc>
                            <Profile>
-                               <Image src={img}/>
+                               <Image src={"/images/avatar.png"}/>
                                <NameAndPosition>
                                    <Name>Abiodun Olaoluwa</Name>
                                    <Position>{props.name}</Position>
@@ -76,7 +75,7 @@ const Feedback = () => {
                                 saving for your child  
                             </Desc>
                             <Profile>
-                                <Image  src={img}/>
+                                <Image  src={"/images/avatar.png"}/>
                                 <NameAndPosition>
                                     <Name>Abiodun Olaoluwa</Name>
                                     <Position>CEO, Annie's wears</Position>

@@ -3,7 +3,6 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Verify from './components/Verify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
 import VerifyLogin from './components/VerifyLogin';
 import DashboardOn from './components/dashboard/DashboardOn';
 import DashBoardAccount from './components/dashboard/DashBoardAccount';

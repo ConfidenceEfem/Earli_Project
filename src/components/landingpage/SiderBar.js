@@ -11,9 +11,7 @@ const SiderBar = ({toggle, setToggle}) => {
     <Container>
        <WrapperHolder>
        <Wrapper>
-            <CloseIcon
-          
-            >
+            <CloseIcon>
                 <AiOutlineClose
                   onClick={()=>{
                     setToggle(!toggle)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styled from "styled-components"
-import img from "./landingpageimages/earli.png"
+
 import {AiOutlineMenu} from "react-icons/ai"
 import {Link} from "react-router-dom"
 import SiderBar from './SiderBar'
@@ -20,7 +20,7 @@ const Header = () => {
         {toggle? <SiderBar toggle={toggle} setToggle={setToggle}/>: null}
         <Wrapper>
             <Left>
-                <Logo src={img}/>
+                <Logo src="/images/earli.png"/>
                 <Navigations>
                     <Navs
                     onClick={()=>{

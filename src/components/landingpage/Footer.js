@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from "styled-components"
-import logo from "./landingpageimages/earli.png"
 
 const Footer = () => {
   return (
     <Container>
         <Wrapper>
-            <Logo src={logo}/>
+            <Logo src={"/images/earli.png"}/>
             <NavigationsHolder>
                 <Navigation>
                     <Title>Company</Title>
@@ -116,5 +115,6 @@ font-family: 'Space Grotesk', sans-serif;
 @media screen and (max-width: 600px){
     height: 100%;
     padding: 30px 0;
+    margin-top: 50px;
 }
 `

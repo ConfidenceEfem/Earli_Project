@@ -1,8 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
 
 
 const Features = () => {
+
+    const navigate = useNavigate()
+
   return (
     <Container>
         <Wrapper>
@@ -17,44 +21,48 @@ const Features = () => {
                  We offer everything for financial 
                  growth and freedom in one App!   
                 </Desc>
-                <Button>
+                <Button
+                 onClick={()=>{
+                    navigate("/signup")
+                }}
+                >
                     Create a free account
                 </Button>
             </TextCont>
             <FeaturesBox>
                 <BoxWrapper>
                  <TextAndIcon>
-                    <Icon/>
+                    <Icon src={"/images/check.png"}/>
                     <Text>
                         Open an account in less than a minute
                     </Text>
                  </TextAndIcon>
                  <TextAndIcon>
-                    <Icon/>
+                 <Icon src={"/images/check.png"}/>
                     <Text>
                        Automatic savings
                     </Text>
                  </TextAndIcon>
                  <TextAndIcon>
-                    <Icon/>
+                 <Icon src={"/images/check.png"}/>
                     <Text>
                     13% interest p.a. on savings
                     </Text>
                  </TextAndIcon>
                  <TextAndIcon>
-                    <Icon/>
+                 <Icon src={"/images/check.png"}/>
                     <Text>
                     Variety of Investment plans
                     </Text>
                  </TextAndIcon>
                  <TextAndIcon>
-                    <Icon/>
+                 <Icon src={"/images/check.png"}/>
                     <Text>
                       Free financial education
                     </Text>
                  </TextAndIcon>
                  <TextAndIcon>
-                    <Icon/>
+                 <Icon src={"/images/check.png"}/>
                     <Text>
                       Zero Maintenance fees
                     </Text>
@@ -71,7 +79,7 @@ export default Features
 const Icon = styled.img`
 width: 30px;
 height: 30px;
-background-color: green;
+
 @media screen and (max-width: 480px){
     width: 20px;
 height: 20px;
