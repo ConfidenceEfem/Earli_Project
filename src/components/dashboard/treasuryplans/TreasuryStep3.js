@@ -5,9 +5,9 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AiOutlineLeft } from "react-icons/ai";
 import ProgressBar from "../ProgressBar";
-import Swal from 'sweetalert2';
-import { AuthContext } from './../../AuthState/AuthProvider';
-import { ErrorFunction } from './../../Error';
+import Swal from "sweetalert2";
+import { AuthContext } from "./../../AuthState/AuthProvider";
+import { ErrorFunction } from "./../../Error";
 
 const TreasuryStep3 = () => {
   const { parentid, childid, invest } = useParams();
@@ -56,47 +56,47 @@ const TreasuryStep3 = () => {
         interest: 10,
       });
 
-      const mainLink = 'https://earli.herokuapp.com';
+      const mainLink = "https://earli.herokuapp.com";
       const config = {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        method: 'post',
+        method: "post",
         url: `${mainLink}/invest/${childid}`,
         data: data,
       };
-      ctxDispatch({ type: 'LoadingRequest' });
+      ctxDispatch({ type: "LoadingRequest" });
 
       await axios(config)
-      .then((res) => {
-        console.log(res)
-        ctxDispatch({ type: 'LoadingSuccess' });
-        Swal.fire({
-          position: 'center',
-          icon: 'success',
-          title: res?.data?.message,
-          showConfirmButton: false,
-          timer: 2500,
-        }).then(() => {
-          navigate(`/dashaccount/${parentid}/${childid}`);
-          localStorage.removeItem('invest_frequency');
-          localStorage.removeItem('treasury_details');
+        .then((res) => {
+          console.log(res);
+          ctxDispatch({ type: "LoadingSuccess" });
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: res?.data?.message,
+            showConfirmButton: false,
+            timer: 2500,
+          }).then(() => {
+            navigate(`/dashaccount/${parentid}/${childid}`);
+            localStorage.removeItem("invest_frequency");
+            localStorage.removeItem("treasury_details");
+          });
+        })
+        .catch((error) => {
+          ctxDispatch({ type: "LoadingFailed" });
+          Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `${ErrorFunction(error)}`,
+            showConfirmButton: false,
+            timer: 2500,
+          });
         });
-      })
-      .catch((error) => {
-        ctxDispatch({ type: 'LoadingFailed' });
-        Swal.fire({
-          position: 'center',
-          icon: 'error',
-          title: `${ErrorFunction(error)}`,
-          showConfirmButton: false,
-          timer: 2500,
-        });
-      });
     } else {
       Swal.fire({
-        position: 'center',
-        icon: 'error',
+        position: "center",
+        icon: "error",
         title: `invalid details`,
         showConfirmButton: false,
         timer: 2500,
@@ -117,7 +117,7 @@ const TreasuryStep3 = () => {
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
             <AccountName>
-              {childData?.firstName} {childData?.lastName}
+              {childData?.firstname} {childData?.lastname}
             </AccountName>
           </ChildAccountName>
         </ChildAccountCard>
@@ -153,7 +153,7 @@ const TreasuryStep3 = () => {
                       <ItemName>Account</ItemName>
                       <ItemValue>
                         {" "}
-                        {childData?.firstName} {childData?.lastName}
+                        {childData?.firstname} {childData?.lastname}
                       </ItemValue>
                     </DetailItem>
                     <DetailItem>
@@ -164,21 +164,28 @@ const TreasuryStep3 = () => {
                       <ItemName>How Much?</ItemName>
                       <ItemValue>{treasury_details?.amount}</ItemValue>
                     </DetailItem>
-                   
+
                     <DetailItem>
                       <ItemName>Expected Return</ItemName>
-                      <ItemValue>N600,500</ItemValue>
+                      <ItemValue>
+                        N
+                        {treasury_details?.amount *
+                          parseInt(
+                            invest_frequency.charAt(0) +
+                              invest_frequency.charAt(1)
+                          )}
+                      </ItemValue>
                     </DetailItem>
                   </DetailsCont>
                   {!state.loading ? (
                     <Button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      navigateToPayment();
-                    }}
-                  >
-                    Start Invstment            
-                  </Button>
+                      onClick={(e) => {
+                        e.preventDefault();
+                        navigateToPayment();
+                      }}
+                    >
+                      Start Investment
+                    </Button>
                   ) : (
                     <ProgressBar />
                   )}
