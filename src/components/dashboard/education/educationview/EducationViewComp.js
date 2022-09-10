@@ -3,9 +3,9 @@ import styled from "styled-components"
 import {AiOutlineLeft} from "react-icons/ai"
 import img from "../../../images/register.png"
 import pig from "../../../images/piggyimage.png"
-import video from "../../../images/wealth-color-earli.mp4"
+// import video from "../../../images/wealth-color-earli.mp4"
 import { useNavigate, useParams } from 'react-router-dom'
-import ReactPlayer from 'react-player/lazy'
+// import ReactPlayer from 'react-player/lazy'
 
 const EducationViewComp = () => {
     const {parentid,childid} = useParams()
@@ -25,7 +25,7 @@ const EducationViewComp = () => {
 <VideoScreen>
     <VideoScreenWrapper>
             <VideoTag>
-                <Video loop controls autoPlay pl src={video}/>
+                <Video loop controls autoPlay pl src={""} alt="education video"/>
                 {/* <ReactPlayer url={video} controls playing playIcon={true}/> */}
             </VideoTag>
             <MoreVideoComp>
