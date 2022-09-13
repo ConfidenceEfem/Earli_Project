@@ -10,6 +10,8 @@ import { BsServer } from 'react-icons/bs';
 import gift from '../images/gift.png';
 import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
+import {useDispatch} from "react-redux"
+import { logout } from '../Redux/EarliReducers';
 
 const DashNav = () => {
   const { parentid, childid } = useParams();
@@ -19,8 +21,10 @@ const DashNav = () => {
     const mainLink1 = 'http://localhost:2004';
     const mainLink = 'https://earli.herokuapp.com';
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
-    setData(res.data.data.children[0]);
+    setData(res?.data?.data?.children[0]);
   };
+
+  const dispatch = useDispatch()
 
   useEffect(() => {
     fetchData();
@@ -67,7 +71,11 @@ const DashNav = () => {
           <Image src={gift} />
           <LogoutAndIcon>
             <LogoutIcon />
-            <Logout>Log Out</Logout>
+            <Logout
+            onClick={()=>{
+              dispatch(logout())
+            }}
+            >Log Out</Logout>
           </LogoutAndIcon>
         </OtherItemsHolder>
       </Wrapper>

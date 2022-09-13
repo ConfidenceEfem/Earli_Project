@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
@@ -29,7 +29,9 @@ const VerifyCard = () => {
   const [num3, setNum3] = useState('');
   const [num4, setNum4] = useState('');
   const [num5, setNum5] = useState('');
-  const [counter, setCounter] = useState(300);
+  const [counter, setCounter] = useState(300); 
+   const inputRef = useRef(null);
+  const [activeBox, setActiveBox] = useState(1);
   const verifyEmailAndLogin = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
@@ -73,6 +75,13 @@ const VerifyCard = () => {
       setCounter((e) => e - 1);
     }, 1000);
   }, []);
+
+
+
+  useEffect(() => {
+    inputRef.current?.focus();
+  }, [activeBox]);
+
 
   return (
     <Container>
