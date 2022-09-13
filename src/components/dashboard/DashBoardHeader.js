@@ -10,7 +10,7 @@ import MobileDashNav from './MobileDashNav';
 import { useSelector } from 'react-redux';
 
 const DashBoardHeader = () => {
-  const { parentid } = useParams();
+  const { parentid,childid } = useParams();
   const [toggle, setToggle] = React.useState(false)
   console.log(parentid);
 
@@ -19,7 +19,7 @@ const DashBoardHeader = () => {
 
   return (
     <MainContainer>
-      {toggle? <MobileDashNav toggle={toggle} /> : null}
+      {toggle? <MobileDashNav toggle={toggle} childid={childid} parentid={parentid}/> : null}
     
       <Container>
       <Wrapper>

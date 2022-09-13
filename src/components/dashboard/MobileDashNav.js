@@ -11,8 +11,8 @@ import styled from "styled-components"
 import gift from '../images/gift.png';
 
 
-const MobileDashNav = () => {
-    const { parentid, childid } = useParams();
+const MobileDashNav = ({parentid, childid}) => {
+    // const { parentid, childid } = useParams();
   // console.log(parentid, childid);
   const [data, setData] = useState([]);
   const fetchData = async () => {
@@ -20,6 +20,8 @@ const MobileDashNav = () => {
     const mainLink = 'https://earli.herokuapp.com';
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res.data.data.children[0]);
+    console.log(parentid)
+    console.log(data?._id)
   };
 
 
@@ -46,7 +48,7 @@ const MobileDashNav = () => {
                         <FaMoneyBill/>
                         <Navs>Payment</Navs>
                     </NavsAndIcon>
-                    <NavsAndIcon to={`/${parentid}/education`}>
+                    <NavsAndIcon to={`/${parentid}/${childid}/education`}>
                         <BiLineChart/>
                         <Navs>Financial Education</Navs>
                     </NavsAndIcon>
