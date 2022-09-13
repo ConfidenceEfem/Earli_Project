@@ -131,6 +131,7 @@ height: 50px;
 border-radius: 50%;
 margin-right: 20px;
 background: red;
+object-fit: cover;
 @media screen and (max-width: 840px){
    width: 40px;
    height: 40px;

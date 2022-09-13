@@ -26,7 +26,7 @@ const UniqueLink = () => {
                     }}
                     >Get Started</Button>
                 </TextCont>
-                <Image src={"/images/family.jpg"}/>
+                <Image src="https://res.cloudinary.com/confidence/image/upload/v1663084844/family_1_mlk9xm.jpg"/>
             </WrapperSub>
         </Wrapper>
     </Container>
