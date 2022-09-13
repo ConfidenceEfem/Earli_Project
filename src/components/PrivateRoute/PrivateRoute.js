@@ -6,7 +6,7 @@ const PrivateRoute = ({children}) => {
 
     const userDetail = useSelector((state)=>state?.persistedReducer?.currentUser)
 
-    return userDetail? children : Navigate("/login")
+    return !userDetail? children :  <Navigate to="/login"/>
 }
 
 export default PrivateRoute
