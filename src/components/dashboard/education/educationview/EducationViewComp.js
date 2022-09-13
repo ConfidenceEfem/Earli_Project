@@ -25,7 +25,7 @@ const EducationViewComp = () => {
 <VideoScreen>
     <VideoScreenWrapper>
             <VideoTag>
-                <Video loop controls autoPlay pl src={""} alt="education video"/>
+                <Video loop controls autoPlay pl src="https://res.cloudinary.com/confidence/video/upload/v1663083042/wealth-color-earli_rrhpd0.mp4" alt="education video"/>
                 {/* <ReactPlayer url={video} controls playing playIcon={true}/> */}
             </VideoTag>
             <MoreVideoComp>

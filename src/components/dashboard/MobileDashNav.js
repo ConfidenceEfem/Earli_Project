@@ -6,9 +6,11 @@ import { FaMoneyBill } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { MdSettings } from 'react-icons/md'
 import { SiMicrosoft } from 'react-icons/si'
+import { useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import styled from "styled-components"
 import gift from '../images/gift.png';
+import { logout } from '../Redux/EarliReducers'
 
 
 const MobileDashNav = ({parentid, childid}) => {
@@ -23,6 +25,8 @@ const MobileDashNav = ({parentid, childid}) => {
     console.log(parentid)
     console.log(data?._id)
   };
+
+  const dispatch = useDispatch()
 
 
 
@@ -62,7 +66,11 @@ const MobileDashNav = ({parentid, childid}) => {
                     </NavsAndIcon>
                     <NavsAndIcon to="/">
             <FiLogOut/>
-            <Navs>Log Out</Navs>
+            <Navs
+              onClick={()=>{
+                dispatch(logout())
+              }}
+            >Log Out</Navs>
           </NavsAndIcon>
                 </NavigationsAndIcon>
                 <Line />

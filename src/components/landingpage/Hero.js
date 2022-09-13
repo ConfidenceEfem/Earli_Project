@@ -62,7 +62,7 @@ const Hero = () => {
                 </InsuredBy>
             </Left>
             <Right>
-                <RightImage src={"/images/girl.jpg"}/>
+                <RightImage src="https://res.cloudinary.com/confidence/image/upload/v1663082571/girl_znk4kn.jpg"/>
               
             </Right>
             

@@ -9,12 +9,14 @@ const Feedback = () => {
             {
                 "id": 1,
                 "desc": "Earli hass got to be one of the best saving and investment platform i have used and i am glad this is a way for me to create wealth for my children all at once without and hassle. Creating an account is as easy as you can think,no stress, hassle free and you can start saving for your child",
-                "name": "Tunde Shola"
+                "name": "Tunde Shola",
+                "image": "https://res.cloudinary.com/confidence/image/upload/v1663083214/comment1_ztmspd.jpg"
             },
             {
                 "id": 2,
                 "desc": "Earli hass got to be one of the best saving and investment platform i have used and i am glad this is a way for me to create wealth for my children all at once without and hassle. Creating an account is as easy as you can think,no stress, hassle free and you can start saving for your child",
-                "name": "Bola Shola"
+                "name": "Bola Shola",
+                "image": "https://res.cloudinary.com/confidence/image/upload/v1663083344/comment_jgogx3.jpg"
             },
             {
                 "id": 3,
@@ -53,7 +55,7 @@ const Feedback = () => {
                                saving for your child  
                            </Desc>
                            <Profile>
-                               <Image src={"/images/avatar.png"}/>
+                               <Image src={props?.image}/>
                                <NameAndPosition>
                                    <Name>Abiodun Olaoluwa</Name>
                                    <Position>{props.name}</Position>
@@ -75,7 +77,7 @@ const Feedback = () => {
                                 saving for your child  
                             </Desc>
                             <Profile>
-                                <Image  src={"/images/avatar.png"}/>
+                                <Image  src="https://res.cloudinary.com/confidence/image/upload/v1663083344/comment_jgogx3.jpg"/>
                                 <NameAndPosition>
                                     <Name>Abiodun Olaoluwa</Name>
                                     <Position>CEO, Annie's wears</Position>
