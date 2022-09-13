@@ -3,17 +3,14 @@ import styled from 'styled-components';
 import img from '../images/avatar.png';
 import logo from '../images/earli1.png';
 import { AiOutlineMenu } from 'react-icons/ai';
-
 import { IoIosArrowDown } from 'react-icons/io';
 import { MdNotifications } from 'react-icons/md';
 import { Link, useParams } from 'react-router-dom';
-import { AuthContext } from '../AuthState/AuthProvider';
 import MobileDashNav from './MobileDashNav';
 import { useSelector } from 'react-redux';
 
 const DashBoardHeader = () => {
   const { parentid } = useParams();
-  const { currentUser } = useContext(AuthContext);
   const [toggle, setToggle] = React.useState(false)
   console.log(parentid);
 

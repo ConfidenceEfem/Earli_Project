@@ -332,7 +332,7 @@ const CreateSavingsPlan = styled.div`
   }
   @media screen and (max-width: 970px){
     width: 385px;
-  
+  }
   @media screen and (max-width: 950px){
     width: 90%;
     margin: 15px 0;
@@ -340,8 +340,14 @@ const CreateSavingsPlan = styled.div`
   @media screen and (max-width: 600px){
     width: 96%;
   }
-  @media screen and (max-width: 500px){
+  /* @media screen and (max-width: 500px){
     height: 570px;
+  } */
+  @media screen and (max-width: 500px){
+    width: 100%;
+    box-shadow: none;
+    height: auto;
+    padding: 20px 0;
   }
 `;
 

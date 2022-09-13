@@ -12,6 +12,7 @@ import { NavLink, useParams } from 'react-router-dom';
 import axios from 'axios';
 import {useDispatch} from "react-redux"
 import { logout } from '../Redux/EarliReducers';
+import {useNavigate} from "react-router-dom"
 
 const DashNav = () => {
   const { parentid, childid } = useParams();
@@ -25,6 +26,8 @@ const DashNav = () => {
   };
 
   const dispatch = useDispatch()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchData();
@@ -45,10 +48,6 @@ const DashNav = () => {
             <NavsAndIcon to={`/dashaccount/${parentid}/${data?._id}`}>
               <Icon1 />
               <Navs>Plans</Navs>
-            </NavsAndIcon>
-            <NavsAndIcon to="/">
-              <Icon2 />
-              <Navs>Payment</Navs>
             </NavsAndIcon>
             <NavsAndIcon to="/">
               <Icon3 />
@@ -74,6 +73,7 @@ const DashNav = () => {
             <Logout
             onClick={()=>{
               dispatch(logout())
+              navigate("/")
             }}
             >Log Out</Logout>
           </LogoutAndIcon>

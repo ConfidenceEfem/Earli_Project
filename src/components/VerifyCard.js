@@ -99,37 +99,115 @@ const VerifyCard = () => {
               value={num}
               onChange={(e) => {
                 setNum(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(2);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(2);
+                }
+              }}
+              maxLength="1"
+              ref={activeBox === 1 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(1);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(2);
+                }
               }}
             />
             <Inputs
-              value={num1}
-              onChange={(e) => {
-                setNum1(e.target.value);
-              }}
+             value={num1}
+             onChange={(e) => {
+               setNum1(e.target.value);
+               if (e.target.value.length === 1) {
+                 setActiveBox(3);
+               } else if (e.target.value.length === 0) {
+                 setActiveBox(2);
+               }
+             }}
+             maxLength="1"
+             ref={activeBox === 2 ? inputRef : null}
+             onKeyDown={(e) => {
+               if (e.key === "Backspace") {
+                 setActiveBox(1);
+               } else if (e.target.value.length === 1) {
+                 setActiveBox(3);
+               }
+             }}
             />
             <Inputs
               value={num2}
               onChange={(e) => {
                 setNum2(e.target.value);
+                if (e.target.value.length === 1) {
+                  setActiveBox(4);
+                } else if (e.target.value.length === 0) {
+                  setActiveBox(3);
+                }
+              }}
+              maxLength="1"
+              ref={activeBox === 3 ? inputRef : null}
+              onKeyDown={(e) => {
+                if (e.key === "Backspace") {
+                  setActiveBox(2);
+                } else if (e.target.value.length === 1) {
+                  setActiveBox(4);
+                }
               }}
             />
             <Inputs
-              value={num3}
-              onChange={(e) => {
-                setNum3(e.target.value);
-              }}
+               value={num3}
+               onChange={(e) => {
+                 setNum3(e.target.value);
+                 if (e.target.value.length === 1) {
+                   setActiveBox(5);
+                 } else if (e.target.value.length === 0) {
+                   setActiveBox(4);
+                 }
+               }}
+               maxLength="1"
+               ref={activeBox === 4 ? inputRef : null}
+               onKeyDown={(e) => {
+                 if (e.key === "Backspace") {
+                   setActiveBox(3);
+                 } else if (e.target.value.length === 1) {
+                   setActiveBox(5);
+                 }
+               }}
             />
             <Inputs
-              value={num4}
-              onChange={(e) => {
-                setNum4(e.target.value);
-              }}
+            value={num4}
+            onChange={(e) => {
+              setNum4(e.target.value);
+              if (e.target.value.length === 1) {
+                setActiveBox(6);
+              } else if (e.target.value.length === 0) {
+                setActiveBox(5);
+              }
+            }}
+            maxLength="1"
+            ref={activeBox === 5 ? inputRef : null}
+            onKeyDown={(e) => {
+              if (e.key === "Backspace") {
+                setActiveBox(4);
+              } else if (e.target.value.length === 1) {
+                setActiveBox(6);
+              }
+            }}
             />
             <Inputs
-              value={num5}
-              onChange={(e) => {
-                setNum5(e.target.value);
-              }}
+             value={num5}
+             onChange={(e) => {
+               setNum5(e.target.value);
+               setActiveBox(6);
+             }}
+             maxLength="1"
+             ref={activeBox === 6 ? inputRef : null}
+             onKeyDown={(e) => {
+               if (e.key === "Backspace") {
+                 setActiveBox(5);
+               }
+             }}
             />
           </InputHolder>
           {counter === 0 || counter < 0 ? (

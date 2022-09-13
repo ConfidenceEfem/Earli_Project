@@ -204,6 +204,9 @@ const CurrentCardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 400px){
+    width: 95%;
+  }
 `;
 
 const CurrentCard = styled.div`

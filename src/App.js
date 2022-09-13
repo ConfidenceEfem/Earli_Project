@@ -112,7 +112,7 @@ const App = () => {
            
           }
           />
-          <Route exact path="/kolooverview/:parentid/:child/:savingsid" element={
+          <Route exact path="/kolooverview/:parentid/:childid/:savingsid" element={
              <PrivateRoute>
                      <KoloOverviewPage />
              </PrivateRoute>
