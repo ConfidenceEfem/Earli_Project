@@ -7,7 +7,7 @@ import { AuthContext } from './AuthState/AuthProvider';
 import Swal from 'sweetalert2';
 import { ErrorFunction } from './Error';
 import ProgressBar from './dashboard/ProgressBar';
-import {addCurrentUser,logout} from "./Redux/EarliReducers"
+import {addCurrentUser,addEmail,addFirstname,addLastname,addPassword,logout} from "./Redux/EarliReducers"
 
 const VerifyCard = () => {
   const { value } = useContext(AuthContext);
@@ -17,7 +17,7 @@ const VerifyCard = () => {
   const { state, dispatch: ctxDispatch } = value;
   const navigate = useNavigate();
 
-  // console.log(state.loading);
+  // to get the userdata from the state
   const firstname = useSelector((state) => state?.persistedReducer?.firstname);
   const lastname = useSelector((state) => state?.persistedReducer.lastname);
   const email = useSelector((state) => state?.persistedReducer.email);
@@ -32,11 +32,15 @@ const VerifyCard = () => {
   const [counter, setCounter] = useState(300); 
    const inputRef = useRef(null);
   const [activeBox, setActiveBox] = useState(1);
+
+ 
   const verifyEmailAndLogin = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     ctxDispatch({ type: 'LoadingRequest' });
     try {
+
+       // to verify the user otp and create the user
       const res = await axios.post(`${mainLink}/verify`, {
         firstname,
         lastname,
@@ -45,8 +49,20 @@ const VerifyCard = () => {
         otp: num + num1 + num2 + num3 + num4 + num5,
       });
       if (res) {
+
+        // 
         ctxDispatch({ type: 'LoadingSuccess' });
+
+        // it pushes the current user to redux state
         dispatchUser(addCurrentUser(res.data.data))
+
+        //it changes the user input to empty string
+        dispatchUser(addFirstname(""))
+        dispatchUser(addLastname(""))
+        dispatchUser(addPassword(""))
+        dispatchUser(addEmail(""))
+
+
         localStorage.setItem('currentUser', JSON.stringify(res.data.data));
         Swal.fire({
           position: 'center',
@@ -70,6 +86,7 @@ const VerifyCard = () => {
     }
   };
 
+  // for the counter
   React.useEffect(() => {
     setInterval(() => {
       setCounter((e) => e - 1);
@@ -91,7 +108,16 @@ const VerifyCard = () => {
           <VerifySub>
             Fill in the code we sent to <span>{email}</span>
           </VerifySub>
-          <VerifyChange to="/signup">Change Email</VerifyChange>
+          <VerifyChange>
+            <span
+            onClick={()=>{
+              navigate("/signup")
+            }}
+            >
+               Change Email
+            </span>
+           
+            </VerifyChange>
         </VerifyText>
         <InputsAndButton>
           <InputHolder>
@@ -251,6 +277,10 @@ const Resend = styled.div`
   span {
     color: #7b69dd;
   }
+  @media screen and (max-width: 400px) {
+  margin-bottom: 35px;
+  margin-top: 10px;
+  }
 `;
 const Button = styled.div`
   width: 100%;
@@ -303,32 +333,45 @@ const InputHolder = styled.div`
   display: flex;
   width: 100%;
   justify-content: space-between;
+  text-align: center;
   /* background-color: red; */
 `;
-const VerifyChange = styled(Link)`
+const VerifyChange = styled.div`
   font-size: 12px;
   color: #7b69dd;
   font-family: work sans;
   text-decoration: none;
   @media screen and (max-width: 400px) {
-    font-size: 11px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 25px;
   }
 `;
 const VerifySub = styled.div`
-  font-size: 14px;
+ font-size: 14px;
   color: gray;
   font-family: work sans;
-  margin: 8px 0;
+  margin: 10px 0;
+  letter-spacing: 0.3px;
+  line-height: 25px;
+  /* background: green; */
+ 
   span {
-    font-weight: 300;
+    font-weight: 500;
     color: black;
+    margin-left: 5px;
   }
   @media screen and (max-width: 400px) {
-    font-size: 12px;
+    font-size: 14px;
+    /* width: 100%; */
+    flex-wrap: wrap;
+    /* height: auto; */
+  display:flex;
+  span {
+    margin-left: 0px;
   }
-  @media screen and (max-width: 322px) {
-    line-height: 18px;
   }
+ 
 `;
 const VerifyHead = styled.div`
   font-weight: bold;
@@ -337,6 +380,10 @@ const VerifyHead = styled.div`
   @media screen and (max-width: 1000px) {
     font-size: 18px;
   }
+  @media screen and (max-width: 420px) {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
 `;
 
 const InputsAndButton = styled.div`
@@ -344,6 +391,9 @@ const InputsAndButton = styled.div`
   align-items: center;
   display: flex;
   width: 100%;
+  @media screen and (max-width: 400px) {
+  margin-top: 35px;
+  }
 `;
 const VerifyText = styled.div`
   display: flex;
@@ -352,11 +402,14 @@ const VerifyText = styled.div`
   text-align: left;
   padding-bottom: 15px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.099);
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 400px) {
+    display:flex;
+    flex-wrap: wrap;
+    border-bottom: solid 1px silver;
   }
 `;
 const Wrapper = styled.div`
-  width: 87%;
+ width: 87%;
   height: 80%;
   display: flex;
   flex-direction: column;
@@ -366,9 +419,13 @@ const Wrapper = styled.div`
   @media screen and (max-width: 500px) {
     width: 90%;
   }
+  @media screen and (max-width: 400px) {
+    align-items: center;
+    justify-content: flex-start;
+  }
 `;
 const Container = styled.div`
-  width: 470px;
+   width: 470px;
   height: 200px;
   background-color: white;
   display: flex;
@@ -394,6 +451,6 @@ const Container = styled.div`
     margin-top: 10px;
   }
   @media screen and (max-width: 400px) {
-    height: 280px;
+    height: auto;
   }
 `;

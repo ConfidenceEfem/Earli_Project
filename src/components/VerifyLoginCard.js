@@ -17,6 +17,7 @@ const VerifyLoginCard = () => {
   const { state, dispatch: ctxDispatch } = value;
   const navigate = useNavigate();
 
+  // getting the user data from the redux state
   const email = useSelector((state) => state?.persistedReducer?.email);
   const password = useSelector((state) => state?.persistedReducer?.password);
 
@@ -29,8 +30,9 @@ const VerifyLoginCard = () => {
   const [counter, setCounter] = useState(300);
 
   const verifyEmailAndLogin = async () => {
+
+    // to verify the user and login the user
     const mainLink = "https://earli.herokuapp.com";
-    const mainLink1 = "http://localhost:2004";
     ctxDispatch({ type: "LoadingRequest" });
     try {
       const res = await axios.post(`${mainLink}/verifylogin`, {
@@ -72,6 +74,7 @@ const VerifyLoginCard = () => {
     inputRef.current?.focus();
   }, [activeBox]);
 
+  // for the counter state
   React.useEffect(() => {
     setInterval(() => {
       setCounter((e) => e - 1);
@@ -84,9 +87,19 @@ const VerifyLoginCard = () => {
         <VerifyText>
           <VerifyHead>Verify Your Email</VerifyHead>
           <VerifySub>
-            Fill in the code we sent to <span>{email}</span>
+            Fill in the code we sent to 
+            <span>{email}</span>
           </VerifySub>
-          <VerifyChange to="/login">Change Email</VerifyChange>
+          <VerifyChange>
+       
+            <span
+            onClick={()=>{
+              navigate("/login")
+            }}
+            >
+                  Change Email 
+            </span>
+            </VerifyChange>
         </VerifyText>
         <InputsAndButton>
           <InputHolder>
@@ -246,6 +259,10 @@ const Resend = styled.div`
   span {
     color: #7b69dd;
   }
+  @media screen and (max-width: 400px) {
+  margin-bottom: 35px;
+  margin-top: 10px;
+  }
 `;
 const Button = styled.div`
   width: 100%;
@@ -296,29 +313,45 @@ const InputHolder = styled.div`
   text-align: center;
   /* background-color: red; */
 `;
-const VerifyChange = styled(Link)`
+const VerifyChange = styled.div`
   font-size: 12px;
   color: #7b69dd;
   font-family: work sans;
   text-decoration: none;
   @media screen and (max-width: 400px) {
-    font-size: 11px;
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 25px;
   }
 `;
 const VerifySub = styled.div`
   font-size: 14px;
   color: gray;
   font-family: work sans;
-  margin: 8px 0;
+  margin: 10px 0;
+  letter-spacing: 0.3px;
+  line-height: 25px;
+  /* background: green; */
+ 
   span {
     font-weight: 500;
     color: black;
+    margin-left: 5px;
   }
   @media screen and (max-width: 400px) {
-    font-size: 12px;
+    font-size: 14px;
+    /* width: 100%; */
+    flex-wrap: wrap;
+    /* height: auto; */
+  display:flex;
+  span {
+    margin-left: 0px;
+  }
+    
+    /* margin: 10px 0; */
   }
   @media screen and (max-width: 322px) {
-    line-height: 18px;
+    /* line-height: 18px; */
   }
 `;
 const VerifyHead = styled.div`
@@ -328,6 +361,10 @@ const VerifyHead = styled.div`
   @media screen and (max-width: 1000px) {
     font-size: 18px;
   }
+  @media screen and (max-width: 420px) {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
 `;
 
 const InputsAndButton = styled.div`
@@ -335,15 +372,22 @@ const InputsAndButton = styled.div`
   align-items: center;
   display: flex;
   width: 100%;
+  @media screen and (max-width: 400px) {
+  margin-top: 35px;
+  }
 `;
 const VerifyText = styled.div`
   display: flex;
   width: 100%;
+ 
   flex-direction: column;
   text-align: left;
   padding-bottom: 15px;
   border-bottom: solid 1px rgba(0, 0, 0, 0.099);
-  @media screen and (max-width: 450px) {
+  @media screen and (max-width: 400px) {
+    display:flex;
+    flex-wrap: wrap;
+    border-bottom: solid 1px silver;
   }
 `;
 const Wrapper = styled.div`
@@ -356,6 +400,10 @@ const Wrapper = styled.div`
   /* background-color: red; */
   @media screen and (max-width: 500px) {
     width: 90%;
+  }
+  @media screen and (max-width: 400px) {
+    align-items: center;
+    justify-content: flex-start;
   }
 `;
 const Container = styled.div`
@@ -385,6 +433,6 @@ const Container = styled.div`
     margin-top: 10px;
   }
   @media screen and (max-width: 400px) {
-    height: 280px;
+    height: auto;
   }
 `;
