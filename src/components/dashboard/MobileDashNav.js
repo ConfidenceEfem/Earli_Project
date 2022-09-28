@@ -6,13 +6,15 @@ import { FaMoneyBill } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { MdSettings } from 'react-icons/md'
 import { SiMicrosoft } from 'react-icons/si'
+import { useDispatch } from 'react-redux'
 import { NavLink, useParams } from 'react-router-dom'
 import styled from "styled-components"
 import gift from '../images/gift.png';
+import { logout } from '../Redux/EarliReducers'
 
 
-const MobileDashNav = () => {
-    const { parentid, childid } = useParams();
+const MobileDashNav = ({parentid, childid}) => {
+    // const { parentid, childid } = useParams();
   // console.log(parentid, childid);
   const [data, setData] = useState([]);
   const fetchData = async () => {
@@ -20,7 +22,11 @@ const MobileDashNav = () => {
     const mainLink = 'https://earli.herokuapp.com';
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res.data.data.children[0]);
+    console.log(parentid)
+    console.log(data?._id)
   };
+
+  const dispatch = useDispatch()
 
 
 
@@ -46,7 +52,7 @@ const MobileDashNav = () => {
                         <FaMoneyBill/>
                         <Navs>Payment</Navs>
                     </NavsAndIcon>
-                    <NavsAndIcon to={`/${parentid}/education`}>
+                    <NavsAndIcon to={`/${parentid}/${childid}/education`}>
                         <BiLineChart/>
                         <Navs>Financial Education</Navs>
                     </NavsAndIcon>
@@ -60,7 +66,11 @@ const MobileDashNav = () => {
                     </NavsAndIcon>
                     <NavsAndIcon to="/">
             <FiLogOut/>
-            <Navs>Log Out</Navs>
+            <Navs
+              onClick={()=>{
+                dispatch(logout())
+              }}
+            >Log Out</Navs>
           </NavsAndIcon>
                 </NavigationsAndIcon>
                 <Line />

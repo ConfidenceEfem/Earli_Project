@@ -1,9 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
-import arrow from "./landingpageimages/arrow.png"
-import saving from "./landingpageimages/saving.png"
 
 const SavingComp = ({image,topic,desc,plan,fd}) => {
+
+    const navigate = useNavigate()
+
   return (
     <Container>
         <Wrapper fd={fd}>
@@ -16,10 +18,14 @@ const SavingComp = ({image,topic,desc,plan,fd}) => {
                {desc}
                 </Desc>
                 <Button>
-                    <ButtonText>
+                    <ButtonText
+                      onClick={()=>{
+                        navigate("/signup")
+                    }}
+                    >
                         {plan}
                     </ButtonText>
-                    <Icon src={arrow}/>
+                    <Icon src={"/images/arrow.png"}/>
                 </Button>
             </TextCont>
         </Wrapper>

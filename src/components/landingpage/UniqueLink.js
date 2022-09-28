@@ -1,8 +1,11 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from "styled-components"
-import family from "./landingpageimages/family.jpg"
 
 const UniqueLink = () => {
+
+    const navigate = useNavigate()
+
   return (
     <Container>
         <Wrapper>
@@ -17,9 +20,13 @@ const UniqueLink = () => {
                      money through their unique 
                     link from anywhere in the World.
                     </Desc>
-                    <Button>Get Started</Button>
+                    <Button
+                     onClick={()=>{
+                        navigate("/signup")
+                    }}
+                    >Get Started</Button>
                 </TextCont>
-                <Image src={family}/>
+                <Image src="https://res.cloudinary.com/confidence/image/upload/v1663084844/family_1_mlk9xm.jpg"/>
             </WrapperSub>
         </Wrapper>
     </Container>

@@ -137,7 +137,7 @@ const SavingsPage = ({ parentid, childid }) => {
                       <NextIcon1
                         color="#7b69dd"
                         onClick={() => {
-                          navigate(`/kolooverview/${parentid}/${props._id}`);
+                          navigate(`/kolooverview/${parentid}/${childid}/${props._id}`);
                         }}
                       />
                     </CurrentCardWrapper>
@@ -204,6 +204,9 @@ const CurrentCardWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media screen and (max-width: 400px){
+    width: 95%;
+  }
 `;
 
 const CurrentCard = styled.div`

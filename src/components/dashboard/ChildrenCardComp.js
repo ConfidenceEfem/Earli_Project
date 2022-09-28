@@ -155,6 +155,7 @@ const ChildrenCardWrapper = styled.div`
 
 const ChildrenCard = styled.div`
   min-width: 260px;
+  width: 270px;
   height: 260px;
   background: white;
   cursor: pointer;
@@ -162,6 +163,7 @@ const ChildrenCard = styled.div`
   display: flex;
   justify-content: center;
   margin-right: 20px;
+
 `;
 
 

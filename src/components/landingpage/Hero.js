@@ -1,15 +1,42 @@
 import React from 'react'
 import styled from "styled-components"
-import ndic from "./landingpageimages/ndic.svg"
-import girl from "./landingpageimages/girl.jpg"
+import { useNavigate } from 'react-router-dom'
 
 const Hero = () => {
+    const [counter, setCounter] = React.useState(0)
+
+    const navigate = useNavigate()
+
+    const holdText = [
+        {text: "Guardians"},
+        {text: "Moms"},
+        {text: "Dads"},
+    ]
+
+    const colorHold = [
+        {cl: "blue"},
+        {cl: "#7b69dd"},
+        {cl: "green"},
+    ]
+
+    React.useEffect(()=>{
+        setInterval(()=>{
+            setCounter((e)=>e+1)
+        },3000)
+    },[])
+
+    const oneText = holdText[counter % holdText.length]
+    const oneColor = colorHold[counter % colorHold.length]
+
   return (
     <Container>
         <Wrapper>
             <Left>
                 <Topic>
-                    Superhero Guardian Save 
+                    Superhero {" "}
+                    <nobr style={{color: `${oneColor.cl}`}}>{oneText?.text}</nobr>
+                    {" "}
+                    Save 
                     and Invest
                      for Their Kids
                 </Topic>
@@ -20,18 +47,22 @@ const Hero = () => {
                  for their children
                   automatically for free.
                 </Desc>
-                <Button>
+                <Button
+                     onClick={()=>{
+                        navigate("/signup")
+                    }}
+                >
                 Create a free account
                 </Button>
                 <InsuredBy>
                     <InsuredText>
                         Deposit Insured by 
                     </InsuredText>
-                    <InsuredLogo src={ndic}/>
+                    <InsuredLogo src={"/images/ndic.svg"}/>
                 </InsuredBy>
             </Left>
             <Right>
-                <RightImage src={girl}/>
+                <RightImage src="https://res.cloudinary.com/confidence/image/upload/v1663082571/girl_znk4kn.jpg"/>
               
             </Right>
             
