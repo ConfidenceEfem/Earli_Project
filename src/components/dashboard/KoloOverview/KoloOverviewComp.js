@@ -1,20 +1,21 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-// import * as yup from 'yup';
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import { AiOutlineInfoCircle, AiOutlineLeft } from "react-icons/ai";
 import { FaPiggyBank } from "react-icons/fa";
 import { BsDashCircle } from "react-icons/bs";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import img from "../../images/avatar.png";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { NoIcon } from './../../AllIcons';
 import axios from "axios";
+import moment from "moment";
 
 const KoloOverviewComp = () => {
-  const { savingsid } = useParams();
+  const { savingsid,parentid, childid } = useParams();
 
-  console.log(savingsid);
+  const navigate = useNavigate()
+
   const [savings, setSavings] = useState();
 
   const fetchSavingsData = async () => {
@@ -33,7 +34,11 @@ const KoloOverviewComp = () => {
     <Container>
       <Wrapper>
         <BackComp>
-          <IconAndText>
+          <IconAndText
+          onClick={()=>{
+            navigate(`/dashaccount/${parentid}/${childid}`)
+          }}
+          >
             <BackIcon />
             <IconText>Back</IconText>
           </IconAndText>
@@ -65,10 +70,7 @@ const KoloOverviewComp = () => {
                   <SavingsButton>
                     <ButtonComp style={{ marginRight: "10px" }}>
                       <BsDashCircle size="15px" />
-                      {/* <CopyToClipboard text={document.getElementById("hey")}> */}
-                         <ButtonText id="hey">Withdraw Savings </ButtonText>
-                      {/* </CopyToClipboard> */}
-                     
+                         <ButtonText>Withdraw Savings </ButtonText>                     
                     </ButtonComp>
                     <ButtonComp
                       style={{
@@ -92,7 +94,7 @@ const KoloOverviewComp = () => {
                     <DetailData>
                       <GrayAcc>Account</GrayAcc>
                       <ImageandName>
-                        <ChildImage src={img} />
+                        <ChildImage src={savings?.childId?.image} />
                         <ChildName>{`${savings?.childId?.lastname} ${savings?.childId?.firstname}`}</ChildName>
                       </ImageandName>
                     </DetailData>
@@ -103,11 +105,16 @@ const KoloOverviewComp = () => {
                   </DetailAccountCard>
                   <LabelAndDate>
                     <DateLabel>Start date</DateLabel>
-                    <TheDate>{savings?.startDate}</TheDate>
+                    <TheDate>
+                    
+                      {moment(savings?.startDate).format("DD MM yy")}
+                      </TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
                     <DateLabel>End date</DateLabel>
-                    <TheDate>{savings?.endDate}</TheDate>
+                    <TheDate>
+                      {moment(savings?.endDate).format("DD MM yy")}
+                      </TheDate>
                   </LabelAndDate>
                   <LabelAndDate>
                     <DateLabel>Status</DateLabel>
@@ -183,7 +190,8 @@ const DateLabel = styled.div`
 const LabelAndDate = styled.div`
   display: flex;
   align-items: center;
-  padding: 7px 0;
+  padding: 12px 0;
+  width: 100%;
   border-bottom: 1px solid lightgray;
 `;
 const Month = styled.div`
@@ -198,7 +206,6 @@ const ChildImage = styled.img`
   width: 20px;
   height: 20px;
   object-fit: cover;
-  background-color: red;
   margin-right: 10px;
   border-radius: 50%;
 `;
@@ -414,12 +421,20 @@ const SavingsButton = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 90%;
+  @media screen and (max-width: 400px){
+    width: 100%;
+  }
 `;
 const SavingsAmounts = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 25px 0;
+  width: 90%;
+  @media screen and (max-width: 400px){
+    width: 97%;
+  }
 `;
 const InfoIcon = styled(AiOutlineInfoCircle)`
   color: #7b69dd;
@@ -440,7 +455,7 @@ const SavingsHeader = styled.div`
 `;
 const SavingsCardWrapper = styled.div`
 width: 90%;
-height: 95%:
+height: 95%;
 display:flex;
 flex-direction:column;
 align-items: center;

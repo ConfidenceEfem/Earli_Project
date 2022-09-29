@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ProgressBar from './dashboard/ProgressBar';
 
 import {
@@ -23,6 +23,12 @@ const RegisterCard = () => {
   const { currentUser, value } = useContext(AuthContext);
 
   const { state, dispatch: ctxDispatch } = value;
+
+  const myFirstName = useSelector((state) => state?.persistedReducer?.firstname);
+  const myLastName = useSelector((state) => state?.persistedReducer.lastname);
+  const myEmail = useSelector((state) => state?.persistedReducer.email);
+  const myPassword = useSelector((state) => state?.persistedReducer.password);
+
 
   const navigate = useNavigate();
 
@@ -112,14 +118,18 @@ const RegisterCard = () => {
                 <NamesCont>First Name</NamesCont>
                 <Error>{errors?.firstname?.message}</Error>
               </LabelHold>
-              <NameInput {...register('firstname')} />
+              <NameInput {...register('firstname')} 
+              defaultValue={myFirstName}
+              />
             </OneInputHold>
             <OneInputHold>
               <LabelHold>
                 <NamesCont>Last Name</NamesCont>
                 <Error>{errors?.surname?.message}</Error>
               </LabelHold>
-              <NameInput {...register('surname')} />
+              <NameInput {...register('surname')} 
+                defaultValue={myLastName}
+              />
             </OneInputHold>
           </NamesInputHolder>
           <InputsAndLabel>
@@ -131,6 +141,7 @@ const RegisterCard = () => {
               type="text"
               style={{ height: '32px' }}
               {...register('email')}
+              defaultValue={myEmail}
             />
           </InputsAndLabel>
           <InputsAndLabel>
@@ -140,7 +151,9 @@ const RegisterCard = () => {
             </LabelHold>
             {toggle ? (
               <InputPassword>
-                <Input1 type="text" {...register('password')} />
+                <Input1 type="text" {...register('password')} 
+                defaultValue={myPassword}
+                />
                 <IconImage1
                   onClick={() => {
                     onToggle();
@@ -149,7 +162,9 @@ const RegisterCard = () => {
               </InputPassword>
             ) : (
               <InputPassword>
-                <Input1 type="password" {...register('password')} />
+                <Input1 type="password" {...register('password')} 
+                defaultValue={myPassword}
+                />
                 <IconImage
                   onClick={() => {
                     onToggle();
@@ -279,6 +294,10 @@ const CheckTxt = styled.div`
   code {
     font-family: work sans;
   }
+
+@media screen and (max-width: 400px){
+  line-height: 18px;
+}
 `;
 const CheckInput = styled.input`
   width: 18px;
@@ -287,7 +306,7 @@ const CheckInput = styled.input`
   background-color: black;
   border-radius: 0px;
   &:checked {
-    background-color: green;
+    background-color: red;
   }
 `;
 const CheckAndText = styled.div`

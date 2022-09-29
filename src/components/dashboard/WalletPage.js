@@ -21,7 +21,7 @@ const WalletPage = ({ childid }) => {
     setChildData(res?.data?.data);
     setWalletData(resData?.data?.data);
 
-    console.log(childData, walletData);
+    console.log("hey this is wallet", walletData);
   };
 
   React.useEffect(() => {

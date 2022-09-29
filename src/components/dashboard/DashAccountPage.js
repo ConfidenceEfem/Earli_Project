@@ -4,28 +4,23 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import { FiPlus } from "react-icons/fi";
 import { BsBarChartFill } from "react-icons/bs";
 import { FaPiggyBank } from "react-icons/fa";
-import avatar from "../images/avatar.png";
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { AuthContext } from "../AuthState/AuthProvider";
 import axios from "axios";
 import { NoIcon } from "../AllIcons";
-import moment from "moment";
 import ChildrenCardComp from "./ChildrenCardComp";
 import {useSelector, useDispatch} from "react-redux"
+import moment from "moment";
 
 const DashAccountPage = () => {
   const { parentid } = useParams();
 
-  const navigate = useNavigate();
 
   const userDetail = useSelector((state)=>state?.persistedReducer?.currentUser?.data)
 
-  const { currentUser } = useContext(AuthContext);
 
   const [childrenData, setChildrenData] = useState([]);
   const [walletTotal, setWalletTotal] = useState({});
 
-  console.log(parentid);
 
   const fetchData = async () => {
     const mainLink = "https://earli.herokuapp.com";
@@ -35,8 +30,7 @@ const DashAccountPage = () => {
 
     setChildrenData(res?.data?.data?.children);
     setWalletTotal(resData?.data?.data);
-    console.log("hey",childrenData, walletTotal);
-    // setChildrenData(res.data.data.children);
+    console.log(childrenData)
   };
 
   useEffect(() => {
@@ -125,7 +119,7 @@ const DashAccountPage = () => {
                 <ChildrenCardHolder>
                   {childrenData?.map((props, i) =>
                     i <= 1 ? (
-                      <ChildrenCardComp childid={props?._id} parentid={parentid}/>
+                      <ChildrenCardComp childid={props?._id} parentid={parentid} key={props?._id}/>
                     ) : null
                   )}
                 </ChildrenCardHolder>
@@ -172,7 +166,7 @@ const DashAccountPage = () => {
                     let imgSrc = props?.image;
                     return props?.transactions?.map((props, i) => {
                       return i === 0 ? (
-                        <TransactionCard>
+                        <TransactionCard key={props?._id}>
                           <TransactionDetails>
                             <TransactionImage src={imgSrc} />
                             <TransactionNameDetail>
@@ -187,7 +181,7 @@ const DashAccountPage = () => {
                           </TransactionDetails>
                           <AmountDate>
                             <TransAmount>+N{props?.amount}</TransAmount>
-                            <TransDate>Jun 12</TransDate>
+                            <TransDate>{moment(props?.createdAt).format("MM DD")}</TransDate>
                           </AmountDate>
                         </TransactionCard>
                       ) : null;
@@ -308,6 +302,9 @@ const TransactionNameDetail = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  @media screen and (max-width: 375px){
+    flex-wrap: wrap;
+  }
 `;
 
 const TransactionImage = styled.img`
@@ -319,6 +316,10 @@ const TransactionImage = styled.img`
   align-items: center;
   object-fit: cover;
   margin-right: 10px;
+  @media screen and (max-width: 3800px){
+    width: 35px;
+    height: 35px;
+  }
 `;
 
 const AmountDate = styled.div`
@@ -530,6 +531,9 @@ const ChildrenCardHolder = styled.div`
   align-items: center;
   /* flex-wrap: wrap; */
   overflow-x: scroll;
+  @media screen and (max-width: 400px){
+    padding-left:20px;
+  }
 `;
 
 const ChildrenHeading = styled.div`
@@ -597,6 +601,7 @@ const Headings = styled.div`
 `;
 const DotIcon = styled(HiOutlineDotsVertical)`
   font-size: 20px;
+  cursor: pointer;
 `;
 
 const Circle = styled.div`

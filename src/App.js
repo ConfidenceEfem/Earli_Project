@@ -3,7 +3,6 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Verify from './components/Verify';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import LandingPage from './components/LandingPage';
 import VerifyLogin from './components/VerifyLogin';
 import DashboardOn from './components/dashboard/DashboardOn';
 import DashBoardAccount from './components/dashboard/DashBoardAccount';
@@ -21,72 +20,153 @@ import TreasuryPlan3 from './components/dashboard/treasuryplans/TreasuryPlan3';
 import EducationOverview from './components/dashboard/education/EducationOverview';
 import EducationViewPage from './components/dashboard/education/educationview/EducationViewPage';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Home from './components/landingpage/Home';
 
 const App = () => {
   return (
     <div>
       <Router>
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+          <Route exact path="/" element={
+            // <PrivateRoute>
+                    <Home />
+            // </PrivateRoute>
+      
+          } />
           <Route path="/signup" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/verify" element={<Verify />} />
           <Route path="/verifylogin" element={<VerifyLogin />} />
-          <Route path="/home/:parentid" element={<DashboardOn />} />
+          <Route path="/home/:parentid" element={
+            <PrivateRoute>
+                 <DashboardOn />
+            </PrivateRoute>
+       
+          } />
           <Route
             path="/dashaccount/:parentid/:childid"
-            element={<DashBoardAccount />}
+            element={
+           
+            <PrivateRoute>
+               <DashBoardAccount />
+            </PrivateRoute>
+          }
           />
-          <Route path="/addchild/:parentid" element={<AddChildPage />} />
+          <Route path="/addchild/:parentid" element={
+             <PrivateRoute>
+              <AddChildPage />
+             </PrivateRoute>
+          
+          } />
           <Route
             path="/addchildimage/:parentid"
-            element={<AddChildImagePage />}
-          />
+            element={
+              <PrivateRoute>
+               <AddChildImagePage />
+              </PrivateRoute>
+           
+          }
+          />` `
           <Route
             path="/childoverview/:parentid"
-            element={<AddChildOverview />}
+            element={
+              <PrivateRoute>
+               <AddChildOverview />
+              </PrivateRoute>
+           
+          }
           />
           <Route
             path="/firstearliplan/:parentid/:childid/:plan"
-            element={<AddEarliStep1 />}
+            element={
+              <PrivateRoute>
+              <AddEarliStep1 />
+              </PrivateRoute>
+            
+          }
           />
           <Route
             path="/secondearliplan/:parentid/:childid/:plan"
-            element={<AddEarliStep2 />}
+            element={
+              <PrivateRoute>
+                <AddEarliStep2 />
+              </PrivateRoute>
+          
+          }
           />
           <Route
             path="/earlioverview/:parentid/:childid/:plan"
-            element={<AddEarliOverview />}
+            element={
+              <PrivateRoute>
+               <AddEarliOverview />
+              </PrivateRoute>
+           
+          }
           />
           <Route
             path="/thirdearliplan/:parentid/:childid/:plan"
-            element={<AddEarliStep3 />}
+            element={
+              <PrivateRoute>
+               <AddEarliStep3 />
+              </PrivateRoute>
+           
+          }
           />
-          <Route exact path="/kolooverview/:parentid/:savingsid" element={<KoloOverviewPage />} />
+          <Route exact path="/kolooverview/:parentid/:childid/:savingsid" element={
+             <PrivateRoute>
+                     <KoloOverviewPage />
+             </PrivateRoute>
+   
+          } />
           <Route
             exact
             path="/:parentid/:childid/:invest"
-            element={<TreasuryPlan1 />}
+            element={
+              <PrivateRoute>
+              <TreasuryPlan1 />
+              </PrivateRoute>
+            
+          }
           />
           <Route
             exact
             path="/:parentid/:childid/:invest/amount"
-            element={<TreasuryPlan2 />}
+            element={
+              <PrivateRoute>
+              <TreasuryPlan2 />
+              </PrivateRoute>
+            
+          }
           />
           <Route
             exact
             path="/:parentid/:childid/:invest/overview"
-            element={<TreasuryPlan3 />}
+            element={
+              <PrivateRoute>
+               <TreasuryPlan3 />
+              </PrivateRoute>
+           
+          }
           />
           <Route
             exact
             path="/:parentid/:childid/education"
-            element={<EducationOverview />}
+            element={
+              <PrivateRoute>
+                <EducationOverview />
+              </PrivateRoute>
+          
+          }
           />
           <Route
             exact
             path="/:parentid/:childid/education/view"
-            element={<EducationViewPage />}
+            element={
+              <PrivateRoute>
+               <EducationViewPage />
+              </PrivateRoute>
+           
+          }
           />
         </Routes>
       </Router>

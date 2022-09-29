@@ -168,6 +168,10 @@ const Nav = styled.div`
   @media screen and (max-width: 500px){
     margin-right: 30px;
   }
+  @media screen and (max-width: 400px){
+    font-size: 13px;
+    padding-bottom: 6px;
+  }
 `;
 const Navs = styled.div`
   font-size: 15px;
@@ -179,6 +183,10 @@ const Navs = styled.div`
   border-bottom: 5px solid #7b69dd;
   @media screen and (max-width: 500px){
     margin-right: 30px;
+  }
+  @media screen and (max-width: 400px){
+    font-size: 13px;
+    padding-bottom: 6px;
   }
 `;
 const CardNavigations = styled.div`
@@ -209,22 +217,13 @@ const UserAccountMainCardHolder = styled.div`
   align-items: center;
   border-radius: 10px;
   background-color: white;
- 
   height: auto;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-`;
-const CaretIcon = styled(FiChevronDown)`
-  cursor: pointer;
-  margin-left: 10px;
-  font-weight: 700;
-  font-size: 20px;
+  @media screen and (max-width: 400px){
+    width: 100%;
+  }
 `;
 
-const AccountName = styled.div`
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 0.1px;
-`;
 
 const NameAndIcon = styled.div`
   display: flex;

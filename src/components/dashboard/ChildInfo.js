@@ -5,13 +5,11 @@ import styled from "styled-components"
 const ChildInfo = ({myid}) => {
 
   const [data, setData] = React.useState([])
-console.log("this is another id", myid)
 
   const fetchChildData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const res = await axios.get(`${mainLink}/childsum/${myid}`);
-    console.log("This is wallet sum child",res?.data?.data)
     setData(res?.data?.data)
   }
 

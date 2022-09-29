@@ -30,11 +30,13 @@ const AddChildImage = () => {
   };
 
   const submit = async () => {
-    // console.log(imageLink);
-    // console.log(image);
+   
+
     if (imageLink === '') {
+      //check if there is an image
       Swal.fire('Please input an Image');
     } else {
+      // pushing the image link to the state
       ctxDispatch({ type: 'AddImageLink', payload: imageLink });
       // dispatch(addChildLink(imageLink));
       localStorage.setItem('childImage', image);
