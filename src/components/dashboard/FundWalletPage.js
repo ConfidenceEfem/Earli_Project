@@ -14,7 +14,7 @@ const FundWalletPage = ({ parentid, childid }) => {
 //   console.log(location);
 
   const [config, setConfig] = useState({
-    publicKey: "pk_test_43a24eab923416dd3f8c295ba9fc5f97f2013b01",
+    publicKey: "pk_live_c6bdb50df94df517f62a88dac858d21da9dd52cd",
     amount: 0
   });
 
