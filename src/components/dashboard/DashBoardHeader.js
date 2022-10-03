@@ -19,7 +19,7 @@ const DashBoardHeader = () => {
 
   return (
     <MainContainer>
-      {toggle? <MobileDashNav toggle={toggle} childid={childid} parentid={parentid}/> : null}
+      {toggle? <MobileDashNav toggle={toggle} setToggle={setToggle} childid={childid} parentid={parentid}/> : null}
     
       <Container>
       <Wrapper>
@@ -141,10 +141,19 @@ const Container = styled.div`
   background-color: white;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+    @media screen and (max-width: 1000px){
+      position: fixed;
+    }
 `;
 
 const MainContainer = styled.div`
 display:flex;
 position: relative;
 width: 100%;
+z-index: 3;
+/* position:fixed; */
+@media screen and (max-width: 1000px){
+ 
+      margin-bottom: 80px;
+    }
 `

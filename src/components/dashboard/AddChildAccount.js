@@ -42,7 +42,7 @@ const AddChildAccount = () => {
         title: "Input a Valid Date of Birth",
         position: "center",    
         showConfirmButton: false,
-        timer: 4000,
+        timer: 3500,
         icon: "error"
       })
     }else{

@@ -8,6 +8,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import axios from 'axios';
 import { AiOutlineLeft } from 'react-icons/ai';
 import ProgressBar from '../ProgressBar';
+import Swal from 'sweetalert2';
 
 const Step2Comp = () => {
   const { parentid, childid, plan } = useParams();
@@ -17,6 +18,8 @@ const Step2Comp = () => {
   const [data, setData] = useState([]);
 
   const [childData, setChildData] = useState([]);
+
+  const currentDate = Date.now()
 
   const fetchData = async () => {
     const mainLink = 'https://earli.herokuapp.com';
@@ -58,9 +61,19 @@ const Step2Comp = () => {
     console.log(data);
     const { amount, duration, start } = data;
 
+    if(currentDate > start){
+      Swal.fire({
+        title: "Input a Valid Start Date",
+        position: "center",    
+        showConfirmButton: false,
+        timer: 3500,
+        icon: "error"
+      })
+    }else{
     localStorage.setItem('plan_details', JSON.stringify(data));
-
     navigate(`/earlioverview/${parentid}/${childid}/${plan}`);
+    }
+
   });
   return (
     <Container>
@@ -71,6 +84,7 @@ const Step2Comp = () => {
             <AccountNo>Account 1</AccountNo>
             <AccountName>
               {childData?.firstname}
+              {" "}
               {childData?.lastname}
             </AccountName>
           </ChildAccountName>

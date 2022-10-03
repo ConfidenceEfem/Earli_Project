@@ -13,7 +13,7 @@ import gift from '../images/gift.png';
 import { logout } from '../Redux/EarliReducers'
 
 
-const MobileDashNav = ({parentid, childid}) => {
+const MobileDashNav = ({parentid, childid, toggle, setToggle}) => {
     // const { parentid, childid } = useParams();
   // console.log(parentid, childid);
   const [data, setData] = useState([]);
@@ -34,8 +34,17 @@ const MobileDashNav = ({parentid, childid}) => {
     fetchData();
   }, []);
   return (
-    <Container>
-        <Wrapper>
+
+    <Container
+    onClick={()=>{
+      setToggle(!toggle)
+    }}
+    >
+        <Wrapper
+        onClick={(e)=>{
+          e.stopPropagation()
+        }}
+        >
             <ItemsHolder>
             <OtherItemsHolder>
                 <NavigationsAndIcon>
@@ -56,14 +65,14 @@ const MobileDashNav = ({parentid, childid}) => {
                         <BiLineChart/>
                         <Navs>Financial Education</Navs>
                     </NavsAndIcon>
-                    <NavsAndIcon to="/">
+                    {/* <NavsAndIcon to="/">
                         <MdSettings/>
                         <Navs>Settings</Navs>
-                    </NavsAndIcon>
-                    <NavsAndIcon to="/">
+                    </NavsAndIcon> */}
+                    {/* <NavsAndIcon to="/">
                         <BiHeadphone/>
                         <Navs>Help Activity</Navs>
-                    </NavsAndIcon>
+                    </NavsAndIcon> */}
                     <NavsAndIcon to="/">
             <FiLogOut/>
             <Navs
@@ -177,8 +186,10 @@ display:none;
     width: 100%;
 display:flex;
 position: absolute;
+background: rgb(0,0,0,0.5);
 top:90px;
 z-index: 4;
+position:fixed;
 }
 
 

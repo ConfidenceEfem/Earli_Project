@@ -70,6 +70,7 @@ const Step1Comp = () => {
             <AccountNo>Account 1</AccountNo>
             <AccountName>
               {childData?.firstname}
+              {" "}
               {childData?.lastname}
             </AccountName>
           </ChildAccountName>

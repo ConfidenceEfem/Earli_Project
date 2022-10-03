@@ -104,8 +104,8 @@ export default function SelectChildCard({ parentid, childid }) {
               value={props?.firstname + props?.lastname}
               style={getStyles(props?._id, personName, theme)}
               onClick={() => {
-                navigate(`/dashaccount/${parentid}/${props?._id}`);
-                // window.location.reload();
+                // navigate(`/dashaccount/${parentid}/${props?._id}`);
+                window.location.href = `/dashaccount/${parentid}/${props?._id}`
               }}
             >
               <img
