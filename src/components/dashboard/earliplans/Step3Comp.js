@@ -193,8 +193,7 @@ const Step3Comp = () => {
           <ChildAccountName>
             <AccountNo>Account 1</AccountNo>
             <AccountName>
-              {childData?.firstname}
-              {childData?.lastname}
+              {childData?.firstname}{" "}{childData?.lastname}
             </AccountName>
           </ChildAccountName>
         </ChildAccountCard>

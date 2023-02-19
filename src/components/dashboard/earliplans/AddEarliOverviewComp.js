@@ -65,6 +65,7 @@ const AddEarliOverviewComp = () => {
             <AccountName>
               {' '}
               {childData?.firstname}
+              {" "}
               {childData?.lastname}{' '}
             </AccountName>
           </ChildAccountName>

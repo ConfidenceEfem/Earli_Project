@@ -49,10 +49,10 @@ const DashNav = () => {
               <Icon1 />
               <Navs>Plans</Navs>
             </NavsAndIcon>
-            <NavsAndIcon to="/">
+            {/* <NavsAndIcon to="/">
               <Icon3 />
               <Navs>Analytics</Navs>
-            </NavsAndIcon>
+            </NavsAndIcon> */}
             <NavsAndIcon to={`/${parentid}/${childid}/education`}>
               <Icon3 />
               <Navs>Financial Education</Navs>
@@ -61,10 +61,10 @@ const DashNav = () => {
               <Icon4 />
               <Navs>Settings</Navs>
             </NavsAndIcon>
-            <NavsAndIcon to="/">
+            {/* <NavsAndIcon to="/">
               <Icon5 />
               <Navs>Help Activity</Navs>
-            </NavsAndIcon>
+            </NavsAndIcon> */}
           </NavigationsAndIcon>
           <Line />
           <Image src={gift} />

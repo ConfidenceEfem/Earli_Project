@@ -228,7 +228,7 @@ const VerifyLoginCard = () => {
           {counter === 0 || counter < 0 ? (
             <Button bg="lightgray">Continue</Button>
           ) : (
-            <div style={{ width: "100%" }}>
+            <div style={{ width: "100%", display:"flex", justifyContent:"center"  }}>
               {!state.loading ? (
                 <Button
                   tr
