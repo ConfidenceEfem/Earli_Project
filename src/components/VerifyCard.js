@@ -35,7 +35,7 @@ const VerifyCard = () => {
 
  
   const verifyEmailAndLogin = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     ctxDispatch({ type: 'LoadingRequest' });
     try {

@@ -32,7 +32,7 @@ const VerifyLoginCard = () => {
   const verifyEmailAndLogin = async () => {
 
     // to verify the user and login the user
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     ctxDispatch({ type: "LoadingRequest" });
     try {
       const res = await axios.post(`${mainLink}/verifylogin`, {

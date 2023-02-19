@@ -50,7 +50,7 @@ const Login = () => {
     ctxDispatch({ type: 'LoadingRequest' });
     try {
       const mainLink1 = 'http://localhost:2004';
-      const mainLink = 'https://earli.herokuapp.com';
+      const mainLink = 'https://earlifinance.herokuapp.com';
 
       const res = await axios.post(`${mainLink}/login`, { email, password });
       if (res) {
