@@ -22,7 +22,7 @@ const TreasuryStep3 = () => {
   const [childData, setChildData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     // const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
@@ -31,7 +31,7 @@ const TreasuryStep3 = () => {
   };
 
   const fetchChildData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
@@ -56,7 +56,7 @@ const TreasuryStep3 = () => {
         interest: 10,
       });
 
-      const mainLink = "https://earli.herokuapp.com";
+      const mainLink = "https://earlifinance.herokuapp.com";
       const config = {
         headers: {
           "Content-Type": "application/json",

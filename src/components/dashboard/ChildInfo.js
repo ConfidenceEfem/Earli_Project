@@ -7,7 +7,7 @@ const ChildInfo = ({myid}) => {
   const [data, setData] = React.useState([])
 
   const fetchChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const res = await axios.get(`${mainLink}/childsum/${myid}`);
     setData(res?.data?.data)

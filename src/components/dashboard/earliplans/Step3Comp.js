@@ -35,7 +35,7 @@ const Step3Comp = () => {
   const initializePayment = usePaystackPayment(config);
 
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
@@ -48,7 +48,7 @@ const Step3Comp = () => {
   }, []);
 
   const fetchCardsData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const res = await axios.get(`${mainLink}/parentcards/${parentid}`);
     if (!res) {
@@ -59,7 +59,7 @@ const Step3Comp = () => {
     }
   };
   const fetchConfigData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
     const fetchPayData = await axios.get(`${mainLink}/cardlink/${parentid}`);
     if (fetchPayData) {
@@ -103,7 +103,7 @@ const Step3Comp = () => {
       plan: plan,
     });
 
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const config = {
@@ -144,7 +144,7 @@ const Step3Comp = () => {
   };
 
   const addCard = async () => {
-    const mainLink = 'https://earli.herokuapp.com/savecard';
+    const mainLink = 'https://earlifinance.herokuapp.com/savecard';
     const mainLink1 = 'http://localhost:2004';
     const onSuccess = (reference) => {
       console.log(reference);

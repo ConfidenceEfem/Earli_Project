@@ -19,7 +19,7 @@ const KoloOverviewComp = () => {
   const [savings, setSavings] = useState();
 
   const fetchSavingsData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
 
     const res = await axios.get(`${mainLink}/savings/${savingsid}`);
     setSavings(res?.data?.data);

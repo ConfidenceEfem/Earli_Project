@@ -12,7 +12,7 @@ const WalletPage = ({ childid }) => {
   const [walletData, setWalletData] = useState({});
 
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/child/${childid}`);

@@ -21,7 +21,7 @@ const FundWalletPage = ({ parentid, childid }) => {
   const initializePayment = usePaystackPayment(config);
 
   const fetchConfigData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     await axios
@@ -44,7 +44,7 @@ const FundWalletPage = ({ parentid, childid }) => {
   }, []);
 
   const fundWallet = async () => {
-    const mainLink = "https://earli.herokuapp.com/fundachild";
+    const mainLink = "https://earlifinance.herokuapp.com/fundachild";
     const onSuccess = (reference) => {
       console.log(reference);
       axios
@@ -115,7 +115,7 @@ const FundWalletPage = ({ parentid, childid }) => {
                 position: "center",
                 icon: "success",
                 title: `Copy fund link`,
-                text: `https://earli.herokuapp.com/fund/${childid}`,
+                text: `https://earlifinance.herokuapp.com/fund/${childid}`,
                 showConfirmButton: true,
               });
             }}

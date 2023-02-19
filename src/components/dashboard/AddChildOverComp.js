@@ -41,7 +41,7 @@ const AddChildOverComp = () => {
     formData.append("relationship", childdetail.relationship);
     formData.append("image", state.link);
 
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     ctxDispatch({ type: "LoadingRequest" });
