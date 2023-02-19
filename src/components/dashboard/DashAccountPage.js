@@ -23,7 +23,7 @@ const DashAccountPage = () => {
 
 
   const fetchData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     const resData = await axios.get(`${mainLink}/parentsum/${parentid}`);

@@ -19,7 +19,7 @@ const MobileDashNav = ({parentid, childid, toggle, setToggle}) => {
   const [data, setData] = useState([]);
   const fetchData = async () => {
     const mainLink1 = 'http://localhost:2004';
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res.data.data.children[0]);
     console.log(parentid)

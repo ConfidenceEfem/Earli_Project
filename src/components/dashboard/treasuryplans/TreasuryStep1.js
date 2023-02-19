@@ -16,7 +16,7 @@ const TreasuryStep1 = () => {
   const [childData, setChildData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
@@ -25,7 +25,7 @@ const TreasuryStep1 = () => {
   };
 
   const ChildData = async () => {
-    const mainLink = "https://earli.herokuapp.com";
+    const mainLink = "https://earlifinance.herokuapp.com";
     const mainLink1 = "http://localhost:2004";
 
     const res = await axios.get(`${mainLink}/child/${childid}`);

@@ -14,7 +14,7 @@ const SavingsPage = ({ parentid, childid }) => {
   const [savingsData, setSavingsData] = useState([]);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/onechild/${childid}`);

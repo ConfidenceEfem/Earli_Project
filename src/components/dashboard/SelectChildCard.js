@@ -37,14 +37,14 @@ export default function SelectChildCard({ parentid, childid }) {
   const [childData, setChildData] = React.useState([]);
 
   const fetchData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/oneparent/${parentid}`);
     setData(res?.data?.data?.children);
   };
   const ChildData = async () => {
-    const mainLink = 'https://earli.herokuapp.com';
+    const mainLink = 'https://earlifinance.herokuapp.com';
     const mainLink1 = 'http://localhost:2004';
 
     const res = await axios.get(`${mainLink}/child/${childid}`);
